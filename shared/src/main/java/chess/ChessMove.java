@@ -7,16 +7,19 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessMove {
-
+    // What does this constructor mean?
+    private ChessPosition startPosition;
     public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
                      ChessPiece.PieceType promotionPiece) {
+        this.startPosition = startPosition;
     }
 
     /**
      * @return ChessPosition of starting location
      */
     public ChessPosition getStartPosition() {
-        throw new RuntimeException("Not implemented");
+        // return getRow() getColumn()?
+        return startPosition;
     }
 
     /**
@@ -29,7 +32,6 @@ public class ChessMove {
     /**
      * Gets the type of piece to promote a pawn to if pawn promotion is part of this
      * chess move
-     *
      * @return Type of piece to promote a pawn to, or null if no promotion
      */
     public ChessPiece.PieceType getPromotionPiece() {

@@ -52,8 +52,10 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-      // generate all posible moves for that type of piece from that position.
+      // generate all possible moves for that type of piece from that position.
         return new ArrayList<>();
+        /*
+        * */
     }
     // validbishop()..
 }

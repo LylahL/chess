@@ -63,11 +63,6 @@ public class ChessPiece {
 @Override
     public String toString() {
         StringBuilder piece = new StringBuilder();
-        if (pieceColor == ChessGame.TeamColor.WHITE) {
-            piece.append("W");
-        }else {
-            piece.append("B");
-        }
         switch(type){
             case KING:
                 piece.append("K");
@@ -88,6 +83,9 @@ public class ChessPiece {
                 piece.append("P");
                 break;
         }
-        return piece.toString();
+    if (pieceColor == ChessGame.TeamColor.WHITE) {
+        return piece.toString().toLowerCase();
+    }
+    return piece.toString();
     }
 }

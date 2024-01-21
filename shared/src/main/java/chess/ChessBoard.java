@@ -33,7 +33,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow() - 1][position.getColumn() - 1];
     }
 
     /**
@@ -117,20 +117,26 @@ public class ChessBoard {
 
     @Override
     public String toString() {
+//                |r|n|b|q|k|b|n|r|
+//                |p|p|p|p|p|p|p|p|
+//                | | | | | | | | |
+//                | | | | | | | | |
+//                | | | | | | | | |
+//                | | | | | | | | |
+//                |P|P|P|P|P|P|P|P|
+//                |R|N|B|Q|K|B|N|R|
       StringBuilder board = new StringBuilder();
       for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++ ){
           if(squares[i][j] == null){
-            board.append("[....]");
+            board.append("| ");
           }else {
-            board.append("[")
-                 .append(squares[i][j].toString())
-                 .append(i)
-                 .append(j)
-                 .append("]");
+            board.append("|")
+                 .append(squares[i][j].toString());
           }
         }
-        board.append("\n");
+        board.append("|")
+             .append("\n");
       }
       return board.toString();
     }

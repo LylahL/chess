@@ -121,14 +121,18 @@ public class ChessBoard {
       for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++ ){
           if(squares[i][j] == null){
-            board.append("[  ]");
+            board.append("[....]");
           }else {
-            board.append(squares[i][j].toString());
+            board.append("[")
+                 .append(squares[i][j].toString())
+                 .append(i)
+                 .append(j)
+                 .append("]");
           }
         }
-
-
+        board.append("\n");
       }
+      return board.toString();
     }
 
 

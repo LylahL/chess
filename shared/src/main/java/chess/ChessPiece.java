@@ -3,6 +3,8 @@ package chess;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static chess.ChessPiece.PieceType.KING;
+
 /**
  * Represents a single chess piece
  * <p>
@@ -10,8 +12,8 @@ import java.util.Collection;
  * signature of the existing methods.
  */
 public class ChessPiece {
-    private PieceType type;
-    private ChessGame.TeamColor pieceColor;
+    private final PieceType type;
+    private final ChessGame.TeamColor pieceColor;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.pieceColor = pieceColor;
@@ -58,4 +60,34 @@ public class ChessPiece {
         * */
     }
     // validbishop()..
+@Override
+    public String toString() {
+        StringBuilder piece = new StringBuilder();
+        if (pieceColor == ChessGame.TeamColor.WHITE) {
+            piece.append("W");
+        }else {
+            piece.append("B");
+        }
+        switch(type){
+            case KING:
+                piece.append("K");
+                break;
+            case QUEEN:
+                piece.append("Q");
+                break;
+            case BISHOP:
+                piece.append("B");
+                break;
+            case KNIGHT:
+                piece.append("N");
+                break;
+            case ROOK:
+                piece.append("R");
+                break;
+            case PAWN:
+                piece.append("P");
+                break;
+        }
+        return piece.toString();
+    }
 }

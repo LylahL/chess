@@ -2,6 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 import static chess.ChessPiece.PieceType.KING;
@@ -56,11 +57,57 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
       // generate all possible moves for that type of piece from that position.
-        return new ArrayList<>();
-        /*
-        * */
+        Collection<ChessMove> validMoves = new HashSet<>();
+        switch (type) {
+            case KING:
+                validMoves = kingMoves(board, myPosition);
+                break;
+            case QUEEN:
+                validMoves = bishopMoves(board, myPosition);
+                break;
+            case BISHOP:
+                validMoves = bishopMoves(board, myPosition);
+                break;
+            case KNIGHT:
+                validMoves = bishopMoves(board, myPosition);
+                break;
+            case ROOK:
+                validMoves = bishopMoves(board, myPosition);
+                break;
+            case PAWN:
+                validMoves = bishopMoves(board, myPosition);
+                break;
+        }
+        return validMoves;
     }
-    // validbishop()..
+    private boolean checkBounds(ChessPosition Position) {
+        return Position.getRow() <= 8 &&
+                Position.getRow() > 1 &&
+                Position.getColumn() <= 8 &&
+                Position.getColumn() > 0;
+    }
+
+    private HashSet<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row =myPosition.getRow();
+        int i = 0;
+        ChessPosition endPosition = new ChessPosition(col + i, row + i);
+        // up right
+        while (checkBounds(endPosition)){
+           i ++;
+            endPosition = new ChessPosition(col + i, row + i);
+           // if hit same type player
+            if ()
+        }
+    }
+
+
+    private HashSet<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
+        throw new RuntimeException("Not Implemented");
+    }
+
+
 @Override
     public String toString() {
         StringBuilder piece = new StringBuilder();

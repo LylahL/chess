@@ -1,5 +1,6 @@
 package chess;
 
+import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -57,28 +58,14 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
       // generate all possible moves for that type of piece from that position.
-        Collection<ChessMove> validMoves = new HashSet<>();
-        switch (type) {
-            case KING:
-                validMoves = kingMoves(board, myPosition);
-                break;
-            case QUEEN:
-                validMoves = bishopMoves(board, myPosition);
-                break;
-            case BISHOP:
-                validMoves = bishopMoves(board, myPosition);
-                break;
-            case KNIGHT:
-                validMoves = bishopMoves(board, myPosition);
-                break;
-            case ROOK:
-                validMoves = bishopMoves(board, myPosition);
-                break;
-            case PAWN:
-                validMoves = bishopMoves(board, myPosition);
-                break;
-        }
-        return validMoves;
+        return switch (type) {
+          case KING -> kingMoves(board, myPosition);
+          case QUEEN -> bishopMoves(board, myPosition);
+          case BISHOP -> bishopMoves(board, myPosition);
+          case KNIGHT -> bishopMoves(board, myPosition);
+          case ROOK -> bishopMoves(board, myPosition);
+          case PAWN -> bishopMoves(board, myPosition);
+        };
     }
     private boolean checkBounds(ChessPosition Position) {
         return Position.getRow() <= 8 &&
@@ -87,21 +74,37 @@ public class ChessPiece {
                 Position.getColumn() > 0;
     }
 
-    private HashSet<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
+
+    private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
         int col = myPosition.getColumn();
         int row =myPosition.getRow();
-        int i = 0;
-        ChessPosition endPosition = new ChessPosition(col + i, row + i);
+        ChessPosition endPosition = new ChessPosition(row, col);
         // up right
         while (checkBounds(endPosition)){
-           i ++;
-            endPosition = new ChessPosition(col + i, row + i);
-           // if hit same type player
-            if ()
+            for (int r = row, c = col; r <= 8 && c <= 8; r++, c++) {
+                ChessPosition nextStepPosition = new ChessPosition(r, c);
+                ChessPiece pieceUnder = board.getPiece(nextStepPosition);
+                // gonna hit own team, stop before next step
+                if (pieceUnder.getTeamColor() == board.getPiece(endPosition).getTeamColor()){
+                    addToCollection(moves, myPosition, endPosition);
+                }
+                else {
+                    // all clear
+                    endPosition = new ChessPosition(r, c);
+                    addToCollection(moves, myPosition, endPosition);
+                    // hit opposite team
+                    if (pieceUnder.getTeamColor() != board.getPiece(endPosition).getTeamColor()) {
+                        break;
+                    }
+                }
+            }
         }
+        return moves;
     }
-
+    private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){
+        moves.add(new ChessMove(startPosition, endPosition, null));
+    }
 
     private HashSet<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
         throw new RuntimeException("Not Implemented");

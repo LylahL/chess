@@ -204,9 +204,11 @@ public class ChessPiece {
         return (myPosition.getRow() == 2 && pawn.getTeamColor() == ChessGame.TeamColor.WHITE) ||
                 (myPosition.getRow() == 7 && pawn.getTeamColor() == ChessGame.TeamColor.BLACK);
     }
+
     private void MoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
         ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
-        if(type == PAWN && checkInitialStepPawn(myPosition, this)){ // you can do two or one step
+        if(type == PAWN && checkInitialStepPawn(myPosition, this) && frontNotBlock(board,myPosition) && frontNotBlock(board, nextStepPosition)){
+            // you can do two step
             nextStepPosition = new ChessPosition(row + 2*i, col + 2*j);
         }
         while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
@@ -217,9 +219,12 @@ public class ChessPiece {
                 if (myPosition.equals(endPosition)) {
                     //myPosition.getRow()+i == endPosition.getRow() && myPosition.getColumn()+j == endPosition.getColumn()
                     if(type == PAWN){
-                        checkCapture(board, nextStepPosition, myPosition, endPosition);
-                        if(!myPosition.equals(endPosition)){
-                            addToCollection(moves, myPosition, endPosition);
+                        // modifies endPosition it may return an array of endPositinos
+                        Collection<ChessPosition> possibleCaptures = checkCapture(board, nextStepPosition, myPosition, endPosition);
+                        for(ChessPosition capturePosition : possibleCaptures){
+                            if (capturePosition != null) {
+                                addToCollection(moves, myPosition, capturePosition);
+                            }
                         }
                         break;
                     }
@@ -231,8 +236,12 @@ public class ChessPiece {
             // hit opposite team
             else if (pieceUnder != null && pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
                 if(type == PAWN){
-                    checkCapture(board, nextStepPosition, myPosition, endPosition);
-                    addToCollection(moves, myPosition, endPosition);
+                    Collection<ChessPosition> possibleCaptures = checkCapture(board, nextStepPosition, myPosition, endPosition);
+                    for(ChessPosition capturePosition : possibleCaptures){
+                        if (capturePosition != null) {
+                            addToCollection(moves, myPosition, capturePosition);
+                        }
+                    }
                     break;
                 }
                 endPosition=nextStepPosition;
@@ -256,16 +265,35 @@ public class ChessPiece {
             nextStepPosition=new ChessPosition(nextStepPosition.getRow() + i, nextStepPosition.getColumn() + j);
         }
     }
-    // assign endPosition to the possible Position
-    private void checkCaptureHelper(ChessBoard board, ChessPosition position, ChessPosition endPosition){
-        if(board.getPiece(position) != null){
-            if(board.getPiece(position).getTeamColor() != null && board.getPiece(position).getTeamColor() != board.getPiece(position).getTeamColor()){
-                endPosition = position;
-            }
+
+    private boolean frontNotBlock(ChessBoard board, ChessPosition myPosition) {
+        int row = myPosition.getRow();
+        int col = myPosition.getColumn();
+        if(board.getPiece(myPosition) == null){
+            return false;
+        }
+        if(board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.WHITE){
+            ChessPosition frontPosition = new ChessPosition(row+1, col);
+            return board.getPiece(frontPosition) == null;
+        }else{
+            ChessPosition frontPosition = new ChessPosition(row-1, col);
+            return board.getPiece(frontPosition) == null;
+
         }
     }
 
-    private void checkCapture(ChessBoard board, ChessPosition nextPosition, ChessPosition myPosition, ChessPosition endPosition) {
+    // assign endPosition to the possible Position
+    private ChessPosition checkCaptureHelper(ChessBoard board, ChessPosition position, ChessPosition endPosition){
+        if(board.getPiece(position) != null){
+            if(board.getPiece(position).getTeamColor() != null && board.getPiece(position).getTeamColor() != board.getPiece(position).getTeamColor()){
+                return position;
+            }
+        }
+        return null;
+    }
+
+    private Collection<ChessPosition> checkCapture(ChessBoard board, ChessPosition nextPosition, ChessPosition myPosition, ChessPosition endPosition) {
+        Collection<ChessPosition> returnCollection = new HashSet<>();
         int row = nextPosition.getRow();
         int col = nextPosition.getColumn();
         // check if the positions around has opposite side pieces
@@ -275,13 +303,15 @@ public class ChessPiece {
         ChessPosition downLeft = new ChessPosition(row+1, col-1);
         ChessPosition downRight = new ChessPosition(row+1, col+1);
         if (board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.WHITE){
-            checkCaptureHelper(board, downLeft, endPosition);
-            checkCaptureHelper(board, downRight, endPosition);
+            // return a possible Capture possition so I can add it
+            returnCollection.add(checkCaptureHelper(board, downLeft, endPosition));
+            returnCollection.add(checkCaptureHelper(board, downRight, endPosition));
         }
         else{
-            checkCaptureHelper(board, upLeft, endPosition);
-            checkCaptureHelper(board, upRight, endPosition);
+            returnCollection.add(checkCaptureHelper(board, upLeft, endPosition));
+            returnCollection.add(checkCaptureHelper(board, upRight, endPosition));
         }
+        return returnCollection;
 
 
 

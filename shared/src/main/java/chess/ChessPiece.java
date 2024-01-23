@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 
 import static chess.ChessPiece.PieceType.KING;
+import static chess.ChessPiece.PieceType.KNIGHT;
 
 /**
  * Represents a single chess piece
@@ -62,10 +63,28 @@ public class ChessPiece {
           case KING -> kingMoves(board, myPosition);
           case QUEEN -> queenMoves(board, myPosition);
           case BISHOP -> bishopMoves(board, myPosition);
-          case KNIGHT -> bishopMoves(board, myPosition);
+          case KNIGHT -> knightMoves(board, myPosition);
           case ROOK -> rookMoves(board, myPosition);
           case PAWN -> bishopMoves(board, myPosition);
         };
+    }
+
+    private Collection<ChessMove> knightMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row = myPosition.getRow();
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = 2, j = 1;
+        // UpLeft
+        MoveHelper(moves, row, col, board, myPosition, endPosition, -i, j); // change moving directions by modifying i and j.
+        MoveHelper(moves, row, col, board, myPosition, endPosition, -i, -j);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, -j);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, -i);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, -j, i);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, -j, -i);
+        return moves;
     }
 
     private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
@@ -92,8 +111,6 @@ public class ChessPiece {
         MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
         return moves;
     }
-
-
 
     private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
@@ -144,7 +161,6 @@ public class ChessPiece {
                 Position.getColumn() > 0;
     }
 
-
     private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
         int col = myPosition.getColumn();
@@ -189,7 +205,7 @@ public class ChessPiece {
             }
             // all clear
             else if (pieceUnder == null && myPosition != endPosition) {
-                if (type == KING && !myPosition.equals(endPosition)){
+                if (type == KING ||type == KNIGHT && !myPosition.equals(endPosition)){
                     // Pieces that can only make one move
                     break;
                 }

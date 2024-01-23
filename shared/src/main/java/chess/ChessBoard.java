@@ -14,7 +14,6 @@ public class ChessBoard {
   // why can't it be ChessPosition[8][8];
     private ChessPiece[][] squares = new ChessPiece[8][8];
     public ChessBoard() {
-      resetBoard();
     }
 
     /**

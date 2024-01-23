@@ -59,13 +59,65 @@ public class ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
       // generate all possible moves for that type of piece from that position.
         return switch (type) {
-          case KING -> bishopMoves(board, myPosition);
-          case QUEEN -> bishopMoves(board, myPosition);
+          case KING -> kingMoves(board, myPosition);
+          case QUEEN -> queenMoves(board, myPosition);
           case BISHOP -> bishopMoves(board, myPosition);
           case KNIGHT -> bishopMoves(board, myPosition);
           case ROOK -> rookMoves(board, myPosition);
           case PAWN -> bishopMoves(board, myPosition);
         };
+    }
+
+    private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row = myPosition.getRow();
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = 1, j = -1;
+        // Down
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        // Left
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        // Up
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        // Right
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        // DownRight
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i);
+        // DownLeft
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        // UpRight
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        // UpLeft
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        return moves;
+    }
+
+
+
+    private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row = myPosition.getRow();
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = 1, j = -1;
+        // Down
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        // Left
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        // Up
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        // Right
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        // DownRight
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i);
+        // DownLeft
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        // UpRight
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        // UpLeft
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        return moves;
     }
 
     private Collection<ChessMove> rookMoves(ChessBoard board, ChessPosition myPosition) {
@@ -131,15 +183,16 @@ public class ChessPiece {
             }
             // hit opposite team
             else if (pieceUnder != null && pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
-                if (myPosition == endPosition) {
-                    break;
-                }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
                 break;
             }
             // all clear
             else if (pieceUnder == null && myPosition != endPosition) {
+                if (type == KING && !myPosition.equals(endPosition)){
+                    // Pieces that can only make one move
+                    break;
+                }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
             }
@@ -149,10 +202,6 @@ public class ChessPiece {
 
     private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){
         moves.add(new ChessMove(startPosition, endPosition, null));
-    }
-
-    private HashSet<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not Implemented");
     }
 
 

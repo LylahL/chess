@@ -59,7 +59,7 @@ public class ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
       // generate all possible moves for that type of piece from that position.
         return switch (type) {
-          case KING -> kingMoves(board, myPosition);
+          case KING -> bishopMoves(board, myPosition);
           case QUEEN -> bishopMoves(board, myPosition);
           case BISHOP -> bishopMoves(board, myPosition);
           case KNIGHT -> bishopMoves(board, myPosition);
@@ -78,28 +78,32 @@ public class ChessPiece {
     private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
         int col = myPosition.getColumn();
-        int row =myPosition.getRow();
-        ChessPosition endPosition = new ChessPosition(row, col);
+        int row = myPosition.getRow();
+        ChessPosition endPosition = myPosition;
+
         // up right
-        while (checkBounds(endPosition)){
-            for (int r = row, c = col; r <= 8 && c <= 8; r++, c++) {
-                ChessPosition nextStepPosition = new ChessPosition(r, c);
+        ChessPosition nextStepPosition = new ChessPosition(row + 1, col + 1);
+        while (checkBounds(endPosition) && checkBounds(nextStepPosition)){
+            nextStepPosition = new ChessPosition(nextStepPosition.getRow()+1, nextStepPosition.getColumn()+1);
                 ChessPiece pieceUnder = board.getPiece(nextStepPosition);
+                // all clear
+                if (pieceUnder == null){
+                    endPosition = nextStepPosition;
+                    addToCollection(moves, myPosition, endPosition);
+                }
                 // gonna hit own team, stop before next step
-                if (pieceUnder.getTeamColor() == board.getPiece(endPosition).getTeamColor()){
+                else if (pieceUnder.getTeamColor() == board.getPiece(endPosition).getTeamColor()){
                     addToCollection(moves, myPosition, endPosition);
                 }
-                else {
-                    // all clear
-                    endPosition = new ChessPosition(r, c);
+                // hit opposite team
+                else if (pieceUnder.getTeamColor() != board.getPiece(endPosition).getTeamColor()) {
+                    endPosition = nextStepPosition;
                     addToCollection(moves, myPosition, endPosition);
-                    // hit opposite team
-                    if (pieceUnder.getTeamColor() != board.getPiece(endPosition).getTeamColor()) {
-                        break;
-                    }
+                    break;
                 }
+
             }
-        }
+
         return moves;
     }
     private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){

@@ -79,32 +79,85 @@ public class ChessPiece {
         Collection<ChessMove> moves = new HashSet<>();
         int col = myPosition.getColumn();
         int row = myPosition.getRow();
-        ChessPosition endPosition = myPosition;
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = -1, j = 1;
+        // DownRight
+        bishopMoveHelper(moves, row, col, board, myPosition, endPosition, j, j); // change moving directions by modifying i and j.
 
-        // up right
-        ChessPosition nextStepPosition = new ChessPosition(row + 1, col + 1);
-        while (checkBounds(endPosition) && checkBounds(nextStepPosition)){
-            nextStepPosition = new ChessPosition(nextStepPosition.getRow()+1, nextStepPosition.getColumn()+1);
-                ChessPiece pieceUnder = board.getPiece(nextStepPosition);
-                // all clear
-                if (pieceUnder == null){
-                    endPosition = nextStepPosition;
-                    addToCollection(moves, myPosition, endPosition);
-                }
-                // gonna hit own team, stop before next step
-                else if (pieceUnder.getTeamColor() == board.getPiece(endPosition).getTeamColor()){
-                    addToCollection(moves, myPosition, endPosition);
-                }
-                // hit opposite team
-                else if (pieceUnder.getTeamColor() != board.getPiece(endPosition).getTeamColor()) {
-                    endPosition = nextStepPosition;
-                    addToCollection(moves, myPosition, endPosition);
-                    break;
-                }
-
-            }
+        bishopDownRight(moves, row, col, board, myPosition, endPosition);
+        bishopDownLeft(moves, row, col, board, myPosition, endPosition);
 
         return moves;
+    }
+
+    private void bishopMoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
+        ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
+        while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
+            ChessPiece pieceUnder=board.getPiece(nextStepPosition);
+            // all clear
+            if (pieceUnder == null) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // gonna hit own team, stop before next step
+            else if (pieceUnder.getTeamColor() == board.getPiece(myPosition).getTeamColor()) {
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // hit opposite team
+            else if (pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+                break;
+            }
+            nextStepPosition=new ChessPosition(nextStepPosition.getRow() + 1, nextStepPosition.getColumn() + 1);
+        }
+    }
+
+    private void bishopDownLeft(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition) {
+        ChessPosition nextStepPosition = new ChessPosition(row + 1, col - 1);
+        while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
+            ChessPiece pieceUnder=board.getPiece(nextStepPosition);
+            // all clear
+            if (pieceUnder == null) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // gonna hit own team, stop before next step
+            else if (pieceUnder.getTeamColor() == board.getPiece(myPosition).getTeamColor()) {
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // hit opposite team
+            else if (pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+                break;
+            }
+            nextStepPosition=new ChessPosition(nextStepPosition.getRow() + 1, nextStepPosition.getColumn() - 1);
+        }
+    }
+
+
+    private void bishopDownRight(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition){
+        ChessPosition nextStepPosition = new ChessPosition(row + 1, col + 1);
+        while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
+            ChessPiece pieceUnder=board.getPiece(nextStepPosition);
+            // all clear
+            if (pieceUnder == null) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // gonna hit own team, stop before next step
+            else if (pieceUnder.getTeamColor() == board.getPiece(myPosition).getTeamColor()) {
+                addToCollection(moves, myPosition, endPosition);
+            }
+            // hit opposite team
+            else if (pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
+                endPosition=nextStepPosition;
+                addToCollection(moves, myPosition, endPosition);
+                break;
+            }
+            nextStepPosition=new ChessPosition(nextStepPosition.getRow() + 1, nextStepPosition.getColumn() + 1);
+        }
     }
     private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){
         moves.add(new ChessMove(startPosition, endPosition, null));

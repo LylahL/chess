@@ -6,8 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 
-import static chess.ChessPiece.PieceType.KING;
-import static chess.ChessPiece.PieceType.KNIGHT;
+import static chess.ChessPiece.PieceType.*;
 
 /**
  * Represents a single chess piece
@@ -65,8 +64,26 @@ public class ChessPiece {
           case BISHOP -> bishopMoves(board, myPosition);
           case KNIGHT -> knightMoves(board, myPosition);
           case ROOK -> rookMoves(board, myPosition);
-          case PAWN -> bishopMoves(board, myPosition);
+          case PAWN -> pawnMoves(board, myPosition);
         };
+    }
+
+    private Collection<ChessMove> pawnMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row = myPosition.getRow();
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = 1, j = -1;
+        if (board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.BLACK){
+            // Up
+            MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        }
+        else{
+            // Down
+            MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+
+        }
+        return moves;
     }
 
     private Collection<ChessMove> knightMoves(ChessBoard board, ChessPosition myPosition) {
@@ -182,9 +199,16 @@ public class ChessPiece {
 
         return moves;
     }
-
+    
+    private boolean checkInitialStepPawn(ChessPosition myPosition, ChessPiece pawn){
+        return (myPosition.getRow() == 2 && pawn.getTeamColor() == ChessGame.TeamColor.WHITE) ||
+                (myPosition.getRow() == 7 && pawn.getTeamColor() == ChessGame.TeamColor.BLACK);
+    }
     private void MoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
         ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
+        if(type == PAWN && checkInitialStepPawn(myPosition, this)){ // you can do two or one step
+            nextStepPosition = new ChessPosition(row + 2*i, col + 2*j);
+        }
         while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
             ChessPiece pieceUnder=board.getPiece(nextStepPosition);
             // gonna hit own team, stop before next step
@@ -192,6 +216,13 @@ public class ChessPiece {
                 // check if it's first move, if it is, don't add it
                 if (myPosition.equals(endPosition)) {
                     //myPosition.getRow()+i == endPosition.getRow() && myPosition.getColumn()+j == endPosition.getColumn()
+                    if(type == PAWN){
+                        checkCapture(board, nextStepPosition, myPosition, endPosition);
+                        if(!myPosition.equals(endPosition)){
+                            addToCollection(moves, myPosition, endPosition);
+                        }
+                        break;
+                    }
                     break;
                 }
                 addToCollection(moves, myPosition, endPosition);
@@ -199,21 +230,77 @@ public class ChessPiece {
             }
             // hit opposite team
             else if (pieceUnder != null && pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
+                if(type == PAWN){
+                    checkCapture(board, nextStepPosition, myPosition, endPosition);
+                    addToCollection(moves, myPosition, endPosition);
+                    break;
+                }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
                 break;
             }
             // all clear
             else if (pieceUnder == null && myPosition != endPosition) {
-                if (type == KING ||type == KNIGHT && !myPosition.equals(endPosition)){
+                if ((type == KING ||type == KNIGHT || type == PAWN)&& !myPosition.equals(endPosition)){
+                    if(type == PAWN){
+                        checkCapture(board, nextStepPosition, myPosition, endPosition);
+                        addToCollection(moves, myPosition, endPosition);
+                        break;}
                     // Pieces that can only make one move
                     break;
                 }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
             }
+
             nextStepPosition=new ChessPosition(nextStepPosition.getRow() + i, nextStepPosition.getColumn() + j);
         }
+    }
+    // assign endPosition to the possible Position
+    private void checkCaptureHelper(ChessBoard board, ChessPosition position, ChessPosition endPosition){
+        if(board.getPiece(position) != null){
+            if(board.getPiece(position).getTeamColor() != null && board.getPiece(position).getTeamColor() != board.getPiece(position).getTeamColor()){
+                endPosition = position;
+            }
+        }
+    }
+
+    private void checkCapture(ChessBoard board, ChessPosition nextPosition, ChessPosition myPosition, ChessPosition endPosition) {
+        int row = nextPosition.getRow();
+        int col = nextPosition.getColumn();
+        // check if the positions around has opposite side pieces
+        // up left
+        ChessPosition upLeft = new ChessPosition(row-1, col-1);
+        ChessPosition upRight = new ChessPosition(row-1, col+1);
+        ChessPosition downLeft = new ChessPosition(row+1, col-1);
+        ChessPosition downRight = new ChessPosition(row+1, col+1);
+        if (board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.WHITE){
+            checkCaptureHelper(board, downLeft, endPosition);
+            checkCaptureHelper(board, downRight, endPosition);
+        }
+        else{
+            checkCaptureHelper(board, upLeft, endPosition);
+            checkCaptureHelper(board, upRight, endPosition);
+        }
+
+
+
+
+        /* up right
+
+        if(board.getPiece(upRight).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(upRight).getTeamColor()){
+            endPosition = upRight;
+        }
+        // down left
+
+        if(board.getPiece(downLeft).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(downLeft).getTeamColor()){
+            endPosition = downLeft;
+        }
+        // down right
+
+        if(board.getPiece(downRight).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(downRight).getTeamColor()){
+            endPosition = downRight;
+        }*/
     }
 
     private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){

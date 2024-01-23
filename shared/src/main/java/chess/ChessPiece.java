@@ -63,10 +63,28 @@ public class ChessPiece {
           case QUEEN -> bishopMoves(board, myPosition);
           case BISHOP -> bishopMoves(board, myPosition);
           case KNIGHT -> bishopMoves(board, myPosition);
-          case ROOK -> bishopMoves(board, myPosition);
+          case ROOK -> rookMoves(board, myPosition);
           case PAWN -> bishopMoves(board, myPosition);
         };
     }
+
+    private Collection<ChessMove> rookMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new HashSet<>();
+        int col = myPosition.getColumn();
+        int row = myPosition.getRow();
+        ChessPosition endPosition = new ChessPosition(row, col);
+        int i = 1, j = -1;
+        // Down
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        // Left
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        // Up
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        // Right
+        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        return moves;
+    }
+
     private boolean checkBounds(ChessPosition Position) {
         return Position.getRow() <= 8 &&
                 Position.getRow() > 0 &&
@@ -82,13 +100,13 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 1, j = -1;
         // DownRight
-        bishopMoveHelper(moves, row, col, board, myPosition, endPosition, i, i); // change moving directions by modifying i and j.
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i); // change moving directions by modifying i and j.
         // DownLeft
-        bishopMoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
         // UpRight
-        bishopMoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
         // UpLeft
-        bishopMoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
 
 
 //        bishopDownRight(moves, row, col, board, myPosition, endPosition);
@@ -97,7 +115,7 @@ public class ChessPiece {
         return moves;
     }
 
-    private void bishopMoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
+    private void MoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
         ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
         while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
             ChessPiece pieceUnder=board.getPiece(nextStepPosition);

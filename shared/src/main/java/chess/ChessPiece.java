@@ -67,9 +67,13 @@ public class ChessPiece {
           case PAWN -> pawnMoves(board, myPosition);
         };
     }
-
+    private void addToPromotionCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition, PieceType type){
+        moves.add(new ChessMove(startPosition, endPosition, type));
+    }
     private Collection<ChessMove> pawnMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
+        Collection<ChessMove> promotionMoves = new HashSet<>();
+        Collection<ChessMove> discardedMoves = new HashSet<>();
         int col = myPosition.getColumn();
         int row = myPosition.getRow();
         ChessPosition endPosition = new ChessPosition(row, col);
@@ -78,17 +82,41 @@ public class ChessPiece {
             // Up
             MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
             // if moves includes reach end position, grab the position and promote it's all posibilities
-//            for (ChessMove move: moves){
-//                if(move.getEndPosition().getRow() == 1) {
-//                    //promotion
-//                }
-//            }
+            for (ChessMove move: moves){
+                if (move.getEndPosition().getRow() == 1) {
+                    //promotion
+                    // collection add all the promotion moves deletes all the promotion null
+                    addToCollection(discardedMoves, myPosition, move.getEndPosition());
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), BISHOP);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), QUEEN);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), KNIGHT);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), ROOK);
+                }
+            }
+            for (ChessMove move: discardedMoves){
+                moves.remove(move);
+            }
+            moves.addAll(promotionMoves);
 
         }
         else{
             // Down
-            MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
-
+            MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0);// change moving directions by modifying i and j.
+            for (ChessMove move: moves){
+                if (move.getEndPosition().getRow() == 8) {
+                    //promotion
+                    // collection add all the promotion moves deletes all the promotion null
+                    addToCollection(discardedMoves, myPosition, move.getEndPosition());
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), BISHOP);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), QUEEN);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), KNIGHT);
+                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), ROOK);
+                }
+            }
+            for (ChessMove move: discardedMoves){
+                moves.remove(move);
+            }
+            moves.addAll(promotionMoves);
         }
         return moves;
     }
@@ -264,6 +292,7 @@ public class ChessPiece {
                 if ((type == KING ||type == KNIGHT)&& !myPosition.equals(endPosition) ||(type == PAWN)){
                     // if pawn just detect capture
                     if(type == PAWN) {
+                        addToCollection(moves, myPosition, nextStepPosition);
                         Collection<ChessPosition> possibleCaptures=checkCapture(board, myPosition, myPosition, endPosition);
                         for (ChessPosition capturePosition : possibleCaptures) {
                             if (capturePosition != null) {

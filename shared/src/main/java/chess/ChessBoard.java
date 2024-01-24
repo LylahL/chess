@@ -1,5 +1,6 @@
 package chess;
 
+import java.io.Console;
 import java.util.Arrays;
 
 /**
@@ -140,7 +141,7 @@ public class ChessBoard {
 //                |P|P|P|P|P|P|P|P|
 //                |R|N|B|Q|K|B|N|R|
       StringBuilder board = new StringBuilder();
-      for(int i = 0; i < 8; i++) {
+      for(int i = 7; i >= 0; i--) {
         for(int j = 0; j < 8; j++ ){
           if(squares[i][j] == null){
             board.append("| ");
@@ -154,6 +155,12 @@ public class ChessBoard {
       }
       return board.toString();
     }
+
+  public static void main(String[] args) {
+    ChessBoard board = new ChessBoard();
+    board.resetBoard();
+    System.out.println(board.toString());
+  }
 
 
 }

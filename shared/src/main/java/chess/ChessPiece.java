@@ -426,7 +426,7 @@ public class ChessPiece {
                 piece.append("P");
                 break;
         }
-    if (pieceColor == ChessGame.TeamColor.WHITE) {
+    if (pieceColor == ChessGame.TeamColor.BLACK) {
         return piece.toString().toLowerCase();
     }
     return piece.toString();

@@ -77,6 +77,13 @@ public class ChessPiece {
         if (board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.BLACK){
             // Up
             MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+            // if moves includes reach end position, grab the position and promote it's all posibilities
+//            for (ChessMove move: moves){
+//                if(move.getEndPosition().getRow() == 1) {
+//                    //promotion
+//                }
+//            }
+
         }
         else{
             // Down
@@ -205,11 +212,15 @@ public class ChessPiece {
                 (myPosition.getRow() == 7 && pawn.getTeamColor() == ChessGame.TeamColor.BLACK);
     }
 
+
+
     private void MoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
         ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
-        if(type == PAWN && checkInitialStepPawn(myPosition, this) && frontNotBlock(board,myPosition) && frontNotBlock(board, nextStepPosition)){
+        if(type == PAWN && checkInitialStepPawn(myPosition, this) && frontNotBlock(board,myPosition) && front2NotBlock(board, myPosition)){
             // you can do two step
+            addToCollection(moves,myPosition,nextStepPosition);
             nextStepPosition = new ChessPosition(row + 2*i, col + 2*j);
+            addToCollection(moves, myPosition, nextStepPosition);
         }
         while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
             ChessPiece pieceUnder=board.getPiece(nextStepPosition);
@@ -219,8 +230,8 @@ public class ChessPiece {
                 if (myPosition.equals(endPosition)) {
                     //myPosition.getRow()+i == endPosition.getRow() && myPosition.getColumn()+j == endPosition.getColumn()
                     if(type == PAWN){
-                        // modifies endPosition it may return an array of endPositinos
-                        Collection<ChessPosition> possibleCaptures = checkCapture(board, nextStepPosition, myPosition, endPosition);
+                        // modifies endPosition it may return an array of end Positinos
+                        Collection<ChessPosition> possibleCaptures = checkCapture(board, myPosition, myPosition, endPosition);
                         for(ChessPosition capturePosition : possibleCaptures){
                             if (capturePosition != null) {
                                 addToCollection(moves, myPosition, capturePosition);
@@ -236,7 +247,7 @@ public class ChessPiece {
             // hit opposite team
             else if (pieceUnder != null && pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
                 if(type == PAWN){
-                    Collection<ChessPosition> possibleCaptures = checkCapture(board, nextStepPosition, myPosition, endPosition);
+                    Collection<ChessPosition> possibleCaptures = checkCapture(board, myPosition, myPosition, endPosition);
                     for(ChessPosition capturePosition : possibleCaptures){
                         if (capturePosition != null) {
                             addToCollection(moves, myPosition, capturePosition);
@@ -250,19 +261,42 @@ public class ChessPiece {
             }
             // all clear
             else if (pieceUnder == null && myPosition != endPosition) {
-                if ((type == KING ||type == KNIGHT || type == PAWN)&& !myPosition.equals(endPosition)){
-                    if(type == PAWN){
-                        checkCapture(board, nextStepPosition, myPosition, endPosition);
-                        addToCollection(moves, myPosition, endPosition);
-                        break;}
+                if ((type == KING ||type == KNIGHT)&& !myPosition.equals(endPosition) ||(type == PAWN)){
+                    // if pawn just detect capture
+                    if(type == PAWN) {
+                        Collection<ChessPosition> possibleCaptures=checkCapture(board, myPosition, myPosition, endPosition);
+                        for (ChessPosition capturePosition : possibleCaptures) {
+                            if (capturePosition != null) {
+                                addToCollection(moves, myPosition, capturePosition);
+                            }
+                        }
+                        break;
+                    }
                     // Pieces that can only make one move
                     break;
                 }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
             }
+            // just check capture
 
             nextStepPosition=new ChessPosition(nextStepPosition.getRow() + i, nextStepPosition.getColumn() + j);
+        }
+    }
+
+    private boolean front2NotBlock(ChessBoard board, ChessPosition myPosition) {
+        int row = myPosition.getRow();
+        int col = myPosition.getColumn();
+        if(board.getPiece(myPosition) == null){
+            return false;
+        }
+        if(board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.WHITE){
+            ChessPosition frontPosition = new ChessPosition(row+2, col);
+            return board.getPiece(frontPosition) == null;
+        }else{
+            ChessPosition frontPosition = new ChessPosition(row-2, col);
+            return board.getPiece(frontPosition) == null;
+
         }
     }
 
@@ -285,7 +319,7 @@ public class ChessPiece {
     // assign endPosition to the possible Position
     private ChessPosition checkCaptureHelper(ChessBoard board, ChessPosition position, ChessPosition endPosition){
         if(board.getPiece(position) != null){
-            if(board.getPiece(position).getTeamColor() != null && board.getPiece(position).getTeamColor() != board.getPiece(position).getTeamColor()){
+            if(board.getPiece(position).getTeamColor() != null && board.getPiece(endPosition).getTeamColor() != board.getPiece(position).getTeamColor()){
                 return position;
             }
         }
@@ -312,6 +346,8 @@ public class ChessPiece {
             returnCollection.add(checkCaptureHelper(board, upRight, endPosition));
         }
         return returnCollection;
+
+
 
 
 

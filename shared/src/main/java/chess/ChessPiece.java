@@ -250,7 +250,7 @@ public class ChessPiece {
             nextStepPosition = new ChessPosition(row + 2*i, col + 2*j);
             addToCollection(moves, myPosition, nextStepPosition);
         }
-        while (checkBounds(endPosition) && checkBounds(nextStepPosition)) {
+        while (checkBounds(nextStepPosition)) {
             ChessPiece pieceUnder=board.getPiece(nextStepPosition);
             // gonna hit own team, stop before next step
             if (pieceUnder != null && pieceUnder.getTeamColor() == board.getPiece(myPosition).getTeamColor()) {

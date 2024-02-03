@@ -1,0 +1,22 @@
+Pawn:
+
+Moves forward one square, but captures diagonally.
+On its first move, a pawn can advance two squares.
+Rook:
+
+Moves horizontally or vertically as many squares as you want.
+Knight:
+
+Moves in an "L" shape: two squares in one direction and one square perpendicular.
+The only piece that can "jump" over others.
+Bishop:
+
+Moves diagonally as many squares as you want.
+Queen:
+
+Combines the moves of the rook and bishop.
+Moves horizontally, vertically, or diagonally as many squares as you want.
+King:
+
+Moves one square in any direction.
+Cannot move into check (threatened by opponent's pieces).

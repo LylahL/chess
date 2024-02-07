@@ -117,8 +117,11 @@ public class ChessGame {
         if(teamTurn != piece.getTeamColor()){
             throw new InvalidMoveException("Wrong team turn");
         }
-
+        if(move.getPromotionPiece() != null){
+            board.addPiece(endPosition, new ChessPiece(piece.getTeamColor(), move.getPromotionPiece()));
+        }else {
             board.addPiece(endPosition, piece);
+        }
             board.addPiece(startPosition, null);
             if(piece.getTeamColor() == TeamColor.WHITE){
                 setTeamTurn(TeamColor.BLACK);

@@ -492,7 +492,7 @@ public class ChessGameTests {
 
     @Test
     @DisplayName("Pinned King Causes Stalemate")
-    public void stalemate() {
+    public void stalemate() throws InvalidMoveException {
         var game = getNewGame();
         game.setBoard(loadBoard("""
                 |k| | | | | | | |

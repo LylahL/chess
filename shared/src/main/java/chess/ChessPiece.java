@@ -283,6 +283,9 @@ public class ChessPiece {
                     }
                     break;
                 }
+                if ((type == KING ||type == KNIGHT)&& !myPosition.equals(endPosition)){
+                    break;
+                }
                 endPosition=nextStepPosition;
                 addToCollection(moves, myPosition, endPosition);
                 break;

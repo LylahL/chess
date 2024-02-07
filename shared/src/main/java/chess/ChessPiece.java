@@ -350,9 +350,11 @@ public class ChessPiece {
 
     // assign endPosition to the possible Position
     private ChessPosition checkCaptureHelper(ChessBoard board, ChessPosition position, ChessPosition endPosition){
-        if(board.getPiece(position) != null){
-            if(board.getPiece(position).getTeamColor() != null && board.getPiece(endPosition).getTeamColor() != board.getPiece(position).getTeamColor()){
-                return position;
+        if(checkBounds(position) && checkBounds(endPosition)){
+            if(board.getPiece(position) != null){
+                if(board.getPiece(position).getTeamColor() != null && board.getPiece(endPosition).getTeamColor() != board.getPiece(position).getTeamColor()){
+                    return position;
+                }
             }
         }
         return null;

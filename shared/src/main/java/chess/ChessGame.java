@@ -51,7 +51,7 @@ public class ChessGame {
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException {
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece current_piece = board.getPiece(startPosition);
         Collection<ChessMove> allMoves = current_piece.pieceMoves(board, startPosition);
         Collection<ChessMove> validMoves = new HashSet<>();
@@ -244,7 +244,7 @@ public class ChessGame {
      * @param teamColor which team to check for stalemate
      * @return True if the specified team is in stalemate, otherwise false
      */
-    public boolean isInStalemate(TeamColor teamColor) throws InvalidMoveException {
+    public boolean isInStalemate(TeamColor teamColor) {
         Collection<ChessMove>  validMoves = null;
         Collection<ChessMove>  returningMoves = null;
         ChessPosition currentPosition = null;
@@ -257,7 +257,7 @@ public class ChessGame {
       return returningMoves.isEmpty();
     }
 
-    private Collection<ChessMove> Check_isInStalemate(Collection<ChessMove> validMoves, ChessPosition currentPosition, ChessPiece currentPiece, TeamColor teamColor) throws InvalidMoveException {
+    private Collection<ChessMove> Check_isInStalemate(Collection<ChessMove> validMoves, ChessPosition currentPosition, ChessPiece currentPiece, TeamColor teamColor) {
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
                 currentPosition=new ChessPosition(i, j);

@@ -29,7 +29,7 @@ public class CastlingTests {
 
     @Test
     @DisplayName("White Team Castle")
-    public void castleWhite() {
+    public void castleWhite() throws InvalidMoveException {
 
         /*
         | | | | | | | | |
@@ -127,7 +127,7 @@ public class CastlingTests {
 
     @Test
     @DisplayName("Black Team Castle")
-    public void castleBlack() {
+    public void castleBlack() throws InvalidMoveException {
 
         /*
         |r| | | |k| | |r|
@@ -239,7 +239,7 @@ public class CastlingTests {
 
     @Test
     @DisplayName("Cannot Castle Through Pieces")
-    public void castlingBlockedByTeam() {
+    public void castlingBlockedByTeam() throws InvalidMoveException {
         /*
         | | | | | | | | |
 		| | | | | | | | |
@@ -287,7 +287,7 @@ public class CastlingTests {
 
     @Test
     @DisplayName("Cannot Castle in Check")
-    public void castlingBlockedByEnemy() {
+    public void castlingBlockedByEnemy() throws InvalidMoveException {
 
         /*
         |r| | |B|k| | |r|

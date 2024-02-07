@@ -630,7 +630,7 @@ public class ChessGameTests {
     public class ValidMoveTests {
         @Test
         @DisplayName("Check Forces Movement")
-        public void forcedMove() {
+        public void forcedMove() throws InvalidMoveException {
 
             var game = getNewGame();
             game.setBoard(loadBoard("""
@@ -661,7 +661,7 @@ public class ChessGameTests {
 
         @Test
         @DisplayName("Piece Partially Trapped")
-        public void moveIntoCheck() {
+        public void moveIntoCheck() throws InvalidMoveException {
 
             var game = getNewGame();
             game.setBoard(loadBoard("""
@@ -687,7 +687,7 @@ public class ChessGameTests {
 
         @Test
         @DisplayName("Piece Completely Trapped")
-        public void rookPinnedToKing() {
+        public void rookPinnedToKing() throws InvalidMoveException {
 
             var game = getNewGame();
             game.setBoard(loadBoard("""
@@ -709,7 +709,7 @@ public class ChessGameTests {
 
         @Test
         @DisplayName("Pieces Cannot Eliminate Check")
-        public void kingInDanger() {
+        public void kingInDanger() throws InvalidMoveException {
 
             var game = getNewGame();
             game.setBoard(loadBoard("""
@@ -753,7 +753,7 @@ public class ChessGameTests {
 
         @Test
         @DisplayName("King Cannot Move Into Check")
-        public void noPutSelfInDanger() {
+        public void noPutSelfInDanger() throws InvalidMoveException {
 
             var game = getNewGame();
             game.setBoard(loadBoard("""

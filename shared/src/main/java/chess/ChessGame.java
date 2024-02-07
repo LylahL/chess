@@ -1,5 +1,7 @@
 package chess;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -50,8 +52,17 @@ public class ChessGame {
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
-    public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        throw new RuntimeException("Not implemented");
+    public Collection<ChessMove> validMoves(ChessPosition startPosition) throws InvalidMoveException {
+        ChessPiece current_piece = board.getPiece(startPosition);
+        Collection<ChessMove> allMoves = current_piece.pieceMoves(board, startPosition);
+        Collection<ChessMove> validMoves = new HashSet<>();
+      for (ChessMove move : allMoves) {
+        this.makeMove(move);
+        if (!isInCheck(current_piece.getTeamColor())) {
+          validMoves.add(move);
+        }
+      }
+      return  validMoves;
     }
 
     /**
@@ -172,7 +183,7 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        
     }
 
     /**

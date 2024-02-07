@@ -1,10 +1,9 @@
 package chess;
 
 import jdk.jshell.spi.ExecutionControl;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -176,21 +175,28 @@ public class ChessGame {
         ChessPiece kingPiece=null;
         ChessPosition currentPosition = null;
         ChessPiece currentPiece = null;
-        Check_isInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
-        assert kingPiece != null;
+        Object[] kingPiece_Position = Check_isInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
+        kingPiece = (ChessPiece) kingPiece_Position[0];
+        kingPosition = (ChessPosition) kingPiece_Position[1];
         Collection<ChessMove> kingMoves=kingPiece.pieceMoves(board, kingPosition);
+        ChessBoard originalBoard;
+        originalBoard = copy_board(board);
 
         if (!isInCheck(teamColor)) {
             return false;
         }
         for(ChessMove move : kingMoves){
             this.makeMove(move);
+            if( isInCheck(teamColor)){
+                return true;
+            }
+            board = copy_board(originalBoard);
         }
-      return !isInCheck(teamColor);
-
+        return false;
     }
 
-    private void Check_isInCheckmate(ChessPiece kingPiece, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition, TeamColor teamColor) {
+    private Object[] Check_isInCheckmate(ChessPiece kingPiece, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition, TeamColor teamColor) {
+        Object[] kingPiece_Position = null;
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
                 currentPosition=new ChessPosition(i, j);
@@ -201,11 +207,13 @@ public class ChessGame {
                 else if (currentPiece.getPieceType() == ChessPiece.PieceType.KING && currentPiece.getTeamColor() == teamColor) {
                     kingPosition=currentPosition;
                     kingPiece=currentPiece;
+                    kingPiece_Position =new Object[]{kingPiece, kingPosition};
                 } else {
                     continue;
                 }
             }
         }
+        return kingPiece_Position;
     }
 
 

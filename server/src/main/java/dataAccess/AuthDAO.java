@@ -1,8 +1,14 @@
 package dataAccess;
 
 public class AuthDAO {
+  private DataAccessInterface database;
+
+  public AuthDAO(Database database){
+    this.database = database;
+  }
+
   public void clear() throws DataAccessException{
-    // not implementing database at this phase, then how would I write the clear method.
+    this.database.clearAuth();
   }
 
 }

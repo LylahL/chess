@@ -1,4 +1,4 @@
 package dataAccess;
 
-public class Database {
+public class Database implements DataAccessInterface {
 }

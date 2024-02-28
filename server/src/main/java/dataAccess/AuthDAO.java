@@ -17,6 +17,10 @@ import java.util.HashMap;
 public class AuthDAO implements AuthDAOInterface{
     private static final HashMap<AuthData, String> authData = new HashMap<>();
 
+    public void clear(){
+        authData.clear();
+    }
+
     public AuthData getAuthByUsername(String username) {
         // get auth base on username
         for (AuthData auth : authData.keySet()) {

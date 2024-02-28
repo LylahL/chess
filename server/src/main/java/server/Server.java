@@ -1,5 +1,6 @@
 package server;
 
+import service.ClearApplication;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -9,6 +10,7 @@ import spark.Spark;
 */
 
 public class Server {
+    private ClearApplication clearApplication;
 
     public static void main(String[] args){
         Server server = new Server();
@@ -19,9 +21,9 @@ public class Server {
 
         Spark.staticFiles.location("web");
 
-        // Register your endpoints and handle exceptions here.
-        //register
-        Spark.post("/user", this::register);
+        // Register your endpoints and handle exceptions here
+        //clear application
+        Spark.delete("/db", this::deleteDatabase);
 
 
 
@@ -36,5 +38,10 @@ public class Server {
 
     public Object register(Request req, Response res) {
         return null;
+    }
+    private boolean deleteDatabase(Request request, Response response) {
+        clearApplication.clearDataBase();
+        response.status(200);
+        return true;
     }
 }

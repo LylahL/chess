@@ -8,6 +8,11 @@ import java.util.Iterator;
 public class UserDAO implements UserDAOInterface{
   private HashSet<UserData> userData = new HashSet<>();
 
+  @Override
+  public void clear() {
+    userData.clear();
+  }
+
   public UserData getUserByUsername(String username) {
     // get userdata base on username
     for(UserData user : userData){
@@ -32,6 +37,11 @@ public class UserDAO implements UserDAOInterface{
         return; // Exit the loop once user is removed
       }
     }
+  }
+
+  @Override
+  public boolean checkExist(String username) {
+    return (this.getUserByUsername(username) != null);
   }
 
 }

@@ -1,7 +1,8 @@
 package server;
 
+import spark.Request;
+import spark.Response;
 import spark.Spark;
-import service.ClearApplication;
 
 /*The Server receives network HTTP requests and sends them to the correct handler for processing.
   The server should also handle all unhandled exceptions that your application generates and return the appropriate HTTP status code.
@@ -19,21 +20,8 @@ public class Server {
         Spark.staticFiles.location("web");
 
         // Register your endpoints and handle exceptions here.
-        ClearApplication clearApplication = new ClearApplication();
-        Spark.delete("/db", (request, response) -> {
-            // response handling
-            boolean success = clearApplication.clearDataBase().getSuccess();
-            // if failed
-            if(!success){
-                // halt(500, "ERROR: failed to clear database");
-                response.status(500)
-            }
-            // else succeed
-            else{
-                response.status(200);
-            }
-            return response.body();
-        });
+        //register
+        Spark.post("/user", this::register);
 
 
 
@@ -44,5 +32,9 @@ public class Server {
 
     public void stop() {
         Spark.stop();
+    }
+
+    public Object register(Request req, Response res) {
+        return null;
     }
 }

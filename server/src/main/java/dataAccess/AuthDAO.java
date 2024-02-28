@@ -14,12 +14,10 @@ import model.AuthData;
 
 import java.util.HashMap;
 
-public class AuthDAO implements DataAccessInterface{
+public class AuthDAO implements AuthDAOInterface{
     private static final HashMap<AuthData, String> authData = new HashMap<>();
 
-
-    @Override
-    public AuthData getData(String username) {
+    public AuthData getAuthByUsername(String username) {
         // get auth base on username
         for (AuthData auth : authData.keySet()) {
             //starts a loop that iterates over the keys (which are AuthData objects) in the authData map.
@@ -29,7 +27,7 @@ public class AuthDAO implements DataAccessInterface{
         }
         return null;
     }
-    public String getData(AuthData authToken) {
+    public String getAuthByAuthToken(AuthData authToken) {
         for (AuthData key : authData.keySet()) {
             if (key.equals(authToken)) {
                 return authData.get(key);
@@ -38,25 +36,18 @@ public class AuthDAO implements DataAccessInterface{
         return null;
     }
 
-    public Object createData(String username) {
+    public AuthData createAuthToken(String username) {
         AuthData newAuthData = new AuthData();
         authData.put(newAuthData, username);
         return newAuthData;
     }
 
-    @Override
-    public Object setData() {
-        return null;
-    }
-
-
-    public Object deleteData(AuthData auth) {
+    public void deleteAuthToken(AuthData auth) {
         String removedUsername = authData.remove(auth); // Remove the AuthData object from the map
-        return removedUsername; // Return the username associated with the deleted AuthData object
     }
 
-    @Override
-    public Object checkExist(AuthData auth) {
+
+    public boolean checkExist(AuthData auth) {
         return authData.containsKey(auth);
     }
 }

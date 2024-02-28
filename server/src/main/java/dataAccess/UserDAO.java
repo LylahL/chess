@@ -1,39 +1,37 @@
 package dataAccess;
 
-import model.AuthData;
 import model.UserData;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
-public class UserDAO implements DataAccessInterface{
+public class UserDAO implements UserDAOInterface{
   private HashSet<UserData> userData = new HashSet<>();
 
-  public UserData getData(String username) {
+  public UserData getUserByUsername(String username) {
     // get userdata base on username
-
-  }
-
-
-  public Object getData(AuthData authToken) {
+    for(UserData user : userData){
+      if(user.getUsername().equals(username)){
+        return user;
+      }
+    }
     return null;
   }
 
-
-  public void createData(UserData user) {
+  public void createUser(UserData user) {
     userData.add(user);
   }
 
-
-  public Object setData() {
-    return null;
+  public void deleteUser(String username){
+    Iterator<UserData> iterator = userData.iterator();
+    while (iterator.hasNext()) {
+      UserData user = iterator.next();
+      if (user.getUsername().equals(username)) {
+        // Remove the user if found
+        iterator.remove();
+        return; // Exit the loop once user is removed
+      }
+    }
   }
 
-
-  public Object deleteData(AuthData auth) {
-    return null;
-  }
-
-  public Object checkExist(AuthData auth) {
-    return null;
-  }
 }

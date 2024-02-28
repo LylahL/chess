@@ -40,6 +40,11 @@ public class UserDAO implements UserDAOInterface{
   }
 
   @Override
+  public String getPassword(String username) {
+    return this.getUserByUsername(username).getPassword();
+  }
+
+  @Override
   public boolean checkExist(String username) {
     return (this.getUserByUsername(username) != null);
   }

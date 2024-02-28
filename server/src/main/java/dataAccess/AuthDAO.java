@@ -47,7 +47,8 @@ public class AuthDAO implements AuthDAOInterface{
     }
 
     public void deleteAuthToken(AuthData auth) {
-        String removedUsername = authData.remove(auth); // Remove the AuthData object from the map
+        String removedUsername = authData.remove(auth);
+        // Remove the AuthData object from the map
     }
 
 

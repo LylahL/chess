@@ -3,7 +3,9 @@ package model;
 import java.util.Objects;
 import java.util.UUID;
 
-public record AuthData(String authToken) {
+public class AuthData {
+    String authToken;
+
     public AuthData() {
         this(UUID.randomUUID().toString());
     }
@@ -11,6 +13,8 @@ public record AuthData(String authToken) {
     public AuthData(String authToken) {
         this.authToken = authToken;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

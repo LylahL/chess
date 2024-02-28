@@ -40,10 +40,7 @@ public class Server {
     public record joinGameRequest(String clientColor, int gameID) {
     }
 
-    public static void main(String[] args){
-        Server server = new Server();
-        server.run(8080);
-    }
+
     public int run(int desiredPort) {
         Spark.port(desiredPort);
 
@@ -61,7 +58,7 @@ public class Server {
         Spark.get("/game", this::listGames);
         Spark.put("/game", this::joinGame);
         Spark.exception(ResponseException.class, this::exceptionHandler);
-
+        Spark.init();
 
         Spark.awaitInitialization();
         return Spark.port();
@@ -79,7 +76,7 @@ public class Server {
             String clientColor = joinGameRequest.clientColor();
             gameService.joinGame(gameID, clientColor, auth);
             response.status(200 );
-            return "";
+            return "{}";
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);
@@ -117,7 +114,7 @@ public class Server {
             AuthData auth= new AuthData(request.headers("authorization"));
             userService.logout(auth);
             response.status(200);
-            return "";
+            return "{}";
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);
@@ -156,6 +153,6 @@ public class Server {
     private Object deleteDatabase(Request request, Response response) {
         clearApplication.clearDataBase();
         response.status(200);
-        return "";
+        return "{}";
     }
 }

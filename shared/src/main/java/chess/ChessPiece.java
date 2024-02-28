@@ -1,7 +1,5 @@
 package chess;
 
-import javax.swing.text.Position;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -380,27 +378,6 @@ public class ChessPiece {
             returnCollection.add(checkCaptureHelper(board, upRight, endPosition));
         }
         return returnCollection;
-
-
-
-
-
-
-        /* up right
-
-        if(board.getPiece(upRight).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(upRight).getTeamColor()){
-            endPosition = upRight;
-        }
-        // down left
-
-        if(board.getPiece(downLeft).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(downLeft).getTeamColor()){
-            endPosition = downLeft;
-        }
-        // down right
-
-        if(board.getPiece(downRight).getTeamColor() != null && board.getPiece(myPosition).getTeamColor() != board.getPiece(downRight).getTeamColor()){
-            endPosition = downRight;
-        }*/
     }
 
     private void addToCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition){

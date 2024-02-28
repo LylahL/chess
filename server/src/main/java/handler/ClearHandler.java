@@ -3,8 +3,6 @@ package handler;
 import service.ClearApplication;
 import spark.Spark;
 
-import static spark.Spark.halt;
-
 /*
 The server handler classes serve as a translator between HTTP and Java.
 Your handlers will convert an HTTP request into Java usable objects & data.
@@ -18,7 +16,8 @@ public class ClearHandler {
       boolean success = clearApplication.clearDataBase().getSuccess();
       // if failed
       if(!success){
-        halt(500, "ERROR: failed to clear database");
+        // halt(500, "ERROR: failed to clear database");
+        response.status(500)
       }
       // else succeed
       else{

@@ -1,10 +1,16 @@
 package dataAccess;
 
-public interface DataAccessInterface {
-  public void deleteAllData();
-  public void clearData();
-  public void getUser();
-  public void createUser();
 
+import model.AuthData;
+
+public interface DataAccessInterface<T> {
+    T getData(String username);
+
+    T getData(AuthData authToken);
+
+    T createData(String username);
+    T setData();
+    T deleteData(AuthData auth);
+    T checkExist(AuthData auth);
 
 }

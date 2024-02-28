@@ -4,14 +4,28 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class AuthData {
-    String authToken;
-
-    public AuthData() {
-        this(UUID.randomUUID().toString());
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public AuthData(String authToken) {
+    String authToken;
+
+    public String getUsername() {
+        return username;
+    }
+
+    String username;
+
+    public AuthData(String username) {
+        // create an authData object by username, authToken is not specified
+        this(UUID.randomUUID().toString(), username);
+
+    }
+
+    public AuthData(String authToken, String username) {
+        // authToken is specified
         this.authToken = authToken;
+        this.username = username;
     }
 
 

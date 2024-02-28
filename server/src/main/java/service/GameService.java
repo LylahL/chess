@@ -33,8 +33,10 @@ public class GameService {
   public int createGame(AuthData authObject, String gameName) throws ResponseException {
     if (auth.checkExist(authObject)) {
       game.createNewGame(gameName);
+    }else {
+      throw new ResponseException(401, "Error: unauthorized");
     }
-    throw new ResponseException(401, "Error: unauthorized");
+    return game.getGameIdByName(gameName);
   }
   //Join Game
   public void joinGame(int gameId, String playerColor, AuthData authObject) throws ResponseException{
@@ -46,8 +48,9 @@ public class GameService {
         // no auth
         throw new ResponseException(401, "Error: unauthorized");
       }
+    }else {
+      // no game found
+      throw new ResponseException(400, "Error: bad request");
     }
-    // no game found
-    throw new ResponseException(400, "Error: bad request");
   }
 }

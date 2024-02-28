@@ -46,6 +46,7 @@ public class UserDAO implements UserDAOInterface{
 
   @Override
   public boolean checkExist(String username) {
+    // if exist then true
     return (this.getUserByUsername(username) != null);
   }
 

@@ -19,9 +19,8 @@ public class UserService {
   public AuthData register(UserData newUserData) throws ResponseException {
     String userName = newUserData.getUsername();
     String password = newUserData.getPassword();
-    // String email = newUserData.getEmail(); Do I need email to register? what is email for.
-    if(user.checkExist(userName)){
-      if(userName != null && password != null){
+    if(!user.checkExist(userName)){
+      if(userName == null && password == null){
         throw new ResponseException(400, "Error: bad request");
       }
       user.createUser(newUserData);
@@ -34,11 +33,11 @@ public class UserService {
   public AuthData login(UserData userObject) throws ResponseException{
     String username = userObject.getUsername();
     String password = userObject.getPassword();
-    if(user.getUserByUsername(username) != null){
+    if(user.getUserByUsername(username) == null){
       throw new ResponseException(500, "Error: user not in data base");
     }
     // success
-    if(Objects.equals(password, user.getPassword(username))){
+    else if(Objects.equals(password, user.getPassword(username))){
       AuthData authToken = auth.createAuthToken(username);
       return authToken;
     }else {
@@ -56,8 +55,11 @@ public class UserService {
         throw new ResponseException(500, "Error: user not logged in");
       }
     }
-    // user not found in system
-    throw new ResponseException(401, "Error: unauthorized");
+    else {
+      // user not found in system
+      throw new ResponseException(401, "Error: unauthorized");
+    }
+
 
 
   }

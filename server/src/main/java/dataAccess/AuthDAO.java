@@ -22,6 +22,7 @@ public class AuthDAO implements AuthDAOInterface{
     }
 
     public AuthData getAuthByUsername(String username) {
+        System.out.println(authData);
         // get auth base on username
         for (AuthData auth : authData.keySet()) {
             //starts a loop that iterates over the keys (which are AuthData objects) in the authData map.
@@ -39,9 +40,27 @@ public class AuthDAO implements AuthDAOInterface{
         }
         return null;
     }
+    public String getUserByAuthString(String authToken){
+        for (AuthData auth : authData.keySet()) {
+            if (auth.getAuthToken().equals(authToken)){
+                return authData.get(auth);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public AuthData getAuthDataByAuthString(String authToken) {
+        for (AuthData auth : authData.keySet()) {
+            if (auth.getAuthToken().equals(authToken)){
+                return auth;
+            }
+        }
+        return null;
+    }
 
     public AuthData createAuthToken(String username) {
-        AuthData newAuthData = new AuthData();
+        AuthData newAuthData = new AuthData(username);
         authData.put(newAuthData, username);
         return newAuthData;
     }

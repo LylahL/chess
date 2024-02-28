@@ -3,11 +3,17 @@ package serviceTests;
 import dataAccess.AuthDAO;
 import dataAccess.GameDAO;
 import dataAccess.UserDAO;
+import exception.ResponseException;
+import model.AuthData;
+import model.UserData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.ClearApplication;
 import service.GameService;
 import service.UserService;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class service {
   private ClearApplication clearApplication;
 
@@ -16,43 +22,135 @@ public class service {
   private AuthDAO auth;
   private GameDAO game;
   private UserDAO user;
+  UserData user123 = new UserData("username", "password", "email");
+  UserData user000 = new UserData(null, null, null);
 
   @BeforeEach
   void setUp() {
+
     auth = new AuthDAO();
     game = new GameDAO();
     user = new UserDAO();
     gameService = new GameService(auth, game, user);
     userService = new UserService(auth, user);
     clearApplication = new ClearApplication(auth, game, user);
-    clearApplication.clearDataBase();
+    this.clearDataBase();
+  }
+
+  // Positive
+  @Test
+  void clearDataBase(){
+      user.createUser(user123);
+      game.createNewGame("chessGame");
+      auth.createAuthToken("username");
+      clearApplication.clearDataBase();
+      assertThrows(ResponseException.class, ()-> userService.login(user123));
+  }
+  @Test
+  void register() throws ResponseException {
+      userService.register(user123);
+      assertEquals(user123, user.getUserByUsername(user123.getUsername()));
   }
 
   @Test
-  void clearDataBase() {
+  void registerFail() {
+    try {
+      // null user
+      userService.register(user000);
+    }catch (ResponseException e){
+      assertEquals(400, e.statusCode());
+    }
   }
 
   @Test
-  void register() {
+  void login() throws ResponseException {
+      user.createUser(user123);
+      AuthData authToken = userService.login(user123);
+      assertEquals(authToken, auth.getAuthByUsername(user123.getUsername()));
   }
 
   @Test
-  void login() {
+  void loginFail() {
+    try {
+      user.createUser(user123);
+      UserData userFalse = new UserData("username", "wrongPassword","email");
+      userService.login(userFalse);
+    } catch (ResponseException e){
+      assertEquals(401, e.statusCode());
+    }
   }
 
   @Test
-  void logout() {
+  void logout() throws ResponseException {
+    user.createUser(user123);
+    AuthData authToken = userService.login(user123);
+    userService.logout(authToken);
+    assertNull(auth.getAuthByUsername(user123.getUsername()));
+  }
+
+
+  @Test
+  void logoutFail()  {
+    try{
+      AuthData authToken = auth.createAuthToken("user");
+      userService.logout(authToken);
+    }catch (ResponseException e){
+      assertEquals(401, e.statusCode());
+    }
   }
 
   @Test
-  void listGames() {
+  void listGames() throws ResponseException {
+    game.createNewGame("game1");
+    game.createNewGame("game2");
+    AuthData authToken = userService.register(user123);
+    assertEquals(gameService.listGames(authToken), game.listAllGame());
+  }
+  @Test
+  void listGamesFailed(){
+    try {
+      game.createNewGame("game1");
+      game.createNewGame("game2");
+      AuthData authToken = auth.createAuthToken("username");
+      gameService.listGames(authToken);
+    }catch (ResponseException e){
+      assertEquals(401, e.statusCode());
+    }
+
+  }
+  @Test
+  void createGame() throws ResponseException {
+    AuthData authToken = userService.register(user123);
+    int gameID = gameService.createGame(authToken, "gameName");
+    assertTrue(game.checkExist(gameID));
   }
 
   @Test
-  void createGame() {
+  void createGameFailed() {
+    try{
+      AuthData authToken = new AuthData("username");
+      int gameID = gameService.createGame(authToken, "gameName");
+    }catch (ResponseException e){
+      assertEquals(401, e.statusCode());
+    }
   }
 
   @Test
-  void joinGame() {
+  void joinGame() throws ResponseException {
+    AuthData authToken = userService.register(user123);
+    int gameId = gameService.createGame(authToken, "gameName");
+    gameService.joinGame(gameId, "WHITE", authToken);
+    assertEquals(game.getGameByUsername(user123.getUsername()), game.getGameByGameId(gameId));
   }
+
+  @Test
+  void joinGameFailed(){
+    try {
+      AuthData authToken = userService.register(user123);
+      gameService.joinGame(14, "WHITE", authToken);
+    }catch(ResponseException e){
+      assertEquals(400, );
+    }
+  }
+
 }

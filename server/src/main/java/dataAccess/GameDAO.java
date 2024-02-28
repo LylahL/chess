@@ -8,6 +8,14 @@ import java.util.Objects;
 public class GameDAO implements GameDAOInterface{
     private HashSet<GameData> gameData=new HashSet<>();
 
+    public HashSet<GameData> listAllGame(){
+        return gameData;
+    }
+
+    @Override
+    public boolean checkExist(int gameId) {
+        return this.getGameByGameId(gameId) != null;
+    }
 
     public GameData getGameByUsername(String username) {
         // Get game data based on username, checking both white and black usernames
@@ -29,9 +37,9 @@ public class GameDAO implements GameDAOInterface{
         return null;
     }
 
-    public void createNewGame(GameData game) {
+    public void createNewGame(String gameName) {
         // Create and add game data
-        gameData.add(game);
+        gameData.add(new GameData(null, null,gameName));
     }
 
 

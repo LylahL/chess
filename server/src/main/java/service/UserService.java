@@ -1,6 +1,6 @@
 package service;
 
-import dataAccess.AuthDAOInterface;
+import dataAccess.AuthDAO;
 import dataAccess.UserDAOInterface;
 import exception.ResponseException;
 import model.AuthData;
@@ -9,10 +9,10 @@ import model.UserData;
 import java.util.Objects;
 
 public class UserService {
-  private AuthDAOInterface auth;
+  private AuthDAO auth;
   private UserDAOInterface user;
 
-  public UserService(AuthDAOInterface auth, UserDAOInterface user) {
+  public UserService(AuthDAO auth, UserDAOInterface user) {
     this.auth=auth;
     this.user=user;
   }

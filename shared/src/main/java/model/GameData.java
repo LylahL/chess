@@ -11,13 +11,13 @@ public class GameData {
   private String blackUsername;
   private String gameName;
   private ChessGame game;
+  private static int n = 0;
 
-  public GameData(int gameID, String whiteUsername, String blackUsername, String gameName, ChessGame game) {
-    this.gameID = gameID;
+  public GameData(String whiteUsername, String blackUsername, String gameName) {
+    this.gameID = n++;
     this.whiteUsername = whiteUsername;
     this.blackUsername = blackUsername;
     this.gameName = gameName;
-    this.game = game;
   }
 
   public int getGameID() {

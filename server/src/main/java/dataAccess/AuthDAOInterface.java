@@ -4,7 +4,6 @@ import model.AuthData;
 
 public interface AuthDAOInterface {
   void clear();
-  AuthData getAuthByUsername(String username);
   String getUserByAuthToken(AuthData authToken);
   AuthData getAuthDataByAuthString(String authToken);
   AuthData createAuthToken(String username);

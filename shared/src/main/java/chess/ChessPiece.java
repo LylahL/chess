@@ -65,9 +65,7 @@ public class ChessPiece {
           case PAWN -> pawnMoves(board, myPosition);
         };
     }
-    private void addToPromotionCollection(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition, PieceType type){
-        moves.add(new ChessMove(startPosition, endPosition, type));
-    }
+
     private Collection<ChessMove> pawnMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
         Collection<ChessMove> promotionMoves = new HashSet<>();
@@ -85,10 +83,7 @@ public class ChessPiece {
                     //promotion
                     // collection add all the promotion moves deletes all the promotion null
                     addToCollection(discardedMoves, myPosition, move.getEndPosition());
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), BISHOP);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), QUEEN);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), KNIGHT);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), ROOK);
+                    addAllPromotionMoves(promotionMoves, myPosition, move.getEndPosition());
                 }
             }
             for (ChessMove move: discardedMoves){
@@ -105,10 +100,7 @@ public class ChessPiece {
                     //promotion
                     // collection add all the promotion moves deletes all the promotion null
                     addToCollection(discardedMoves, myPosition, move.getEndPosition());
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), BISHOP);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), QUEEN);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), KNIGHT);
-                    addToPromotionCollection(promotionMoves, myPosition, move.getEndPosition(), ROOK);
+                    addAllPromotionMoves(promotionMoves, myPosition, move.getEndPosition());
                 }
             }
             for (ChessMove move: discardedMoves){
@@ -117,6 +109,13 @@ public class ChessPiece {
             moves.addAll(promotionMoves);
         }
         return moves;
+    }
+
+    private void addAllPromotionMoves(Collection<ChessMove> moves, ChessPosition startPosition, ChessPosition endPosition) {
+        PieceType[] types = {PieceType.BISHOP, PieceType.QUEEN, PieceType.KNIGHT, PieceType.ROOK};
+        for (PieceType type : types) {
+            moves.add(new ChessMove(startPosition, endPosition, type));
+        }
     }
 
     private Collection<ChessMove> knightMoves(ChessBoard board, ChessPosition myPosition) {

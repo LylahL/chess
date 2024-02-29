@@ -21,17 +21,6 @@ public class AuthDAO implements AuthDAOInterface{
         authData.clear();
     }
 
-    public AuthData getAuthByUsername(String username) {
-        System.out.println(authData);
-        // get auth base on username
-        for (AuthData auth : authData.keySet()) {
-            //starts a loop that iterates over the keys (which are AuthData objects) in the authData map.
-            if (authData.get(auth).equals(username)) {
-                return auth;
-            }
-        }
-        return null;
-    }
     public String getUserByAuthToken(AuthData authToken) {
         for (AuthData key : authData.keySet()) {
             if (key.equals(authToken)) {

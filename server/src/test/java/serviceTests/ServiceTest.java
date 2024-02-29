@@ -66,7 +66,7 @@ public class ServiceTest {
   void login() throws ResponseException {
       user.createUser(user123);
       AuthData authToken = userService.login(user123);
-      assertEquals(authToken, auth.getAuthByUsername(user123.getUsername()));
+      assertEquals(authToken, auth.getAuthDataByAuthString(authToken.getAuthToken()));
   }
 
   @Test
@@ -85,7 +85,7 @@ public class ServiceTest {
     user.createUser(user123);
     AuthData authToken = userService.login(user123);
     userService.logout(authToken);
-    assertNull(auth.getAuthByUsername(user123.getUsername()));
+    assertNull(auth.getAuthDataByAuthString(authToken.getAuthToken()));
   }
 
 
@@ -140,7 +140,7 @@ public class ServiceTest {
     AuthData authToken = userService.register(user123);
     int gameId = gameService.createGame(authToken, "gameName");
     gameService.joinGame(gameId, "WHITE", authToken);
-    assertEquals(game.getGameByUsername(user123.getUsername()), game.getGameByGameId(gameId));
+    assertEquals(game.getGameIdByName("gameName"), gameId);
   }
 
   @Test

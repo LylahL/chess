@@ -38,7 +38,7 @@ public class Server {
         gameService = new GameService(authDAO, game, user);
     }
 
-    public record joinGameRequest(String playerColor, int gameID) {
+    public record JoinGameRequest(String playerColor, int gameID) {
     }
     public record LoginResult(String username, String authToken) {
     }
@@ -72,7 +72,7 @@ public class Server {
 
     private Object joinGame(Request request, Response response) {
         try{
-            joinGameRequest joinGameRequest = new Gson().fromJson(request.body(), joinGameRequest.class);
+            JoinGameRequest joinGameRequest = new Gson().fromJson(request.body(), JoinGameRequest.class);
             String authToken = request.headers("authorization");
             AuthData auth = authDAO.getAuthDataByAuthString(authToken);
             int gameID = joinGameRequest.gameID();

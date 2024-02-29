@@ -213,7 +213,7 @@ public class ChessGame {
     }
 
     private Object[] checkIsInCheckmate(ChessPiece kingPiece, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition, TeamColor teamColor) {
-        Object[] kingPiece_Position = null;
+        Object[] kingPiecePosition = null;
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
                 currentPosition=new ChessPosition(i, j);
@@ -224,13 +224,13 @@ public class ChessGame {
                 else if (currentPiece.getPieceType() == ChessPiece.PieceType.KING && currentPiece.getTeamColor() == teamColor) {
                     kingPosition=currentPosition;
                     kingPiece=currentPiece;
-                    kingPiece_Position =new Object[]{kingPiece, kingPosition};
+                    kingPiecePosition =new Object[]{kingPiece, kingPosition};
                 } else {
                     continue;
                 }
             }
         }
-        return kingPiece_Position;
+        return kingPiecePosition;
     }
 
 

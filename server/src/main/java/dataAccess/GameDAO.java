@@ -18,16 +18,6 @@ public class GameDAO implements GameDAOInterface{
         return this.getGameByGameId(gameId) != null;
     }
 
-    public GameData getGameByUsername(String username) {
-        // Get game data based on username, checking both white and black usernames
-        for (GameData data : gameData) {
-            if (data.getWhiteUsername().equals(username) || data.getBlackUsername().equals(username)) {
-                return data;
-            }
-        }
-        return null;
-    }
-
     public GameData getGameByGameId(int gameId) {
         // Get game data based on gameID
         for (GameData game : gameData) {

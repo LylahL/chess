@@ -137,7 +137,7 @@ public class ChessPiece {
         return moves;
     }
 
-    private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
+    private Collection<ChessMove> queenKingMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new HashSet<>();
         int col = myPosition.getColumn();
         int row = myPosition.getRow();
@@ -162,29 +162,12 @@ public class ChessPiece {
         return moves;
     }
 
+    private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
+        return queenKingMoves(board, myPosition);
+    }
+
     private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition myPosition) {
-        Collection<ChessMove> moves = new HashSet<>();
-        int col = myPosition.getColumn();
-        int row = myPosition.getRow();
-        ChessPosition endPosition = new ChessPosition(row, col);
-        int i = 1, j = -1;
-        // Down
-        moveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
-        // Left
-        moveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
-        // Up
-        moveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
-        // Right
-        moveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
-        // DownRight
-        moveHelper(moves, row, col, board, myPosition, endPosition, i, i);
-        // DownLeft
-        moveHelper(moves, row, col, board, myPosition, endPosition, i, j);
-        // UpRight
-        moveHelper(moves, row, col, board, myPosition, endPosition, j, i);
-        // UpLeft
-        moveHelper(moves, row, col, board, myPosition, endPosition, j, j);
-        return moves;
+        return queenKingMoves(board, myPosition);
     }
 
     private Collection<ChessMove> rookMoves(ChessBoard board, ChessPosition myPosition) {

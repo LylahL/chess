@@ -149,7 +149,7 @@ public class service {
       AuthData authToken = userService.register(user123);
       gameService.joinGame(14, "WHITE", authToken);
     }catch(ResponseException e){
-      assertEquals(400, );
+      assertEquals(400, e.statusCode());
     }
   }
 

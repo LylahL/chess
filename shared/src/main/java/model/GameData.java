@@ -3,22 +3,21 @@ package model;
 // public record GameData (int gameID, String whiteUsername, String blackUsername, String gameName, ChessGame game){}
 // cannot use record because record is immutable
 
-import chess.ChessGame;
+import java.util.ArrayList;
 
 public class GameData {
   private int gameID;
   private String whiteUsername;
   private String blackUsername;
   private String gameName;
-  private ChessGame game;
-  private static int n = 0;
+  private static ArrayList<String> observers = new ArrayList<>();
+  private static int n=0;
 
   public GameData(String whiteUsername, String blackUsername, String gameName) {
-    this.gameID = n++;
-    this.whiteUsername = whiteUsername;
-    this.blackUsername = blackUsername;
-    this.gameName = gameName;
-    this.game = new ChessGame();
+    this.gameID=n++;
+    this.whiteUsername=whiteUsername;
+    this.blackUsername=blackUsername;
+    this.gameName=gameName;
   }
 
   public int getGameID() {
@@ -26,7 +25,7 @@ public class GameData {
   }
 
   public void setGameID(int gameID) {
-    this.gameID = gameID;
+    this.gameID=gameID;
   }
 
   public String getWhiteUsername() {
@@ -34,7 +33,7 @@ public class GameData {
   }
 
   public void setWhiteUsername(String whiteUsername) {
-    this.whiteUsername = whiteUsername;
+    this.whiteUsername=whiteUsername;
   }
 
   public String getBlackUsername() {
@@ -42,7 +41,7 @@ public class GameData {
   }
 
   public void setBlackUsername(String blackUsername) {
-    this.blackUsername = blackUsername;
+    this.blackUsername=blackUsername;
   }
 
   public String getGameName() {
@@ -50,14 +49,12 @@ public class GameData {
   }
 
   public void setGameName(String gameName) {
-    this.gameName = gameName;
+    this.gameName=gameName;
   }
 
-  public ChessGame getGame() {
-    return game;
+  public void addObserver(String username){
+      observers.add(username);
   }
 
-  public void setGame(ChessGame game) {
-    this.game = game;
-  }
 }
+

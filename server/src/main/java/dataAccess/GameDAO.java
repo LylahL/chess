@@ -59,9 +59,12 @@ public class GameDAO implements GameDAOInterface{
         GameData game=this.getGameByGameId(gameID);
         if (Objects.equals(clientColor, "WHITE")) {
             game.setWhiteUsername(username);
-        } else {
+        } else if (Objects.equals(clientColor, "BLACK")) {
             game.setBlackUsername(username);
         }
+      else if (Objects.equals(clientColor, null)){
+           game.addObserver(username);
+      }
     }
 
 

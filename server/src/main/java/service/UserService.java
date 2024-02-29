@@ -20,7 +20,7 @@ public class UserService {
     String userName = newUserData.getUsername();
     String password = newUserData.getPassword();
     if(!user.checkExist(userName)){
-      if(userName == null && password == null){
+      if(userName == null || password == null){
         throw new ResponseException(400, "Error: bad request");
       }
       user.createUser(newUserData);
@@ -34,7 +34,7 @@ public class UserService {
     String username = userObject.getUsername();
     String password = userObject.getPassword();
     if(user.getUserByUsername(username) == null){
-      throw new ResponseException(500, "Error: user not in data base");
+      throw new ResponseException(401, "Error: user not in data base");
     }
     // success
     else if(Objects.equals(password, user.getPassword(username))){

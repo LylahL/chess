@@ -38,8 +38,12 @@ public class Server {
         gameService = new GameService(authDAO, game, user);
     }
 
-    public record joinGameRequest(String clientColor, int gameID) {
+    public record joinGameRequest(String playerColor, int gameID) {
     }
+    public record LoginResult(String username, String authToken) {
+    }
+
+    public record ListGameResult(int gameId, String whiteUserName, String BlackUsername, String GameName){}
 
 
     public int run(int desiredPort) {
@@ -71,12 +75,12 @@ public class Server {
 
     private Object joinGame(Request request, Response response) {
         try{
-            joinGameRequest joinGameRequest = new Gson().fromJson(request.body(), Server.joinGameRequest.class);
+            joinGameRequest joinGameRequest = new Gson().fromJson(request.body(), joinGameRequest.class);
             String authToken = request.headers("authorization");
             AuthData auth = authDAO.getAuthDataByAuthString(authToken);
             int gameID = joinGameRequest.gameID();
-            String clientColor = joinGameRequest.clientColor();
-            gameService.joinGame(gameID, clientColor, auth);
+            String playerColor = joinGameRequest.playerColor();
+            gameService.joinGame(gameID, playerColor, auth);
             response.status(200 );
             return "{}";
         } catch (ResponseException e) {
@@ -91,7 +95,8 @@ public class Server {
             AuthData auth = authDAO.getAuthDataByAuthString(authToken);
             HashSet<GameData> games = gameService.listGames(auth);
             response.status(200);
-            return new Gson().toJson(games);
+            // return "{ \"gameID\": \"" + gameID + "\" }";
+            return "{ \"games\": " + new Gson().toJson(games) + "}";
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);
@@ -131,7 +136,8 @@ public class Server {
             UserData user = new Gson().fromJson(request.body(), UserData.class);
             AuthData auth = userService.login(user);
             response.status(200);
-            return new Gson().toJson(auth);
+            LoginResult result = new LoginResult(user.getUsername(), auth.getAuthToken());
+            return new Gson().toJson(result);
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);

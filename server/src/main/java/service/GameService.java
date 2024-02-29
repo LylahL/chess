@@ -8,6 +8,7 @@ import model.AuthData;
 import model.GameData;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class GameService {
 
@@ -40,8 +41,14 @@ public class GameService {
   }
   //Join Game
   public void joinGame(int gameId, String playerColor, AuthData authObject) throws ResponseException{
-    if (game.checkExist(gameId)){
-      if(auth.checkExist(authObject)){
+    if (game.checkExist(gameId)){// if game exist
+      if(auth.checkExist(authObject)){// if user logged in
+        GameData currentGame = game.getGameByGameId(gameId);
+          // already taken
+          if (playerColor != null && (playerColor.equals("WHITE") && currentGame.getWhiteUsername() != null )||
+                  (Objects.equals(playerColor, "BLACK") && currentGame.getBlackUsername() != null )){
+            throw new ResponseException(403, "Error: already taken");
+          }
         String username = auth.getUserByAuthToken(authObject);
         game.addUserToGame(playerColor, gameId, username);
       }else{

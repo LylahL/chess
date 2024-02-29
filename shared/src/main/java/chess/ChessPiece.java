@@ -204,11 +204,11 @@ public class ChessPiece {
         return moves;
     }
 
-    private boolean checkBounds(ChessPosition Position) {
-        return Position.getRow() <= 8 &&
-                Position.getRow() > 0 &&
-                Position.getColumn() <= 8 &&
-                Position.getColumn() > 0;
+    private boolean checkBounds(ChessPosition position) {
+        return position.getRow() <= 8 &&
+                position.getRow() > 0 &&
+                position.getColumn() <= 8 &&
+                position.getColumn() > 0;
     }
 
     private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {

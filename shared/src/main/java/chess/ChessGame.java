@@ -49,19 +49,19 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        ChessPiece current_piece = board.getPiece(startPosition);
-        Collection<ChessMove> allMoves = current_piece.pieceMoves(board, startPosition);
+        ChessPiece currentPiece = board.getPiece(startPosition);
+        Collection<ChessMove> allMoves = currentPiece.pieceMoves(board, startPosition);
         Collection<ChessMove> validMoves = new HashSet<>();
         // need to make copy of the board
         ChessBoard originalBoard;
         originalBoard = copyBoard(board);
         // use a for loop, create new chess pieces to that new board
 
-        if(current_piece != null){
+        if(currentPiece != null){
             for (ChessMove move : allMoves) {
                 board.addPiece(startPosition, null);
-                board.addPiece(move.getEndPosition(), current_piece);
-                if (!isInCheck(current_piece.getTeamColor())) {
+                board.addPiece(move.getEndPosition(), currentPiece);
+                if (!isInCheck(currentPiece.getTeamColor())) {
                     validMoves.add(move);
                 }
                 board = copyBoard(originalBoard);
@@ -191,9 +191,9 @@ public class ChessGame {
         ChessPiece kingPiece=null;
         ChessPosition currentPosition = null;
         ChessPiece currentPiece = null;
-        Object[] kingPiece_Position = checkIsInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
-        kingPiece = (ChessPiece) kingPiece_Position[0];
-        kingPosition = (ChessPosition) kingPiece_Position[1];
+        Object[] kingPiecePosition = checkIsInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
+        kingPiece = (ChessPiece) kingPiecePosition[0];
+        kingPosition = (ChessPosition) kingPiecePosition[1];
         Collection<ChessMove> kingMoves=kingPiece.pieceMoves(board, kingPosition);
         ChessBoard originalBoard;
         originalBoard = copyBoard(board);

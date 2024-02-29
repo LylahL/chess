@@ -43,9 +43,6 @@ public class Server {
     public record LoginResult(String username, String authToken) {
     }
 
-    public record ListGameResult(int gameId, String whiteUserName, String BlackUsername, String GameName){}
-
-
     public int run(int desiredPort) {
         Spark.port(desiredPort);
 

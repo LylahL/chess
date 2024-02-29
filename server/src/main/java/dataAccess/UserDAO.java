@@ -3,7 +3,6 @@ package dataAccess;
 import model.UserData;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class UserDAO implements UserDAOInterface{
   private HashSet<UserData> userData = new HashSet<>();
@@ -25,18 +24,6 @@ public class UserDAO implements UserDAOInterface{
 
   public void createUser(UserData user) {
     userData.add(user);
-  }
-
-  public void deleteUser(String username){
-    Iterator<UserData> iterator = userData.iterator();
-    while (iterator.hasNext()) {
-      UserData user = iterator.next();
-      if (user.getUsername().equals(username)) {
-        // Remove the user if found
-        iterator.remove();
-        return; // Exit the loop once user is removed
-      }
-    }
   }
 
   @Override

@@ -78,7 +78,7 @@ public class ChessPiece {
         int i = 1, j = -1;
         if (board.getPiece(myPosition).getTeamColor() == ChessGame.TeamColor.BLACK){
             // Up
-            MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+            moveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
             // if moves includes reach end position, grab the position and promote it's all posibilities
             for (ChessMove move: moves){
                 if (move.getEndPosition().getRow() == 1) {
@@ -99,7 +99,7 @@ public class ChessPiece {
         }
         else{
             // Down
-            MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0);// change moving directions by modifying i and j.
+            moveHelper(moves, row, col, board, myPosition, endPosition, i, 0);// change moving directions by modifying i and j.
             for (ChessMove move: moves){
                 if (move.getEndPosition().getRow() == 8) {
                     //promotion
@@ -126,14 +126,14 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 2, j = 1;
         // UpLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, -i, j); // change moving directions by modifying i and j.
-        MoveHelper(moves, row, col, board, myPosition, endPosition, -i, -j);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, -j);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, -i);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, -j, i);
-        MoveHelper(moves, row, col, board, myPosition, endPosition, -j, -i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, -i, j); // change moving directions by modifying i and j.
+        moveHelper(moves, row, col, board, myPosition, endPosition, -i, -j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, -j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, -i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, -j, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, -j, -i);
         return moves;
     }
 
@@ -144,21 +144,21 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 1, j = -1;
         // Down
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
         // Left
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
         // Up
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
         // Right
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
         // DownRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, i);
         // DownLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, j);
         // UpRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, i);
         // UpLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, j);
         return moves;
     }
 
@@ -169,21 +169,21 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 1, j = -1;
         // Down
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
         // Left
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
         // Up
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
         // Right
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
         // DownRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, i);
         // DownLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, j);
         // UpRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, i);
         // UpLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, j);
         return moves;
     }
 
@@ -194,13 +194,13 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 1, j = -1;
         // Down
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, 0); // change moving directions by modifying i and j.
         // Left
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, j);
         // Up
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, 0);
         // Right
-        MoveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, 0, i);
         return moves;
     }
 
@@ -218,13 +218,13 @@ public class ChessPiece {
         ChessPosition endPosition = new ChessPosition(row, col);
         int i = 1, j = -1;
         // DownRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, i); // change moving directions by modifying i and j.
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, i); // change moving directions by modifying i and j.
         // DownLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, i, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, i, j);
         // UpRight
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, i);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, i);
         // UpLeft
-        MoveHelper(moves, row, col, board, myPosition, endPosition, j, j);
+        moveHelper(moves, row, col, board, myPosition, endPosition, j, j);
 
 
 //        bishopDownRight(moves, row, col, board, myPosition, endPosition);
@@ -240,7 +240,7 @@ public class ChessPiece {
 
 
 
-    private void MoveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
+    private void moveHelper(Collection<ChessMove> moves, int row, int col, ChessBoard board, ChessPosition myPosition, ChessPosition endPosition, int i, int j) {
         ChessPosition nextStepPosition = new ChessPosition(row + i, col + j);
         if(type == PAWN && checkInitialStepPawn(myPosition, this) && frontNotBlock(board,myPosition) && front2NotBlock(board, myPosition)){
             // you can do two step

@@ -14,7 +14,7 @@ import service.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class service {
+public class ServiceTest {
   private ClearApplication clearApplication;
 
   private GameService gameService;

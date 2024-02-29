@@ -40,14 +40,6 @@ public class AuthDAO implements AuthDAOInterface{
         }
         return null;
     }
-    public String getUserByAuthString(String authToken){
-        for (AuthData auth : authData.keySet()) {
-            if (auth.getAuthToken().equals(authToken)){
-                return authData.get(auth);
-            }
-        }
-        return null;
-    }
 
     @Override
     public AuthData getAuthDataByAuthString(String authToken) {

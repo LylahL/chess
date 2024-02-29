@@ -1,8 +1,5 @@
 package chess;
 
-import jdk.jshell.spi.ExecutionControl;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 
 /**
@@ -57,7 +54,7 @@ public class ChessGame {
         Collection<ChessMove> validMoves = new HashSet<>();
         // need to make copy of the board
         ChessBoard originalBoard;
-        originalBoard = copy_board(board);
+        originalBoard = copyBoard(board);
         // use a for loop, create new chess pieces to that new board
 
         if(current_piece != null){
@@ -67,13 +64,13 @@ public class ChessGame {
                 if (!isInCheck(current_piece.getTeamColor())) {
                     validMoves.add(move);
                 }
-                board = copy_board(originalBoard);
+                board = copyBoard(originalBoard);
             }
         }
       return  validMoves;
     }
 
-    private ChessBoard copy_board(ChessBoard board) {
+    private ChessBoard copyBoard(ChessBoard board) {
         ChessBoard newBoard = new ChessBoard();
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
@@ -143,7 +140,7 @@ public class ChessGame {
         ChessPosition kingPosition=null;
         ChessPosition currentPosition = null;
         ChessPiece currentPiece = null;
-        kingPosition = Check_isInCheck(teamColor, allMoves, kingPosition, currentPiece, currentPosition);
+        kingPosition = checkIsInCheck(teamColor, allMoves, kingPosition, currentPiece, currentPosition);
 
         // check if kingPosition in collection
         for(ChessMove move: allMoves){
@@ -154,7 +151,7 @@ public class ChessGame {
         return false;
     }
 
-    private ChessPosition Check_isInCheck(TeamColor teamColor, Collection<ChessMove> allMoves, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition) {
+    private ChessPosition checkIsInCheck(TeamColor teamColor, Collection<ChessMove> allMoves, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition) {
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
                 currentPosition = new ChessPosition(i,j);
@@ -194,12 +191,12 @@ public class ChessGame {
         ChessPiece kingPiece=null;
         ChessPosition currentPosition = null;
         ChessPiece currentPiece = null;
-        Object[] kingPiece_Position = Check_isInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
+        Object[] kingPiece_Position = checkIsInCheckmate(kingPiece, kingPosition, currentPiece, currentPosition, teamColor);
         kingPiece = (ChessPiece) kingPiece_Position[0];
         kingPosition = (ChessPosition) kingPiece_Position[1];
         Collection<ChessMove> kingMoves=kingPiece.pieceMoves(board, kingPosition);
         ChessBoard originalBoard;
-        originalBoard = copy_board(board);
+        originalBoard = copyBoard(board);
 
         if (!isInCheck(teamColor)) {
             return false;
@@ -210,12 +207,12 @@ public class ChessGame {
             if( isInCheck(teamColor)){
                 return true;
             }
-            board = copy_board(originalBoard);
+            board = copyBoard(originalBoard);
         }
         return false;
     }
 
-    private Object[] Check_isInCheckmate(ChessPiece kingPiece, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition, TeamColor teamColor) {
+    private Object[] checkIsInCheckmate(ChessPiece kingPiece, ChessPosition kingPosition, ChessPiece currentPiece, ChessPosition currentPosition, TeamColor teamColor) {
         Object[] kingPiece_Position = null;
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
@@ -252,12 +249,12 @@ public class ChessGame {
         if (isInCheck(teamColor)){
             return false;
         }
-         returningMoves = Check_isInStalemate(validMoves, currentPosition, currentPiece, teamColor);
+         returningMoves = checkIsInStalemate(validMoves, currentPosition, currentPiece, teamColor);
 
       return returningMoves.isEmpty();
     }
 
-    private Collection<ChessMove> Check_isInStalemate(Collection<ChessMove> validMoves, ChessPosition currentPosition, ChessPiece currentPiece, TeamColor teamColor) {
+    private Collection<ChessMove> checkIsInStalemate(Collection<ChessMove> validMoves, ChessPosition currentPosition, ChessPiece currentPiece, TeamColor teamColor) {
         for (int i=1; i <= 8; i++) {
             for (int j=1; j <= 8; j++) {
                 currentPosition=new ChessPosition(i, j);

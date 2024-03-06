@@ -996,28 +996,28 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="287" parent="1" name="utf8mb4_mn_cyrl_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="288" parent="1" name="mysql">
+    <schema id="288" parent="1" name="chess">
+      <Current>1</Current>
+      <IntrospectionTimestamp>2024-03-06.05:12:29</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2024-03-06.19:12:29</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="290" parent="1" name="performance_schema">
+    <schema id="290" parent="1" name="mysql">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="291" parent="1" name="sys">
+    <schema id="291" parent="1" name="performance_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="sakila">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="293" parent="1" name="world">
+    <schema id="293" parent="1" name="sys">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="294" parent="1" name="chess">
-      <Current>1</Current>
-      <IntrospectionTimestamp>2024-03-06.04:20:17</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-03-06.18:20:17</LocalIntrospectionTimestamp>
+    <schema id="294" parent="1" name="world">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="295" parent="1" name="mysql.infoschema">
@@ -1039,89 +1039,117 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="299" parent="294" name="gamedata">
+    <table id="299" parent="288" name="authdata">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="294" name="userdata">
+    <table id="300" parent="288" name="gamedata">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="301" parent="299" name="gameID">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="302" parent="299" name="whiteUsername">
-      <DasType>varchar(256)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="303" parent="299" name="blackUsername">
-      <DasType>varchar(256)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="304" parent="299" name="gameName">
-      <DasType>varchar(256)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="305" parent="299" name="game">
-      <DasType>text|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <index id="306" parent="299" name="PRIMARY">
-      <ColNames>gameID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="307" parent="299" name="whiteUsername">
-      <ColNames>whiteUsername</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="308" parent="299" name="blackUsername">
-      <ColNames>blackUsername</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="309" parent="299" name="gameName">
-      <ColNames>gameName</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="310" parent="299" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="311" parent="300" name="username">
+    <table id="301" parent="288" name="userdata">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="302" parent="299" name="authToken">
       <DasType>varchar(256)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="312" parent="300" name="password">
+    <column id="303" parent="299" name="username">
       <DasType>varchar(256)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="313" parent="300" name="email">
-      <DasType>varchar(256)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="314" parent="300" name="PRIMARY">
+    <index id="304" parent="299" name="PRIMARY">
       <ColNames>username</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="315" parent="300" name="password">
+    <index id="305" parent="299" name="authToken">
+      <ColNames>authToken</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="306" parent="299" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="307" parent="300" name="gameID">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="308" parent="300" name="whiteUsername">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="309" parent="300" name="blackUsername">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="310" parent="300" name="gameName">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="311" parent="300" name="game">
+      <DasType>text|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <index id="312" parent="300" name="PRIMARY">
+      <ColNames>gameID</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="313" parent="300" name="whiteUsername">
+      <ColNames>whiteUsername</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="314" parent="300" name="blackUsername">
+      <ColNames>blackUsername</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="315" parent="300" name="gameName">
+      <ColNames>gameName</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="316" parent="300" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="317" parent="301" name="username">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="318" parent="301" name="password">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="319" parent="301" name="email">
+      <DasType>varchar(256)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="320" parent="301" name="PRIMARY">
+      <ColNames>username</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="321" parent="301" name="password">
       <ColNames>password</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="316" parent="300" name="email">
+    <index id="322" parent="301" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="317" parent="300" name="PRIMARY">
+    <key id="323" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

@@ -49,7 +49,7 @@ public class GameService {
                   (Objects.equals(playerColor, "BLACK") && currentGame.getBlackUsername() != null )){
             throw new ResponseException(403, "Error: already taken");
           }
-        String username = auth.getUserByAuthToken(authObject);
+        String username = authObject.getUsername();
         game.addUserToGame(playerColor, gameId, username);
       }else{
         // no auth

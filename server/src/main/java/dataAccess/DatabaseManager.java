@@ -102,7 +102,7 @@ public class DatabaseManager {
               `authToken` varchar(256) NOT NULL,
               `username` varchar(256) NOT NULL,
               PRIMARY KEY (`username`),
-              INDEX(authToken),
+              INDEX(authToken)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """
 

@@ -46,7 +46,10 @@ public class UserService {
     }
   }
   public void logout(AuthData authObject) throws ResponseException{
-    String username = auth.getUserByAuthToken(authObject);
+    if(authObject == null) {
+      throw  new ResponseException(401, "Error: authObject is null");
+    }
+    String username = authObject.getUsername();
     if(user.checkExist(username)){
       if(auth.checkExist(authObject)){
         auth.deleteAuthToken(authObject);

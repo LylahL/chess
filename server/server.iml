@@ -19,5 +19,7 @@
     <orderEntry type="library" name="ai.whylabs.whylogs.java.spark_2.12" level="project" />
     <orderEntry type="library" name="sparkjava.spark.core" level="project" />
     <orderEntry type="library" name="slf4j.simple" level="project" />
+    <orderEntry type="library" name="mysql.connector.java" level="project" />
+    <orderEntry type="library" name="springframework.security.spring.core" level="project" />
   </component>
 </module>

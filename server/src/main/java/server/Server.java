@@ -1,9 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
-import dataAccess.AuthDAO;
-import dataAccess.GameDAO;
-import dataAccess.UserDAO;
+import dataAccess.*;
 import exception.ResponseException;
 import model.AuthData;
 import model.GameData;
@@ -30,6 +28,15 @@ public class Server {
 
     public Server() {
         // what should I do with the constructor
+        try {
+            DatabaseManager.configureDatabase();
+        } catch (ResponseException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (DataAccessException e) {
+           e.printStackTrace();
+           throw new RuntimeException(e);
+        }
         this.authDAO = new AuthDAO();
         GameDAO game = new GameDAO();
         UserDAO user = new UserDAO();

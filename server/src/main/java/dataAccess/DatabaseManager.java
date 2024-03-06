@@ -122,7 +122,7 @@ public class DatabaseManager {
         }
     }
 
-    public static int executeUpdate(String statement, Object... params) throws ResponseException, DataAccessException {
+    public static String executeUpdate(String statement, Object... params) throws ResponseException, DataAccessException {
         try (var conn = DatabaseManager.getConnection()) {
             try (var ps = conn.prepareStatement(statement, RETURN_GENERATED_KEYS)) {
                 for (var i = 0; i < params.length; i++) {
@@ -136,10 +136,10 @@ public class DatabaseManager {
 
                 var rs = ps.getGeneratedKeys();
                 if (rs.next()) {
-                    return rs.getInt(1);
+                    return rs.getString(1);
                 }
 
-                return 0;
+                return null;
             }
         } catch (SQLException e) {
             throw new ResponseException(500, String.format("unable to update database: %s, %s", statement, e.getMessage()));

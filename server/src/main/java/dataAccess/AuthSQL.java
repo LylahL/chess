@@ -12,27 +12,6 @@ public class AuthSQL implements AuthDAOInterface{
     var statement = "TRUNCATE authData";
     DatabaseManager.executeUpdate(statement);
   }
-
-  @Override
-  public String getUserByAuthToken(AuthData authToken) throws DataAccessException {
-    String authTokenString = authToken.getAuthToken();
-    try (var conn = DatabaseManager.getConnection()){
-      var statement = "SELECT authToken FROM authData WHERE authToken=?";
-      try (var ps = conn.prepareStatement(statement)){
-        ps.setString(1, authTokenString);
-        try (var rs = ps.executeQuery()){
-          if(rs.next()){
-            var username = rs.getString("username");
-            return username;
-          }
-        }
-      }
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
-    return null;
-  }
-
   @Override
   public AuthData getAuthDataByAuthString(String authToken) {
     try (var conn = DatabaseManager.getConnection()){
@@ -52,18 +31,35 @@ public class AuthSQL implements AuthDAOInterface{
   }
 
   @Override
-  public AuthData createAuthToken(String username) {
-    return null;
+  public AuthData createAuthToken(String username) throws ResponseException, DataAccessException {
+    var statement = "INSERT INTO authdata (authToken, username) VALUES (?, ?, ?)";
+    // generate new authToken
+    AuthData authData = new AuthData(username);
+    DatabaseManager.executeUpdate(statement, authData.getAuthToken(), username);
+    return authData;
   }
 
   @Override
-  public void deleteAuthToken(AuthData auth) {
-
+  public void deleteAuthToken(AuthData auth) throws ResponseException, DataAccessException {
+    var statement = "DELETE FROM authToken WHERE username=?";
+    var username = auth.getUsername();
+    DatabaseManager.executeUpdate(statement, username);
   }
 
   @Override
   public boolean checkExist(AuthData auth) {
-    return false;
+    var authToken = auth.getAuthToken();
+    try (var conn = DatabaseManager.getConnection()){
+      var statement = "SELECT authToken, username FROM authData WHERE authToken=?";
+      try (var ps = conn.prepareStatement(statement)){
+        ps.setString(1, authToken);
+        try (var rs = ps.executeQuery()){
+            return rs.next();
+        }
+      }
+    } catch (SQLException | DataAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private AuthData readAuthData(ResultSet rs) throws SQLException {

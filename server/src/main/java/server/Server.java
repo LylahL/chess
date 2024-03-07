@@ -163,6 +163,8 @@ public class Server {
         } catch (ResponseException e) {
           exceptionHandler(e, req, res);
           return getErrorMassage(e);
+        } catch (DataAccessException e) {
+          throw new RuntimeException(e);
         }
     }
     private Object deleteDatabase(Request request, Response response) {

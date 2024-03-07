@@ -1,6 +1,7 @@
 package service;
 
 import dataAccess.AuthDAO;
+import dataAccess.DataAccessException;
 import dataAccess.UserDAOInterface;
 import exception.ResponseException;
 import model.AuthData;
@@ -16,7 +17,7 @@ public class UserService {
     this.auth=auth;
     this.user=user;
   }
-  public AuthData register(UserData newUserData) throws ResponseException {
+  public AuthData register(UserData newUserData) throws ResponseException, DataAccessException {
     String userName = newUserData.getUsername();
     String password = newUserData.getPassword();
     if(!user.checkExist(userName)){

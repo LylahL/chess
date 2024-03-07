@@ -1,6 +1,7 @@
 package serviceTests;
 
 import dataAccess.AuthDAO;
+import dataAccess.DataAccessException;
 import dataAccess.GameDAO;
 import dataAccess.UserDAO;
 import exception.ResponseException;
@@ -47,7 +48,7 @@ public class ServiceTest {
       assertThrows(ResponseException.class, ()-> userService.login(user123));
   }
   @Test
-  void register() throws ResponseException {
+  void register() throws ResponseException, DataAccessException {
       userService.register(user123);
       assertEquals(user123, user.getUserByUsername(user123.getUsername()));
   }
@@ -57,8 +58,8 @@ public class ServiceTest {
     try {
       // null user
       userService.register(user000);
-    }catch (ResponseException e){
-      assertEquals(400, e.statusCode());
+    }catch (ResponseException | DataAccessException e){
+      assertEquals(400, e.hashCode());
     }
   }
 
@@ -100,7 +101,7 @@ public class ServiceTest {
   }
 
   @Test
-  void listGames() throws ResponseException {
+  void listGames() throws ResponseException, DataAccessException {
     game.createNewGame("game1");
     game.createNewGame("game2");
     AuthData authToken = userService.register(user123);
@@ -119,7 +120,7 @@ public class ServiceTest {
 
   }
   @Test
-  void createGame() throws ResponseException {
+  void createGame() throws ResponseException, DataAccessException {
     AuthData authToken = userService.register(user123);
     int gameID = gameService.createGame(authToken, "gameName");
     assertTrue(game.checkExist(gameID));
@@ -136,7 +137,7 @@ public class ServiceTest {
   }
 
   @Test
-  void joinGame() throws ResponseException {
+  void joinGame() throws ResponseException, DataAccessException {
     AuthData authToken = userService.register(user123);
     int gameId = gameService.createGame(authToken, "gameName");
     gameService.joinGame(gameId, "WHITE", authToken);
@@ -148,8 +149,8 @@ public class ServiceTest {
     try {
       AuthData authToken = userService.register(user123);
       gameService.joinGame(14, "WHITE", authToken);
-    }catch(ResponseException e){
-      assertEquals(400, e.statusCode());
+    }catch(ResponseException | DataAccessException e){
+      assertEquals(400, e.hashCode());
     }
   }
 

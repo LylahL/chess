@@ -58,8 +58,10 @@ public class ServiceTest {
     try {
       // null user
       userService.register(user000);
-    }catch (ResponseException | DataAccessException e){
-      assertEquals(400, e.hashCode());
+    }catch (ResponseException e){
+      assertEquals(400, e.statusCode());
+    } catch (DataAccessException e) {
+        throw new RuntimeException(e);
     }
   }
 
@@ -149,8 +151,10 @@ public class ServiceTest {
     try {
       AuthData authToken = userService.register(user123);
       gameService.joinGame(14, "WHITE", authToken);
-    }catch(ResponseException | DataAccessException e){
-      assertEquals(400, e.hashCode());
+    }catch(ResponseException e){
+      assertEquals(400, e.statusCode());
+    } catch (DataAccessException e) {
+        throw new RuntimeException(e);
     }
   }
 

@@ -3,6 +3,8 @@ package model;
 // public record GameData (int gameID, String whiteUsername, String blackUsername, String gameName, ChessGame game){}
 // cannot use record because record is immutable
 
+import chess.ChessGame;
+
 import java.util.ArrayList;
 
 public class GameData {
@@ -10,6 +12,8 @@ public class GameData {
   private String whiteUsername;
   private String blackUsername;
   private String gameName;
+
+  private ChessGame game;
   private static ArrayList<String> observers = new ArrayList<>();
   private static int n=0;
 
@@ -18,6 +22,15 @@ public class GameData {
     this.whiteUsername=whiteUsername;
     this.blackUsername=blackUsername;
     this.gameName=gameName;
+    ChessGame game=new ChessGame();
+  }
+  public GameData(int gameID, String whiteUsername, String blackUsername, String gameName, ChessGame game) {
+    // this one is a setter constructor
+    this.gameID=gameID;
+    this.whiteUsername=whiteUsername;
+    this.blackUsername=blackUsername;
+    this.gameName=gameName;
+    this.game=game;
   }
 
   public int getGameID() {

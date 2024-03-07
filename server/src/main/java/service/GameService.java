@@ -33,11 +33,11 @@ public class GameService {
   //Create Games
   public int createGame(AuthData authObject, String gameName) throws ResponseException {
     if (auth.checkExist(authObject)) {
-      game.createNewGame(gameName);
+      GameData gameData = game.createNewGame(gameName);
+      return gameData.getGameID();
     }else {
       throw new ResponseException(401, "Error: unauthorized");
     }
-    return game.getGameIdByName(gameName);
   }
   //Join Game
   public void joinGame(int gameId, String playerColor, AuthData authObject) throws ResponseException{

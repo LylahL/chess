@@ -1,6 +1,5 @@
 package dataAccess;
 
-import exception.ResponseException;
 import model.GameData;
 
 import java.util.HashSet;
@@ -28,19 +27,11 @@ public class GameDAO implements GameDAOInterface{
         return null;
     }
 
-    @Override
-    public int getGameIdByName(String gameName) throws ResponseException {
-        for (GameData game : gameData) {
-            if (Objects.equals(game.getGameName(), gameName)) {
-                return game.getGameID();
-            }
-        }
-        throw new ResponseException(400, "Error: Game doesn't exist");
-    }
-
-    public void createNewGame(String gameName) {
+    public GameData createNewGame(String gameName) {
         // Create and add game data
-        gameData.add(new GameData(null, null,gameName));
+        GameData game = new GameData(null, null, gameName);
+        gameData.add(game);
+        return game;
     }
 
 

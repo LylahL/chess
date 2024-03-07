@@ -7,11 +7,10 @@ import java.util.HashSet;
 
 public interface GameDAOInterface {
   GameData getGameByGameId(int gameId);
-  int getGameIdByName(String gameName) throws ResponseException;
-  void createNewGame(String gameName);
+  GameData createNewGame(String gameName) throws ResponseException, DataAccessException;
   void addUserToGame(String clientColor, int gameID, String username);
-  void clearAllGame();
-  HashSet<GameData> listAllGame();
+  void clearAllGame() throws ResponseException, DataAccessException;
+  HashSet<GameData> listAllGame() throws DataAccessException;
 
   boolean checkExist(int gameId);
 }

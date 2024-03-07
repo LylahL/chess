@@ -78,7 +78,7 @@ public class DatabaseManager {
             CREATE TABLE IF NOT EXISTS   userData(
               `username` varchar(256) NOT NULL,
               `password` varchar(256) NOT NULL,
-              `email` varchar(256) NOT NULL,
+              `email` varchar(256),
               PRIMARY KEY (`username`),
               INDEX(password),
               INDEX(email)

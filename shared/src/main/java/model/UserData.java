@@ -3,6 +3,11 @@ package model;
 public class UserData {
   private String username;
   private String password;
+
+  public String getEmail() {
+    return email;
+  }
+
   private String email;
 
   public UserData(String username, String password, String email) {

@@ -31,8 +31,11 @@ class AuthSQLTest {
     clearApplication.clearDataBase();
   }
 
+  // auth
+
   @Test
-  void clear() {
+  void clearAuth() {
+
   }
 
   @Test

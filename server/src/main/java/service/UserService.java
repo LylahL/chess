@@ -18,15 +18,15 @@ public class UserService {
     this.user=user;
   }
   public AuthData register(UserData newUserData) throws ResponseException, DataAccessException {
+    // just putting stuff in the data base not logging in
     String userName = newUserData.getUsername();
     String password = newUserData.getPassword();
     if(!user.checkExist(userName)){
       if(userName == null || password == null){
         throw new ResponseException(400, "Error: bad request");
       }
-      user.createUser(newUserData);
-      AuthData authToken = auth.createAuthToken(userName);
-      return authToken;
+      UserData userData = user.createUser(newUserData);
+      return login(userData);
     }else {
       throw new ResponseException(403, "Error: Already taken");
     }

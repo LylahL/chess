@@ -1,9 +1,10 @@
 package dataAccess;
 
 import exception.ResponseException;
-import model.GameData;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
@@ -79,9 +80,7 @@ public class DatabaseManager {
               `username` varchar(256) NOT NULL,
               `password` varchar(256) NOT NULL,
               `email` varchar(256),
-              PRIMARY KEY (`username`),
-              INDEX(password),
-              INDEX(email)
+              PRIMARY KEY (`username`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """,
             """
@@ -91,18 +90,14 @@ public class DatabaseManager {
               `blackUsername` varchar(256),
               `gameName` varchar(256) NOT NULL,
               `game` TEXT DEFAULT NULL,
-              PRIMARY KEY (`gameID`),
-              INDEX(whiteUsername),
-              INDEX(blackUsername),
-              INDEX(gameName)
+              PRIMARY KEY (`gameID`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """,
             """
             CREATE TABLE IF NOT EXISTS   authData(
               `authToken` varchar(256) NOT NULL,
               `username` varchar(256) NOT NULL,
-              PRIMARY KEY (`username`),
-              INDEX(authToken)
+              PRIMARY KEY (`authToken`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """
 
@@ -129,7 +124,6 @@ public class DatabaseManager {
                     var param = params[i];
                     if (param instanceof String p) ps.setString(i + 1, p);
                     else if (param instanceof Integer p) ps.setInt(i + 1, p);
-                    else if (param instanceof GameData p) ps.setString(i + 1, p.toString());
                     else if (param == null) ps.setNull(i + 1, NULL);
                 }
                 ps.executeUpdate();

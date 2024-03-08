@@ -74,11 +74,13 @@ public class GameSQL implements GameDAOInterface{
   public HashSet<GameData> listAllGame() throws DataAccessException {
     HashSet<GameData> gameList = new HashSet<>();
     try (var conn = DatabaseManager.getConnection()){
-      var statement = "SELECT game FROM gamedata";
+      var statement = "SELECT gameID, whiteUsername, blackUsername, gameName, game FROM gamedata";
       try (var ps = conn.prepareStatement(statement)){
         try (var rs = ps.executeQuery()) {
           while (rs.next()){
-            gameList.add(new Gson().fromJson(rs.getString("game"), GameData.class));
+            GameData gameData = readGameData(rs);
+            gameList.add(gameData);
+//         // gameList.add(new Gson().fromJson(rs.getString("game"), GameData.class));
           }
           return gameList;
         } catch (SQLException e) {

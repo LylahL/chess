@@ -24,7 +24,7 @@ public class Server {
 
     private GameService gameService;
     private UserService userService;
-    private AuthDAO authDAO;
+    private AuthDAOInterface authSQL;
 
     public Server() {
         // what should I do with the constructor
@@ -37,12 +37,12 @@ public class Server {
            e.printStackTrace();
            throw new RuntimeException(e);
         }
-        this.authDAO = new AuthDAO();
-        GameDAO game = new GameDAO();
-        UserDAO user = new UserDAO();
-        userService = new UserService(authDAO, user);
-        clearApplication = new ClearApplication(authDAO, game, user);
-        gameService = new GameService(authDAO, game, user);
+        this.authSQL = new AuthSQL();
+        GameDAOInterface game = new GameSQL();
+        UserDAOInterface user = new UserSQL();
+        userService = new UserService(authSQL, user);
+        clearApplication = new ClearApplication(authSQL, game, user);
+        gameService = new GameService(authSQL, game, user);
     }
 
     public record JoinGameRequest(String playerColor, int gameID) {
@@ -81,7 +81,7 @@ public class Server {
         try{
             JoinGameRequest joinGameRequest = new Gson().fromJson(request.body(), JoinGameRequest.class);
             String authToken = request.headers("authorization");
-            AuthData auth = authDAO.getAuthDataByAuthString(authToken);
+            AuthData auth = authSQL.getAuthDataByAuthString(authToken);
             int gameID = joinGameRequest.gameID();
             String playerColor = joinGameRequest.playerColor();
             gameService.joinGame(gameID, playerColor, auth);
@@ -96,7 +96,7 @@ public class Server {
     private Object listGames(Request request, Response response) {
         try {
             String authToken = request.headers("authorization");
-            AuthData auth = authDAO.getAuthDataByAuthString(authToken);
+            AuthData auth = authSQL.getAuthDataByAuthString(authToken);
             HashSet<GameData> games = gameService.listGames(auth);
             response.status(200);
             // return "{ \"gameID\": \"" + gameID + "\" }";
@@ -112,7 +112,7 @@ public class Server {
     private Object createGame(Request request, Response response) {
         try {
             String authToken = request.headers("authorization");
-            AuthData auth = authDAO.getAuthDataByAuthString(authToken);
+            AuthData auth = authSQL.getAuthDataByAuthString(authToken);
             GameData game = new Gson().fromJson(request.body(), GameData.class);
             String gameName = game.getGameName();
             int gameID =gameService.createGame(auth, gameName);
@@ -129,7 +129,7 @@ public class Server {
     private Object logout(Request request, Response response) {
         try {
             String authToken = request.headers("authorization");
-            AuthData auth = authDAO.getAuthDataByAuthString(authToken);
+            AuthData auth = authSQL.getAuthDataByAuthString(authToken);
             userService.logout(auth);
             response.status(200);
             return "{}";

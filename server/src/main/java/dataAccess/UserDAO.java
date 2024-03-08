@@ -22,8 +22,9 @@ public class UserDAO implements UserDAOInterface{
     return null;
   }
 
-  public void createUser(UserData user) {
+  public UserData createUser(UserData user) {
     userData.add(user);
+    return getUserByUsername(user.getUsername());
   }
 
   @Override

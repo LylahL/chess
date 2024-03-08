@@ -8,5 +8,5 @@ public interface AuthDAOInterface {
   AuthData getAuthDataByAuthString(String authToken);
   AuthData createAuthToken(String username) throws ResponseException, DataAccessException;
   void deleteAuthToken(AuthData auth) throws ResponseException, DataAccessException;
-  boolean checkExist(AuthData auth);
+  boolean checkExist(AuthData auth) throws ResponseException;
 }

@@ -32,7 +32,7 @@ public class AuthSQL implements AuthDAOInterface{
 
   @Override
   public AuthData createAuthToken(String username) throws ResponseException, DataAccessException {
-    var statement = "INSERT INTO authdata (authToken, username) VALUES (?, ?, ?)";
+    var statement = "INSERT INTO authdata (authToken, username) VALUES (?, ?)";
     // generate new authToken
     AuthData authData = new AuthData(username);
     DatabaseManager.executeUpdate(statement, authData.getAuthToken(), username);
@@ -41,7 +41,7 @@ public class AuthSQL implements AuthDAOInterface{
 
   @Override
   public void deleteAuthToken(AuthData auth) throws ResponseException, DataAccessException {
-    var statement = "DELETE FROM authToken WHERE username=?";
+    var statement = "DELETE FROM authdata WHERE username=?";
     var username = auth.getUsername();
     DatabaseManager.executeUpdate(statement, username);
   }

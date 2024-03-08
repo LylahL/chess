@@ -1,6 +1,6 @@
 package service;
 
-import dataAccess.AuthDAO;
+import dataAccess.AuthDAOInterface;
 import dataAccess.DataAccessException;
 import dataAccess.UserDAOInterface;
 import exception.ResponseException;
@@ -10,10 +10,10 @@ import model.UserData;
 import java.util.Objects;
 
 public class UserService {
-  private AuthDAO auth;
+  private AuthDAOInterface auth;
   private UserDAOInterface user;
 
-  public UserService(AuthDAO auth, UserDAOInterface user) {
+  public UserService(AuthDAOInterface auth, UserDAOInterface user) {
     this.auth=auth;
     this.user=user;
   }
@@ -39,7 +39,12 @@ public class UserService {
     }
     // success
     else if(Objects.equals(password, user.getPassword(username))){
-      AuthData authToken = auth.createAuthToken(username);
+      AuthData authToken =null;
+      try {
+        authToken=auth.createAuthToken(username);
+      } catch (DataAccessException e) {
+        throw new RuntimeException(e);
+      }
       return authToken;
     }else {
       // wrong password
@@ -53,7 +58,11 @@ public class UserService {
     String username = authObject.getUsername();
     if(user.checkExist(username)){
       if(auth.checkExist(authObject)){
-        auth.deleteAuthToken(authObject);
+        try {
+          auth.deleteAuthToken(authObject);
+        } catch (DataAccessException e) {
+          throw new RuntimeException(e);
+        }
       }else {
         // user not logged in
         throw new ResponseException(500, "Error: user not logged in");

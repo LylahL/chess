@@ -27,7 +27,7 @@ public class ServiceTest {
   UserData user000 = new UserData(null, null, null);
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws ResponseException, DataAccessException {
 
     auth = new AuthDAO();
     game = new GameDAO();
@@ -35,7 +35,7 @@ public class ServiceTest {
     gameService = new GameService(auth, game, user);
     userService = new UserService(auth, user);
     clearApplication = new ClearApplication(auth, game, user);
-    this.clearDataBase();
+    clearApplication.clearDataBase();
   }
 
   // Positive
@@ -44,8 +44,14 @@ public class ServiceTest {
       user.createUser(user123);
       game.createNewGame("chessGame");
       auth.createAuthToken("username");
+    try {
       clearApplication.clearDataBase();
-      assertThrows(ResponseException.class, ()-> userService.login(user123));
+    } catch (ResponseException e) {
+      throw new RuntimeException(e);
+    } catch (DataAccessException e) {
+      throw new RuntimeException(e);
+    }
+    assertThrows(ResponseException.class, ()-> userService.login(user123));
   }
   @Test
   void register() throws ResponseException, DataAccessException {
@@ -118,6 +124,8 @@ public class ServiceTest {
       gameService.listGames(authToken);
     }catch (ResponseException e){
       assertEquals(401, e.statusCode());
+    } catch (DataAccessException e) {
+      throw new RuntimeException(e);
     }
 
   }
@@ -135,6 +143,8 @@ public class ServiceTest {
       int gameID = gameService.createGame(authToken, "gameName");
     }catch (ResponseException e){
       assertEquals(401, e.statusCode());
+    } catch (DataAccessException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -143,7 +153,7 @@ public class ServiceTest {
     AuthData authToken = userService.register(user123);
     int gameId = gameService.createGame(authToken, "gameName");
     gameService.joinGame(gameId, "WHITE", authToken);
-    assertEquals(0, 1-1);
+    assertEquals(gameId, game.getGameByGameId(gameId).getGameID());
   }
 
   @Test

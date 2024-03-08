@@ -14,7 +14,7 @@ public class GameSQL implements GameDAOInterface{
   @Override
   public GameData getGameByGameId(int gameId) {
     try (var conn = DatabaseManager.getConnection()){
-      var statement = "SELECT gameID, whiteUsername, blackUsername, gameName, game FROM gamedata WHERE gamneID=?";
+      var statement = "SELECT gameID, whiteUsername, blackUsername, gameName, game FROM gamedata WHERE gameID=?";
       try (var ps = conn.prepareStatement(statement)){
         ps.setInt(1, gameId);
         try (var rs = ps.executeQuery()){
@@ -31,7 +31,7 @@ public class GameSQL implements GameDAOInterface{
 
   @Override
   public GameData createNewGame(String gameName) throws ResponseException, DataAccessException {
-    var statement = "INSERT INTO gamedata (gameID, whiteUsername, blackUsername, gameName, game) VALUES (?, ?, ?, ?)";
+    var statement = "INSERT INTO gamedata (gameID, whiteUsername, blackUsername, gameName, game) VALUES (?, ?, ?, ?, ?)";
     ChessGame chessGame = new ChessGame();
     var game = new Gson().toJson(chessGame);
     GameData chessData = new GameData(null, null, gameName);
@@ -47,13 +47,13 @@ public class GameSQL implements GameDAOInterface{
       var statement = "";
       if(Objects.equals(clientColor, "WHITE")){
         game.setWhiteUsername(username);
-        statement = "UPDATE gamedata SET whiteUsername = ? WHERE id = ?";
+        statement = "UPDATE gamedata SET whiteUsername = ? WHERE gameID = ?";
       }else if(Objects.equals(clientColor, "BLACK")){
         game.setBlackUsername(username);
-        statement = "UPDATE gamedata SET blackUsername = ? WHERE id = ?";
+        statement = "UPDATE gamedata SET blackUsername = ? WHERE gameID = ?";
       }
       try {
-        DatabaseManager.executeUpdate(statement, gameID, username, gameName, new Gson().toJson(game));
+        DatabaseManager.executeUpdate(statement, username, gameID);
       } catch (ResponseException e) {
         throw new RuntimeException(e);
       } catch (DataAccessException e) {

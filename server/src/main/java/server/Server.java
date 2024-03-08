@@ -104,6 +104,8 @@ public class Server {
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);
+        } catch (DataAccessException e) {
+          throw new RuntimeException(e);
         }
     }
 
@@ -119,6 +121,8 @@ public class Server {
         } catch (ResponseException e) {
           exceptionHandler(e, request, response);
           return getErrorMassage(e);
+        } catch (DataAccessException e) {
+          throw new RuntimeException(e);
         }
     }
 
@@ -168,7 +172,13 @@ public class Server {
         }
     }
     private Object deleteDatabase(Request request, Response response) {
-        clearApplication.clearDataBase();
+        try {
+            clearApplication.clearDataBase();
+        } catch (ResponseException e) {
+            throw new RuntimeException(e);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
         response.status(200);
         return "{}";
     }

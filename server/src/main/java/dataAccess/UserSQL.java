@@ -33,7 +33,7 @@ public class UserSQL implements UserDAOInterface{
 
   @Override
   public void createUser(UserData user) throws ResponseException, DataAccessException {
-    var statement = "INSERT INTO userData (username, password, email) VALUES (?, ?, ?, ?)";
+    var statement = "INSERT INTO userData (username, password, email) VALUES (?, ?, ?)";
     DatabaseManager.executeUpdate(statement, user.getUsername(), user.getPassword(), user.getEmail());
   }
 

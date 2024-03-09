@@ -11,7 +11,7 @@ public class AuthSQL implements AuthDAOInterface{
 
   @Override
   public void clear() throws ResponseException, DataAccessException {
-    var statement = "TRUNCATE authData";
+    var statement = "TRUNCATE authdata";
     DatabaseManager.executeUpdate(statement);
   }
   @Override

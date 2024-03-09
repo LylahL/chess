@@ -168,6 +168,66 @@ class DataAccessTests {
     assertFalse(game.checkExist(gameData.getGameID()));
 
   }
+  @Test
+  void ListGame() throws ResponseException, DataAccessException {
+    game.createNewGame("game");
+    assertEquals(1, game.listAllGame().size());
+  }
+  @Test
+  void ListGameNegative() throws ResponseException, DataAccessException {
+    assertEquals(0, game.listAllGame().size());
+  }
+
+
+  //UserSQL
+  @Test
+  void clearUser() throws ResponseException, DataAccessException {
+    UserData userData = user.createUser(user123);
+    user.clear();
+    assertFalse(user.checkExist(userData.getUsername()));
+  }
+
+  @Test
+  void getUserByUsername() throws ResponseException, DataAccessException {
+    UserData userData = user.createUser(user123);
+    assertEquals(user.getUserByUsername(userData.getUsername()), userData);
+  }
+
+  @Test
+  void getUserByUsernameNegative() throws ResponseException, DataAccessException {
+    assertEquals(user.getUserByUsername(user123.getUsername()), null);
+  }
+
+
+  @Test
+  void createUser() throws ResponseException, DataAccessException {
+    UserData userData = user.createUser(user123);
+    assertEquals(user.getUserByUsername(userData.getUsername()), userData);
+  }
+  @Test
+  void createUserNegative() throws ResponseException, DataAccessException {
+    assertThrows(ResponseException.class, ()-> user.createUser(user000));
+
+  }
+
+  @Test
+  void getUserPassword() throws ResponseException, DataAccessException {
+    UserData userData=user.createUser(user123);
+    assertEquals(userData.getPassword(), user.getPassword(userData.getUsername()));
+  }
+  @Test
+  void getUserPasswordNegative() throws ResponseException, DataAccessException {
+    assertThrows(NullPointerException.class, ()->user.getPassword("NotExistingUser"));
+  }
+  @Test
+  void checkUserExist() throws ResponseException, DataAccessException {
+    user.createUser(user123);
+    assertTrue(user.checkExist(user123.getUsername()));
+  }
+  @Test
+  void checkUserExistNegative() {
+    assertFalse(user.checkExist("NotExistingUser"));
+  }
 
 
 }

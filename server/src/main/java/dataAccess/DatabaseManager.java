@@ -76,7 +76,7 @@ public class DatabaseManager {
     }
     private static final String[] createStatements = {
             """
-            CREATE TABLE IF NOT EXISTS   userData(
+            CREATE TABLE IF NOT EXISTS   userdata(
               `username` varchar(256) NOT NULL,
               `password` varchar(256) NOT NULL,
               `email` varchar(256),
@@ -84,7 +84,7 @@ public class DatabaseManager {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """,
             """
-            CREATE TABLE IF NOT EXISTS   gameData(
+            CREATE TABLE IF NOT EXISTS   gamedata(
               `gameID` int NOT NULL,
               `whiteUsername` varchar(256),
               `blackUsername` varchar(256),
@@ -94,7 +94,7 @@ public class DatabaseManager {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
             """,
             """
-            CREATE TABLE IF NOT EXISTS   authData(
+            CREATE TABLE IF NOT EXISTS   authdata(
               `authToken` varchar(256) NOT NULL,
               `username` varchar(256) NOT NULL,
               PRIMARY KEY (`authToken`)

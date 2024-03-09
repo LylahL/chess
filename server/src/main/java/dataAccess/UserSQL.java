@@ -40,7 +40,7 @@ public class UserSQL implements UserDAOInterface{
 
   @Override
   public String getPassword(String username) {
-    UserData userData = getUserByUsername(username);
+  UserData userData = getUserByUsername(username);
     return userData.getPassword();
   }
 

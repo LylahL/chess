@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="chess@localhost">
+<dataSource name="chess2@localhost">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
@@ -996,10 +996,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="287" parent="1" name="utf8mb4_zh_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="288" parent="1" name="chess">
+    <schema id="288" parent="1" name="chess2">
       <Current>1</Current>
-      <IntrospectionTimestamp>2024-03-08.02:45:39</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-03-08.16:45:39</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2024-03-08.03:37:19</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2024-03-08.17:37:19</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">

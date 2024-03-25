@@ -1,10 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
-import model.AuthData;
-import model.SignInRequest;
-import model.SignInResponse;
-import model.UserData;
+import model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +43,10 @@ public class ServerFacade<T> {
     // send Request
     HttpURLConnection http = sendRequest(path, "DELET", requestBody);
   }
+
+  public CreateGameResponse createGame(AuthData auth, CreateGameRequest createGameRequest) {
+
+  }
   private String WriteRequestBody(Object requestObject) {
     if(requestObject != null){
       String requestBody = new Gson().toJson(requestObject);
@@ -76,5 +77,6 @@ public class ServerFacade<T> {
     return responseBody;
 
   }
+
 
 }

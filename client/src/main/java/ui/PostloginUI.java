@@ -2,6 +2,8 @@ package ui;
 
 import exception.ResponseException;
 import model.AuthData;
+import model.CreateGameRequest;
+import model.CreateGameResponse;
 import server.ServerFacade;
 
 import java.io.BufferedReader;
@@ -57,7 +59,10 @@ public class PostloginUI {
   }
 
   private void createGame(String[] params) {
-
+    if (params.length == 1){
+      String gameName = params[0];
+      CreateGameResponse response = serverFacade.createGame(auth, new CreateGameRequest(gameName));
+    }
   }
 
   private void logOut(String[] params) throws URISyntaxException, IOException {

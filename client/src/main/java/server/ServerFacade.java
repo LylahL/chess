@@ -21,7 +21,7 @@ public class ServerFacade<T> {
     // write Request Body
     String requestBody = WriteRequestBody(signInRequest);
     // send Request
-    HttpURLConnection http = sendRequest(path, "POST", requestBody);
+    HttpURLConnection http = sendRequest(path, "POST", requestBody, null, null);
     // read Response
     return readResponse(http, SignInResponse.class);
   }
@@ -31,7 +31,7 @@ public class ServerFacade<T> {
     // write Request Body
     String requestBody = WriteRequestBody(user);
     // send Request
-    HttpURLConnection http = sendRequest(path, "POST", requestBody);
+    HttpURLConnection http = sendRequest(path, "POST", requestBody, null, null);
     // read Response
     return readResponse(http, SignInResponse.class);
   }
@@ -41,12 +41,37 @@ public class ServerFacade<T> {
     // write Request Body
     String requestBody = WriteRequestBody(auth.getAuthToken());
     // send Request
-    HttpURLConnection http = sendRequest(path, "DELET", requestBody);
+    HttpURLConnection http = sendRequest(path, "DELET", requestBody, null, null);
   }
 
-  public CreateGameResponse createGame(AuthData auth, CreateGameRequest createGameRequest) {
-
+  public CreateGameResponse createGame(AuthData auth, CreateGameRequest createGameRequest) throws URISyntaxException, IOException {
+    URL path = (new URI(serverURL + "/game")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(createGameRequest);
+    // send Request
+    HttpURLConnection http = sendRequest(path, "POST", requestBody, "authorization", auth.getAuthToken());
+    // read Response
+    return readResponse(http, CreateGameResponse.class);
   }
+
+  public ListGameResponse listGames(AuthData auth) throws URISyntaxException, IOException {
+    URL path = (new URI(serverURL + "/game")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(auth.getAuthToken());
+    // send Request
+    HttpURLConnection http = sendRequest(path, "GET", requestBody, "authorization", auth.getAuthToken());
+    // read Response
+    return readResponse(http,ListGameResponse.class);
+  }
+
+  public void joinGame(AuthData auth, JoinGameRequest joinGameRequest) throws URISyntaxException, IOException {
+    URL path = (new URI(serverURL + "/game")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(auth.getAuthToken());
+    // send Request
+    HttpURLConnection http = sendRequest(path, "PUT", requestBody, "authorization", auth.getAuthToken());
+  }
+
   private String WriteRequestBody(Object requestObject) {
     if(requestObject != null){
       String requestBody = new Gson().toJson(requestObject);
@@ -55,10 +80,14 @@ public class ServerFacade<T> {
     return null;
   }
 
-  private HttpURLConnection sendRequest(URL url, String method, String body) throws IOException, URISyntaxException {
+
+  private HttpURLConnection sendRequest(URL url, String method, String body, String headerKey, String headerValue) throws IOException, URISyntaxException {
     HttpURLConnection http = (HttpURLConnection) url.openConnection();
     http.setRequestMethod(method);
     http.setDoOutput(true);
+    if (headerKey != null && headerValue != null) {
+      http.setRequestProperty(headerKey, headerValue);
+    }
     try (var outputStream = http.getOutputStream()) {
       outputStream.write(body.getBytes());
     }
@@ -77,6 +106,4 @@ public class ServerFacade<T> {
     return responseBody;
 
   }
-
-
 }

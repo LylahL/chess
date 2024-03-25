@@ -1,9 +1,7 @@
 package ui;
 
 import exception.ResponseException;
-import model.AuthData;
-import model.CreateGameRequest;
-import model.CreateGameResponse;
+import model.*;
 import server.ServerFacade;
 
 import java.io.BufferedReader;
@@ -43,25 +41,52 @@ public class PostloginUI {
       case "logout" -> logOut(params);
       case "creategame" -> createGame(params);
       case "listgames" -> listGames(params);
-      case "joingame" -> joingame(params);
+      case "joingame" -> joinGame(params);
       case "joinObserver" -> joinObserver(params);
       default -> PreloginUI.help();
     }
   }
 
-  private void joinObserver(String[] params) {
+  private void joinObserver(String[] params) throws URISyntaxException, IOException {
+    if (params.length == 1){
+      int gameId = Integer.parseInt(params[0]);
+      serverFacade.joinGame(auth, new JoinGameRequest(null, gameId));
+      System.out.println("Joined as Observer Successfully");
+
+    }
+
   }
 
-  private void joingame(String[] params) {
+  private void joinGame(String[] params) throws URISyntaxException, IOException {
+    if (params.length == 2){
+      String teamColor = params[0];
+      int gameId = Integer.parseInt(params[1]);
+      serverFacade.joinGame(auth, new JoinGameRequest(teamColor, gameId));
+      System.out.println("Joined Successfully");
+
+    }
   }
 
-  private void listGames(String[] params) {
+  private void listGames(String[] params) throws URISyntaxException, IOException {
+    if (params.length ==0){
+      ListGameResponse response = serverFacade.listGames(auth);
+      StringBuilder result = new StringBuilder();
+      for (GameData game: response.games()){
+        result.append(String.format("Game ID: %s%n", game.getGameID()));
+        result.append(String.format("Game Name: %s%n", game.getGameName()));
+        result.append(String.format("White Username: %s%n", game.getWhiteUsername()));
+        result.append(String.format("Black Username: %s%n", game.getBlackUsername()));
+        result.append("\n");
+      }
+      System.out.println(result);
+    }
   }
 
-  private void createGame(String[] params) {
+  private void createGame(String[] params) throws URISyntaxException, IOException {
     if (params.length == 1){
       String gameName = params[0];
       CreateGameResponse response = serverFacade.createGame(auth, new CreateGameRequest(gameName));
+      System.out.println(response.gameID());
     }
   }
 

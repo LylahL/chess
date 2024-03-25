@@ -1,6 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
+import model.AuthData;
 import model.SignInRequest;
 import model.SignInResponse;
 import model.UserData;
@@ -8,10 +9,7 @@ import model.UserData;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.*;
 
 
 public class ServerFacade<T> {
@@ -41,6 +39,13 @@ public class ServerFacade<T> {
     return readResponse(http, SignInResponse.class);
   }
 
+  public void logout(AuthData auth) throws URISyntaxException, IOException {
+    URL path = (new URI(serverURL + "/session")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(auth.getAuthToken());
+    // send Request
+    HttpURLConnection http = sendRequest(path, "DELET", requestBody);
+  }
   private String WriteRequestBody(Object requestObject) {
     if(requestObject != null){
       String requestBody = new Gson().toJson(requestObject);

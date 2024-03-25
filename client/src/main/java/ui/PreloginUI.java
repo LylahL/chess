@@ -19,8 +19,8 @@ public class PreloginUI {
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
 
   private boolean isrunning = true;
-
   private String auth;
+  private String username;
 
 
 //  public String eval(String input) throws IOException, URISyntaxException, ResponseException {
@@ -37,9 +37,11 @@ public class PreloginUI {
 //  }
 
   public void run() throws IOException, ResponseException, URISyntaxException {
+    System.out.println("Please input command");
     while(this.isrunning) {
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
+      System.out.println("Please input command");
       parseCommads(cmds);
     }
   }
@@ -55,10 +57,10 @@ public class PreloginUI {
     }
   }
 
-  private String help() {
+  static String help() {
     return """
                 - register <USERNAME> <PASSWORD> <EMAIL> - to create an account
-                - login <USERNAME> <PASSWORD> - to play chess
+                - signIn <USERNAME> <PASSWORD> - to play chess
                 - quit - quit
                 - help - with possible commands
                 """;
@@ -72,7 +74,10 @@ public class PreloginUI {
       String email = params[2];
       SignInResponse res = serverFacade.register(new UserData(username, password, email));
       this.auth = res.authToken();
+      this.username = res.username();
+      PostloginUI postloginUI = new PostloginUI(auth, this.username);
       System.out.printf("You registered in as %s", username);
+      postloginUI.run();
     }
   }
 
@@ -83,7 +88,10 @@ public class PreloginUI {
       String password = params[1];
       SignInResponse res = serverFacade.signIn(new SignInRequest(username, password));
       this.auth = res.authToken();
+      this.username = res.username();
       System.out.printf("You signed in as %s", username);
+      PostloginUI postloginUI = new PostloginUI(auth, res.username());
+      postloginUI.run();
     }
   }
 

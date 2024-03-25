@@ -1,18 +1,75 @@
 package server;
 
+import com.google.gson.Gson;
 import model.SignInRequest;
+import model.SignInResponse;
+import model.UserData;
 
-public class ServerFacade {
-  private final String url;
-  private final String serverPort;
-  public ServerFacade(String url, String serverPort) {
-    this.url = url;
-    this.serverPort=serverPort;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+
+public class ServerFacade<T> {
+  private final String serverURL;
+
+  public ServerFacade(String url) {
+    this.serverURL = url;
   }
 
-  public SignInRequest signIn(SignInRequest signInRequest){
-    var path = "/user";
-    return this.
+  public SignInResponse signIn(SignInRequest signInRequest) throws IOException, URISyntaxException {
+    URL path = (new URI(serverURL + "/session")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(signInRequest);
+    // send Request
+    HttpURLConnection http = sendRequest(path, "POST", requestBody);
+    // read Response
+    return readResponse(http, SignInResponse.class);
+  }
+
+  public SignInResponse register(UserData user) throws IOException, URISyntaxException {
+    URL path = (new URI(serverURL + "/user")).toURL();
+    // write Request Body
+    String requestBody = WriteRequestBody(user);
+    // send Request
+    HttpURLConnection http = sendRequest(path, "POST", requestBody);
+    // read Response
+    return readResponse(http, SignInResponse.class);
+  }
+
+  private String WriteRequestBody(Object requestObject) {
+    if(requestObject != null){
+      String requestBody = new Gson().toJson(requestObject);
+      return requestBody;
+    }
+    return null;
+  }
+
+  private HttpURLConnection sendRequest(URL url, String method, String body) throws IOException, URISyntaxException {
+    HttpURLConnection http = (HttpURLConnection) url.openConnection();
+    http.setRequestMethod(method);
+    http.setDoOutput(true);
+    try (var outputStream = http.getOutputStream()) {
+      outputStream.write(body.getBytes());
+    }
+    http.connect();
+    return http;
+  }
+
+  private <T> T readResponse(HttpURLConnection http, Class<T> responseClass)  throws IOException {
+    var statusCode = http.getResponseCode();
+    var statusMessage = http.getResponseMessage();
+    T responseBody = null ;
+    try (InputStream respBody = http.getInputStream()) {
+      InputStreamReader inputStreamReader =  new InputStreamReader(respBody);
+      responseBody = new Gson().fromJson(inputStreamReader, responseClass);
+    }
+    return responseBody;
+
   }
 
 }

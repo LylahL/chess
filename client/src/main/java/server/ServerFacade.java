@@ -6,7 +6,10 @@ import model.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 public class ServerFacade<T> {
@@ -88,7 +91,7 @@ public class ServerFacade<T> {
   }
 
 
-  private HttpURLConnection sendRequest(URL url, String method, String body, String headerKey, String headerValue) throws IOException, URISyntaxException {
+  private HttpURLConnection sendRequest(URL url, String method, String body, String headerKey, String headerValue) throws IOException {
     HttpURLConnection http = (HttpURLConnection) url.openConnection();
     http.setRequestMethod(method);
     http.setDoOutput(true);
@@ -107,6 +110,10 @@ public class ServerFacade<T> {
   private <T> T readResponse(HttpURLConnection http, Class<T> responseClass)  throws IOException {
     var statusCode = http.getResponseCode();
     var statusMessage = http.getResponseMessage();
+    if(statusCode != 200){
+      ErrorHandling(statusCode, statusMessage);
+      return null;
+    }
     T responseBody = null ;
     try (InputStream respBody = http.getInputStream()) {
       if (responseClass != null) {
@@ -120,5 +127,11 @@ public class ServerFacade<T> {
     }
     return responseBody;
 
+  }
+
+  private Object ErrorHandling(int statusCode, String statusMessage) {
+    System.out.printf("Status Code:%d , Error:%String",statusCode, statusMessage);
+    System.out.println();
+    return null;
   }
 }

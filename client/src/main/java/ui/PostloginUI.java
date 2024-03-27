@@ -47,7 +47,7 @@ public class PostloginUI {
       case "listgames" -> listGames(params);
       case "joingame" -> joinGame(params);
       case "joinobserver" -> joinObserver(params);
-      default -> help();
+      case "help" -> help();
     }
   }
   static void help() {

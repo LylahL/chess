@@ -14,23 +14,27 @@ import java.util.List;
 public class PostloginUI {
   private AuthData auth;
   private String username;
+
+  private State state;
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
 
   private boolean isrunning = true;
 
-  PostloginUI (String auth, String username){
+  PostloginUI (String auth, String username, State state){
+    this.state=state;
     AuthData authData = new AuthData(auth, username);
     this.auth =  authData;
     this.username = username;
   }
 
   public void run() throws ResponseException, IOException, URISyntaxException {
+    System.out.println("This is the Postlogin page, type help to check available commands");
+    System.out.printf("[%s] >>>", state.toString());
     while(isrunning){
-      System.out.println(auth);
-      System.out.println(username);
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
       parseCommads(cmds);
+      System.out.printf("[%s] >>>", state.toString());
     }
   }
 
@@ -42,33 +46,43 @@ public class PostloginUI {
       case "creategame" -> createGame(params);
       case "listgames" -> listGames(params);
       case "joingame" -> joinGame(params);
-      case "joinObserver" -> joinObserver(params);
-      default -> PreloginUI.help();
+      case "joinobserver" -> joinObserver(params);
+      default -> help();
     }
   }
+  static void help() {
+    System.out.print("""
+                - logout - logs out the user
+                - createGame <GAMENAME> - create a game
+                - listGames - lists all games
+                - joinGame <COLOR> <GAMEID> - join a game as player
+                - joinObserver <GAMEID> - join a game as observer
+                """);
+  }
 
-  private void joinObserver(String[] params) throws URISyntaxException, IOException {
+  private void joinObserver(String[] params) throws URISyntaxException, IOException, ResponseException {
     if (params.length == 1){
       int gameId = Integer.parseInt(params[0]);
       serverFacade.joinGame(auth, new JoinGameRequest(null, gameId));
       System.out.println("Joined as Observer Successfully");
-
+//      GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username);
+//      gameplayUI.run();
     }
 
   }
 
-  private void joinGame(String[] params) throws URISyntaxException, IOException {
+  private void joinGame(String[] params) throws URISyntaxException, IOException, ResponseException {
     if (params.length == 2){
       String teamColor = params[0];
       int gameId = Integer.parseInt(params[1]);
       serverFacade.joinGame(auth, new JoinGameRequest(teamColor, gameId));
-      System.out.println("Joined Successfully");
-
+//      GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username);
+//      gameplayUI.run();
     }
   }
 
   private void listGames(String[] params) throws URISyntaxException, IOException {
-    if (params.length ==0){
+    if (params.length == 0){
       ListGameResponse response = serverFacade.listGames(auth);
       StringBuilder result = new StringBuilder();
       for (GameData game: response.games()){
@@ -86,14 +100,17 @@ public class PostloginUI {
     if (params.length == 1){
       String gameName = params[0];
       CreateGameResponse response = serverFacade.createGame(auth, new CreateGameRequest(gameName));
-      System.out.println(response.gameID());
+      System.out.printf("New game created, gameId: %d", response.gameID());
     }
   }
 
-  private void logOut(String[] params) throws URISyntaxException, IOException {
+  private void logOut(String[] params) throws URISyntaxException, IOException, ResponseException {
     if (params.length == 0){
       serverFacade.logout(auth);
       System.out.println("Log out successfully");
     }
+    this.state = State.SIGNEDOUT;
+    PreloginUI preloginUI = new PreloginUI(state);
+    preloginUI.run();
   }
 }

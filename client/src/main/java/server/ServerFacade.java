@@ -39,9 +39,11 @@ public class ServerFacade<T> {
   public void logout(AuthData auth) throws URISyntaxException, IOException {
     URL path = (new URI(serverURL + "/session")).toURL();
     // write Request Body
-    String requestBody = WriteRequestBody(auth.getAuthToken());
+//    String requestBody = WriteRequestBody(auth.getAuthToken());
     // send Request
-    HttpURLConnection http = sendRequest(path, "DELET", requestBody, null, null);
+    HttpURLConnection http = sendRequest(path, "DELETE", null, "authorization", auth.getAuthToken());
+    readResponse(http, null);
+    System.out.println("succeed");
   }
 
   public CreateGameResponse createGame(AuthData auth, CreateGameRequest createGameRequest) throws URISyntaxException, IOException {
@@ -57,9 +59,9 @@ public class ServerFacade<T> {
   public ListGameResponse listGames(AuthData auth) throws URISyntaxException, IOException {
     URL path = (new URI(serverURL + "/game")).toURL();
     // write Request Body
-    String requestBody = WriteRequestBody(auth.getAuthToken());
+//    String requestBody = WriteRequestBody(auth.getAuthToken());
     // send Request
-    HttpURLConnection http = sendRequest(path, "GET", requestBody, "authorization", auth.getAuthToken());
+    HttpURLConnection http = sendRequest(path, "GET", null, "authorization", auth.getAuthToken());
     // read Response
     return readResponse(http,ListGameResponse.class);
   }
@@ -67,9 +69,14 @@ public class ServerFacade<T> {
   public void joinGame(AuthData auth, JoinGameRequest joinGameRequest) throws URISyntaxException, IOException {
     URL path = (new URI(serverURL + "/game")).toURL();
     // write Request Body
-    String requestBody = WriteRequestBody(auth.getAuthToken());
+    String requestBody = WriteRequestBody(joinGameRequest);
     // send Request
     HttpURLConnection http = sendRequest(path, "PUT", requestBody, "authorization", auth.getAuthToken());
+    readResponse(http, null);
+    // erorr handling
+//    { if code 403 then systme out "already taken"
+    // catch all execption geterrormessageprint
+    System.out.println("succeed");
   }
 
   private String WriteRequestBody(Object requestObject) {
@@ -88,8 +95,10 @@ public class ServerFacade<T> {
     if (headerKey != null && headerValue != null) {
       http.setRequestProperty(headerKey, headerValue);
     }
-    try (var outputStream = http.getOutputStream()) {
-      outputStream.write(body.getBytes());
+    if (body != null){
+      try (var outputStream = http.getOutputStream()) {
+        outputStream.write(body.getBytes());
+      }
     }
     http.connect();
     return http;
@@ -100,8 +109,14 @@ public class ServerFacade<T> {
     var statusMessage = http.getResponseMessage();
     T responseBody = null ;
     try (InputStream respBody = http.getInputStream()) {
-      InputStreamReader inputStreamReader =  new InputStreamReader(respBody);
-      responseBody = new Gson().fromJson(inputStreamReader, responseClass);
+      if (responseClass != null) {
+        InputStreamReader inputStreamReader =  new InputStreamReader(respBody);
+        responseBody = new Gson().fromJson(inputStreamReader, responseClass);
+      }
+      else {
+        return null;
+      }
+
     }
     return responseBody;
 

@@ -5,6 +5,7 @@ import dataAccess.*;
 import exception.ResponseException;
 import model.AuthData;
 import model.GameData;
+import model.JoinGameRequest;
 import model.UserData;
 import service.ClearApplication;
 import service.GameService;
@@ -45,8 +46,7 @@ public class Server {
         gameService = new GameService(authSQL, game, user);
     }
 
-    public record JoinGameRequest(String playerColor, int gameID) {
-    }
+
     public record LoginResult(String username, String authToken) {
     }
 

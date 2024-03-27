@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="chess2@localhost" uuid="2f1bfbf7-1a76-4f72-b3c3-21a6ba29e960">
+    <data-source source="LOCAL" name="chess@localhost" uuid="2f1bfbf7-1a76-4f72-b3c3-21a6ba29e960">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/chess2</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/chess</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

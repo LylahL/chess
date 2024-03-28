@@ -28,14 +28,14 @@ public class UserService {
       UserData userData = user.createUser(newUserData);
       return login(userData);
     }else {
-      throw new ResponseException(403, "Error: Already taken");
+      throw new ResponseException(403, "Error: Username already taken");
     }
   }
   public AuthData login(UserData userObject) throws ResponseException{
     String username = userObject.getUsername();
     String password = userObject.getPassword();
     if(user.getUserByUsername(username) == null){
-      throw new ResponseException(401, "Error: user not in data base");
+      throw new ResponseException(401, "Error: user doesn't exist, please register first");
     }
     // success
     else if(Objects.equals(password, user.getPassword(username))){
@@ -48,7 +48,7 @@ public class UserService {
       return authToken;
     }else {
       // wrong password
-      throw new ResponseException(401, "Error: unauthorized");
+      throw new ResponseException(401, "Error: wrong password");
     }
   }
   public void logout(AuthData authObject) throws ResponseException{
@@ -70,7 +70,7 @@ public class UserService {
     }
     else {
       // user not found in system
-      throw new ResponseException(401, "Error: unauthorized");
+      throw new ResponseException(401, "Error: User not found in the system");
     }
 
 

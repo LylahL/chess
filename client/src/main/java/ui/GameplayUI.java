@@ -1,5 +1,9 @@
 package ui;
 
+import chess.ChessBoard;
+import chess.ChessGame;
+import chess.ChessPiece;
+import chess.ChessPosition;
 import exception.ResponseException;
 import model.AuthData;
 import server.ServerFacade;
@@ -7,14 +11,32 @@ import server.ServerFacade;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ui.EscapeSequences.*;
 
 public class GameplayUI {
   private AuthData auth;
   private String username;
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
+  public static ChessBoard board = new ChessBoard();
+  static {
+    board.resetBoard();
+  }
+  private static final String textColor = SET_TEXT_COLOR_WHITE;
+  private static final String indexColor = SET_TEXT_COLOR_BLACK;
+  private static final String whitePieceColor = SET_TEXT_COLOR_BLUE;
+  private static final String blackPieceColor = SET_TEXT_COLOR_YELLOW;
+  private static final String boardSpaceWhiteColor = SET_BG_COLOR_LIGHT_GREY;
+  private static final String boardSpaceBlackColor = SET_BG_COLOR_DARK_GREY;
+  private static final String BackgroundColor = SET_BG_COLOR_RED;
+  private static final String space = EMPTY;
+
+
 
   private boolean isrunning = true;
 
@@ -41,47 +63,132 @@ public class GameplayUI {
     }
   }
 
+  private void drawBoard() {
+    drawBoardOnce(board, ChessGame.TeamColor.WHITE);
+    System.out.println();
+    drawBoardOnce(board, ChessGame.TeamColor.BLACK);
+  }
+
+  private void drawBoardOnce(ChessBoard board, ChessGame.TeamColor teamColor) {
+    PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+    printIndex(out, teamColor);
+    if(teamColor == ChessGame.TeamColor.WHITE){
+      for(int i=1; i <= 8; i++){
+        out.print(BackgroundColor);
+        out.print(indexColor);
+        out.print(space);
+        out.print(i);
+        out.print(space);
+        for(int j=1; j <= 8; j++){
+          ChessPiece currentPiece = board.getPiece(new ChessPosition(i, j));
+          if (i % 2 == 1){
+            if(j % 2 == 1){
+              out.print(boardSpaceWhiteColor);
+              printpiece(out, currentPiece, teamColor);
+            }else {
+              out.print(boardSpaceBlackColor);
+              printpiece(out, currentPiece, teamColor);
+            }
+          }else {
+            if(j % 2 == 1){
+              out.print(boardSpaceBlackColor);
+              printpiece(out, currentPiece, teamColor);
+            }else {
+              out.print(boardSpaceWhiteColor);
+              printpiece(out, currentPiece, teamColor);
+            }
+          }
+        }
+        out.print(" ");
+        out.println();
+        out.print(BackgroundColor);
+      }
+      out.print(BackgroundColor);
+      out.print(space);
+
+    }else{
+      for(int i=8; i >=1; i--){
+        out.print(BackgroundColor);
+        out.print(indexColor);
+        out.print(space);
+        out.print(i);
+        out.print(space);
+        for(int j=8; j >= 1; j--){
+          ChessPiece currentPiece = board.getPiece(new ChessPosition(i, j));
+          if (i % 2 == 1){
+            if(j % 2 == 1){
+              out.print(boardSpaceWhiteColor);
+              printpiece(out, currentPiece, teamColor);
+            }else {
+              out.print(boardSpaceBlackColor);
+              printpiece(out, currentPiece, teamColor);
+            }
+          }else {
+            if(j % 2 == 1){
+              out.print(boardSpaceBlackColor);
+              printpiece(out, currentPiece, teamColor);
+            }else {
+              out.print(boardSpaceWhiteColor);
+              printpiece(out, currentPiece, teamColor);
+            }
+          }
+        }
+        out.println();
+        out.print(BackgroundColor);
+      }
+      out.print(BackgroundColor);
+      out.print(space);
+    }
+
+  }
+
+  private void printpiece(PrintStream out, ChessPiece currentPiece, ChessGame.TeamColor teamColor) {
+    if(currentPiece != null){
+    if (currentPiece.getTeamColor() == ChessGame.TeamColor.WHITE) {
+      out.print(whitePieceColor);
+    } else {
+      out.print(blackPieceColor);
+    }
+      switch (currentPiece.getPieceType()) {
+        case KING -> out.print(BLACK_KING);
+        case QUEEN -> out.print(BLACK_QUEEN);
+        case BISHOP -> out.print(BLACK_BISHOP);
+        case ROOK -> out.print(BLACK_ROOK);
+        case KNIGHT ->out.print(BLACK_KNIGHT);
+        case PAWN -> out.print(BLACK_PAWN);
+        default -> out.print(space);
+    }
+    }else {
+      out.print(space);
+    }
+  }
+
+  private void printIndex(PrintStream out, ChessGame.TeamColor teamColor) {
+    out.print(BackgroundColor);
+    out.print(textColor);
+    String [] index;
+    if(teamColor == ChessGame.TeamColor.WHITE){
+      index = new String[]{"a", "b", "c", "d", "e", "f", "g", "h"};
+    } else {
+      index =  new String [] {"h", "g", "f", "e", "d", "c", "b", "a"};
+    }
+    out.print(space);
+    out.print(space);
+    for (String letter: index){
+      out.print(" ");
+      out.print(letter);
+      out.print(" ");
+      out.print(" ");
+    }
+    out.print(space);
+    out.print(textColor);
+    out.print(BackgroundColor);
+    out.println();
+  }
+
   private void quit() {
     this.isrunning = false;
   }
 
 
-  public String drawBoard() {
-    StringBuilder result=new StringBuilder();
-
-    String[][] board = {
-            {EscapeSequences.WHITE_ROOK, EscapeSequences.WHITE_KNIGHT, EscapeSequences.WHITE_BISHOP, EscapeSequences.WHITE_QUEEN, EscapeSequences.WHITE_KING, EscapeSequences.WHITE_BISHOP, EscapeSequences.WHITE_KNIGHT, EscapeSequences.WHITE_ROOK},
-            {EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN, EscapeSequences.WHITE_PAWN},
-            {EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY},
-            {EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY},
-            {EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY},
-            {EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY},
-            {EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN, EscapeSequences.BLACK_PAWN},
-            {EscapeSequences.BLACK_ROOK, EscapeSequences.BLACK_KNIGHT, EscapeSequences.BLACK_BISHOP, EscapeSequences.BLACK_QUEEN, EscapeSequences.BLACK_KING, EscapeSequences.BLACK_BISHOP, EscapeSequences.BLACK_KNIGHT, EscapeSequences.BLACK_ROOK}
-    };
-
-    final String columnLabels="   a\u2003  b\u2003  c\u2003  d\u2003  e\u2003  f\u2003  g\u2003  h\n";
-
-    result.append(columnLabels);
-
-    for (int i=0; i < 8; i++) {
-      result.append(8 - i).append("|");
-      for (String piece : board[i]) {
-        result.append(piece).append("|");
-      }
-      result.append("\n");
-    }
-
-    result.append(columnLabels);
-
-    for (int i=7; i >= 0; i--) {
-      result.append(i + 1).append("|");
-      for (int j=7; j >= 0; j--) {
-        result.append(board[i][j]).append("|");
-      }
-      result.append("\n");
-    }
-    System.out.println(result);
-    return result.toString();
-  }
 }

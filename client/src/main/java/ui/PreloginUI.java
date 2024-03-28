@@ -29,12 +29,14 @@ public class PreloginUI {
   }
 
   public void run() throws IOException, ResponseException, URISyntaxException {
-    System.out.printf("[%s] >>>", state.toString());
-    while(this.isrunning) {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-      ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
-      parseCommads(cmds);
+    if (isrunning){
       System.out.printf("[%s] >>>", state.toString());
+      while(this.isrunning) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
+        parseCommads(cmds);
+        System.out.printf("[%s] >>>", state.toString());
+      }
     }
   }
 
@@ -85,12 +87,15 @@ public class PreloginUI {
       String password = params[1];
       String email = params[2];
       SignInResponse res = serverFacade.register(new UserData(username, password, email));
-      this.auth = res.authToken();
-      this.username = res.username();
-      this.state = State.SIGNEDIN;
-      PostloginUI postloginUI = new PostloginUI(auth, this.username, this.state);
-      System.out.printf("You registered in as %s", username);
-//      postloginUI.run();
+      if(res != null) {
+        this.auth=res.authToken();
+        this.username=res.username();
+        this.state=State.SIGNEDIN;
+        PostloginUI postloginUI=new PostloginUI(auth, this.username, this.state);
+        System.out.printf("You registered in as %s", username);
+        System.out.println();
+        postloginUI.run();
+      }
     }
   }
 
@@ -106,12 +111,13 @@ public class PreloginUI {
         System.out.printf("You signed in as %s", username);
         System.out.println();
         PostloginUI postloginUI = new PostloginUI(auth, res.username(), state);
-//      postloginUI.run();
+        postloginUI.run();
       }
     }
   }
 
   private void quit() {
+    this.state = State.SIGNEDOUT;
     isrunning = false;
     }
 

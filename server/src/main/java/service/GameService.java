@@ -45,7 +45,7 @@ public class GameService {
           // already taken
           if (playerColor != null && (playerColor.equals("WHITE") && currentGame.getWhiteUsername() != null )||
                   (Objects.equals(playerColor, "BLACK") && currentGame.getBlackUsername() != null )){
-            throw new ResponseException(403, "Error: already taken");
+            throw new ResponseException(403, "Error: team color already taken");
           }
           if (playerColor == null){
             return;
@@ -58,7 +58,7 @@ public class GameService {
       }
     }else {
       // no game found
-      throw new ResponseException(400, "Error: bad request");
+      throw new ResponseException(400, "Error: game is not found in system");
     }
   }
 }

@@ -69,6 +69,16 @@ public class ServerFacade<T> {
     return readResponse(http, ListGameResponse.class);
   }
 
+  public void clear() throws URISyntaxException, IOException {
+    URL path=(new URI(serverURL + "/db")).toURL();
+    // write Request Body
+//    String requestBody = WriteRequestBody(auth.getAuthToken());
+    // send Request
+    HttpURLConnection http=sendRequest(path, "DELETE", null, null, null);
+    // read Response
+    readResponse(http, ListGameResponse.class);
+  }
+
   public static HttpURLConnection joinGame(AuthData auth, JoinGameRequest joinGameRequest) throws URISyntaxException, IOException {
     URL path=(new URI(serverURL + "/game")).toURL();
     // write Request Body

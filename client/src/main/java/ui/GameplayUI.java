@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ui.EscapeSequences.*;
+// TODO: add more cmds like make move
 
 public class GameplayUI {
   private AuthData auth;
@@ -174,11 +175,11 @@ public class GameplayUI {
     }
     out.print(space);
     out.print(space);
+    out.print("\u2002");
     for (String letter: index){
-      out.print(" ");
+      out.print("\u2003");
       out.print(letter);
-      out.print(" ");
-      out.print(" ");
+      out.print("\u2002");
     }
     out.print(space);
     out.print(textColor);

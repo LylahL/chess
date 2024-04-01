@@ -33,12 +33,12 @@ public class PostloginUI {
   public void run() throws ResponseException, IOException, URISyntaxException {
     if(isrunning){
       System.out.println("This is the Postlogin page, type help to check available commands");
-      System.out.printf("[%s] >>>", state.toString());
+//      System.out.printf("[%s] >>>", state.toString());
       while(isrunning){
+        System.out.printf("[%s] >>>", state.toString());
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
         parseCommads(cmds);
-        System.out.printf("[%s] >>>", state.toString());
     }
     }
   }

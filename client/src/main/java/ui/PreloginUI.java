@@ -30,20 +30,17 @@ public class PreloginUI {
 
   public void run() throws IOException, ResponseException, URISyntaxException {
     if (isrunning){
-      System.out.printf("[%s] >>>", state.toString());
+//      System.out.printf("[%s] >>>", state.toString());
       while(this.isrunning) {
+        System.out.printf("[%s] >>>", state.toString());
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
         parseCommads(cmds);
-        System.out.printf("[%s] >>>", state.toString());
+
       }
     }
   }
 
-  // TODO: Error Handling
-  // TODO: Invalid input handling
-  // TODO: Print the board right
-  // TODO: Write Unit tests
 
   private void parseCommads(ArrayList<String> cmds) throws ResponseException, IOException, URISyntaxException {
     String cmd = cmds.getFirst().toLowerCase();

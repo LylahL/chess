@@ -1,8 +1,13 @@
 package server;
 
 
+import chess.ChessGame;
+import chess.ChessMove;
 import com.google.gson.Gson;
 import exception.ResponseException;
+import model.AuthData;
+import webSocketMessages.serverMessages.ServerMessage;
+import webSocketMessages.userCommands.*;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -30,13 +35,59 @@ public class WebSocketFacade extends Endpoint{
       this.session.addMessageHandler(new MessageHandler.Whole<String>() {
         @Override
         public void onMessage(String message) {
-          Notification notification = new Gson().fromJson(message, Notification.class);
-          notificationHandler.notify(notification);
+          ServerMessage notification = new Gson().fromJson(message, ServerMessage.class);
+          notificationHandler.notify(message);
         }
       });
     } catch (DeploymentException | IOException | URISyntaxException ex) {
       throw new ResponseException(500, ex.getMessage());
     }
   }
+
+  public void joinPlayer(AuthData auth, int gameID, ChessGame.TeamColor playerColor){
+    try{
+      var cmd = new JoinPlayer(auth.getAuthToken(), gameID, playerColor);
+      //sends a text message over the WebSocket connection, and the message content is the cmd object.
+      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
+
+  public void joinObserver(AuthData auth, int gameID){
+    try {
+      var cmd = new JoinObserver(auth.getAuthToken(), gameID);
+      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void makeMove(AuthData auth, int gameID, ChessMove move){
+    try {
+      var cmd = new MakeMove(auth.getAuthToken(), gameID, move);
+      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void leave(AuthData auth, int gameID){
+    try {
+      var cmd = new Leave(auth.getAuthToken(), gameID);
+      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void resign(AuthData auth, int gameID){
+    try {
+      var cmd = new Resign(auth.getAuthToken(), gameID);
+      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
 }

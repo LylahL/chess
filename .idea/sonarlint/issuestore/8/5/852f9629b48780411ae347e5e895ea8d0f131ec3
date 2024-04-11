@@ -1,0 +1,24 @@
+
+F
+java:S3740"/Provide the parametrized type for this generic.(Á¦ê´
+a
+java:S11925"FDefine a constant instead of duplicating this literal "/game" 3 times.(Ûûœıÿÿÿÿ
+d
+java:S11920"NDefine a constant instead of duplicating this literal "authorization" 4 times.(áŞ©ú
+~
+java:S1488a"cImmediately return this expression instead of assigning it to the temporary variable "requestBody".(¥«éûÿÿÿÿ
+1
+java:S2326"T is not used in the class.(²¦‡™
+A
+java:S3010"&Remove this assignment of "serverURL".(ÿÈËŸøÿÿÿÿ
+P
+java:S2209"5Change this instance-reference to a static reference.(ÿÈËŸøÿÿÿÿ
+Q	java:S125."<This block of commented-out lines of code should be removed.(…€Ğğ
+Q	java:S125A"<This block of commented-out lines of code should be removed.(…€Ğğ
+Q	java:S125K"<This block of commented-out lines of code should be removed.(…€Ğğ
+h	java:S100_"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Ø­ˆøÿÿÿÿ
+M
+java:S1481z"2Remove this unused "statusMessage" local variable.(†şÌÉÿÿÿÿÿ
+d	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×öŒî
+F	java:S106‘"+Replace this use of System.out by a logger.(ÁùûŞúÿÿÿÿ
+F	java:S106’"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ

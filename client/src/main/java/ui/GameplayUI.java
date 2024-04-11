@@ -24,17 +24,15 @@ public class GameplayUI {
   private AuthData auth;
   private String username;
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
-  public static ChessBoard board = new ChessBoard();
-  static {
-    board.resetBoard();
-  }
+  public static ChessGame chessGame;
   private static final String textColor = SET_TEXT_COLOR_WHITE;
   private static final String indexColor = SET_TEXT_COLOR_BLACK;
   private static final String whitePieceColor = SET_TEXT_COLOR_BLUE;
   private static final String blackPieceColor = SET_TEXT_COLOR_YELLOW;
   private static final String boardSpaceWhiteColor = SET_BG_COLOR_LIGHT_GREY;
   private static final String boardSpaceBlackColor = SET_BG_COLOR_DARK_GREY;
-  private static final String BackgroundColor = SET_BG_COLOR_RED;
+  private static final String BackgroundColor = SET_BG_COLOR_DARK_GREEN;
+  private static final String DefaultBackgroundColor = SET_BG_COLOR_BLACK;
   private static final String space = EMPTY;
 
 
@@ -60,11 +58,40 @@ public class GameplayUI {
     String[] params =cmds.subList(1, cmds.size()).toArray(new String[0]);
     switch (cmd) {
      case "quit" -> quit();
-     default -> drawBoard();
+     case "highlight" -> highLight(chessGame, params);
+     case "help" -> help();
+     case "drawBoard" -> drawBoard(chessGame.getBoard());
+     case "makeMove" -> makeMove(params);
+     case "leave" -> leave();
+     case "resign" -> resign();
     }
   }
 
-  private void drawBoard() {
+  private void resign() {
+  }
+
+  private void leave() {
+  }
+
+  private void makeMove(String[] params) {
+
+  }
+
+  private void highLight(ChessGame chessGame, String[] params) {
+  }
+
+  private void help() {
+    System.out.print("""
+                - quit - quit game
+                - drawBoard - redraws the board
+                - leave - removes the user from the game
+                - resign - the user forfeits the game and the game is over. Does not cause the user to leave the game
+                - makeMove <START POSITION> <END POSITION> - make a move
+                - highlight - hight lights legal moves
+                """);
+  }
+
+  private void drawBoard(ChessBoard board) {
     drawBoardOnce(board, ChessGame.TeamColor.WHITE);
     System.out.println();
     drawBoardOnce(board, ChessGame.TeamColor.BLACK);
@@ -102,10 +129,10 @@ public class GameplayUI {
         }
         out.print(" ");
         out.println();
-        out.print(BackgroundColor);
+//        out.print(BackgroundColor);
       }
       out.print(BackgroundColor);
-      out.print(space);
+//      out.print(space);
 
     }else{
       for(int i=8; i >=1; i--){
@@ -135,9 +162,9 @@ public class GameplayUI {
           }
         }
         out.println();
-        out.print(BackgroundColor);
+//        out.print(BackgroundColor);
       }
-      out.print(BackgroundColor);
+//      out.print(BackgroundColor);
       out.print(space);
     }
 

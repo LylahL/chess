@@ -1,0 +1,29 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–
+E
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–
+c
+java:S11927"MDefine a constant instead of duplicating this literal "joinobserver" 3 times.(‡£¸
+_
+java:S11926"IDefine a constant instead of duplicating this literal "joingame" 3 times.(ñ¤äğ
+f
+java:S11924"KDefine a constant instead of duplicating this literal "creategame" 3 times.(¬›åÿÿÿÿÿ
+E	java:S106#"+Replace this use of System.out by a logger.(½±æøşÿÿÿÿ
+Q	java:S125$"<This block of commented-out lines of code should be removed.(áËìÀ
+@	java:S106&"+Replace this use of System.out by a logger.(‚´İä
+<	java:S1312""Add a default case to this switch.(Ï—íàıÿÿÿÿ
+h	java:S100<"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£½‰úÿÿÿÿ
+@	java:S106@"+Replace this use of System.out by a logger.(·Á½Ù
+?	java:S106E"+Replace this use of System.out by a logger.(Ì¤Ÿ:
+E	java:S106J"+Replace this use of System.out by a logger.(ÅŠ¤Ùøÿÿÿÿ
+P
+java:S2209V"5Change this instance-reference to a static reference.(æß°ëıÿÿÿÿ
+@	java:S106W"+Replace this use of System.out by a logger.(ÿ¨’‹
+E	java:S106v"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿ
+@	java:S106~"+Replace this use of System.out by a logger.(ÙÌš¨
+E	java:S106"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ
+
+java:S1130ƒ"tRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from method's body.(£é¼‚øÿÿÿÿ
+F	java:S106†"+Replace this use of System.out by a logger.(Ù¯Ğ¹ûÿÿÿÿ
+W	java:S125Š"<This block of commented-out lines of code should be removed.(Ã¹¬€ùÿÿÿÿ

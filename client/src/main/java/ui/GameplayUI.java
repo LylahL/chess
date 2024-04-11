@@ -24,8 +24,9 @@ import static ui.EscapeSequences.*;
 
 public class GameplayUI {
   private NotificationHandler notificationHandler;
-  private WebSocketFacade webSocketFacade = new WebSocketFacade("http://localhost:8282");
+  private WebSocketFacade webSocketFacade = new WebSocketFacade("http://localhost:8282",notificationHandler);
   private AuthData auth;
+  private int gameID;
   private String username;
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
   public static ChessGame chessGame;
@@ -43,10 +44,11 @@ public class GameplayUI {
 
   private boolean isrunning = true;
 
-  GameplayUI (String auth, String username) throws ResponseException {
+  GameplayUI (String auth, String username, int gameID) throws ResponseException {
     AuthData authData = new AuthData(auth, username);
     this.auth =  authData;
     this.username = username;
+    this.gameID = gameID;
   }
 
   public void run() throws ResponseException, IOException, URISyntaxException {
@@ -75,7 +77,7 @@ public class GameplayUI {
   }
 
   private void leave() {
-    this.webSocketFacade = new
+    webSocketFacade.leave(auth, gameID);
   }
 
   private void makeMove(String[] params) {

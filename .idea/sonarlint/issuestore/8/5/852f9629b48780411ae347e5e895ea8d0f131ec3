@@ -1,24 +1,24 @@
 
 M
-java:S3740"/Provide the parametrized type for this generic.(Á¦ê´8Â¾³İì1
-k
-java:S11920"NDefine a constant instead of duplicating this literal "authorization" 4 times.(áŞ©ú8Ä¾³İì1
-h
-java:S11925"FDefine a constant instead of duplicating this literal "/game" 3 times.(Ûûœıÿÿÿÿ8Ä¾³İì1
-…
-java:S1488a"cImmediately return this expression instead of assigning it to the temporary variable "requestBody".(¥«éûÿÿÿÿ8Ä¾³İì1
-8
-java:S2326"T is not used in the class.(²¦‡™8ß¾³İì1
-H
-java:S3010"&Remove this assignment of "serverURL".(ÿÈËŸøÿÿÿÿ8à¾³İì1
-W
-java:S2209"5Change this instance-reference to a static reference.(ÿÈËŸøÿÿÿÿ8á¾³İì1
-X	java:S125."<This block of commented-out lines of code should be removed.(…€Ğğ8æ¾³İì1
-X	java:S125A"<This block of commented-out lines of code should be removed.(…€Ğğ8é¾³İì1
-X	java:S125K"<This block of commented-out lines of code should be removed.(…€Ğğ8ë¾³İì1
-o	java:S100_"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Ø­ˆøÿÿÿÿ8í¾³İì1
-T
-java:S1481z"2Remove this unused "statusMessage" local variable.(†şÌÉÿÿÿÿÿ8ô¾³İì1
-k	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×öŒî8õ¾³İì1
-M	java:S106‘"+Replace this use of System.out by a logger.(ÁùûŞúÿÿÿÿ8ö¾³İì1
-M	java:S106’"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ö¾³İì1
+java:S3740"/Provide the parametrized type for this generic.(Á¦ê´8ƒ”ñŞì1
+‘
+java:S11920"NDefine a constant instead of duplicating this literal "authorization" 4 times.(áŞ©ú8Ä¾³İì1J$206f5937-59be-4bb5-9f75-e2ffd3189b7b
+
+java:S11925"FDefine a constant instead of duplicating this literal "/game" 3 times.(Ûûœıÿÿÿÿ8Ä¾³İì1J$08d86a51-4c4d-4c50-9c61-c4dffaf43ddd
+«
+java:S1488a"cImmediately return this expression instead of assigning it to the temporary variable "requestBody".(¥«éûÿÿÿÿ8Ä¾³İì1J$a9b4b86b-80a5-4939-bb98-d1bfd6442223
+^
+java:S2326"T is not used in the class.(²¦‡™8ß¾³İì1J$086352f0-7330-437c-9858-24a9efe44bd2
+n
+java:S3010"&Remove this assignment of "serverURL".(ÿÈËŸøÿÿÿÿ8à¾³İì1J$13c60547-a500-4a86-b0eb-881cfdfa7e96
+}
+java:S2209"5Change this instance-reference to a static reference.(ÿÈËŸøÿÿÿÿ8á¾³İì1J$42207e83-4470-40aa-96ec-d64b5aad2650
+~	java:S125."<This block of commented-out lines of code should be removed.(…€Ğğ8æ¾³İì1J$31592fb3-fa95-4b32-a79e-d53219ea6e4e
+~	java:S125A"<This block of commented-out lines of code should be removed.(…€Ğğ8é¾³İì1J$96237e47-2237-41e0-a2ad-3205b412e1c6
+~	java:S125K"<This block of commented-out lines of code should be removed.(…€Ğğ8ë¾³İì1J$a1aa70c4-5f61-4855-8675-1530453e22de
+•	java:S100_"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Ø­ˆøÿÿÿÿ8í¾³İì1J$d0c1d7e0-4bd1-4b2d-a863-66f3729a0948
+z
+java:S1481z"2Remove this unused "statusMessage" local variable.(†şÌÉÿÿÿÿÿ8ô¾³İì1J$d99414ae-b2a6-41e4-9198-42150cfe5d08
+‘	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×öŒî8õ¾³İì1J$cd0d7998-23b4-4f37-891a-1088f79f3856
+M	java:S106‘"+Replace this use of System.out by a logger.(ÁùûŞúÿÿÿÿ8¤”ñŞì1
+M	java:S106’"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8¤”ñŞì1

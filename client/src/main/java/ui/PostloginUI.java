@@ -85,7 +85,7 @@ public class PostloginUI {
       int gameId = Integer.parseInt(params[0]);
       serverFacade.joinGame(auth, new JoinGameRequest(null, gameId));
       System.out.println("Joined as Observer Successfully");
-      GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username);
+      GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username, gameId);
       gameplayUI.run();
     }
 
@@ -98,7 +98,7 @@ public class PostloginUI {
       HttpURLConnection http = ServerFacade.joinGame(auth, new JoinGameRequest(teamColor, gameId));
       var statusCode=http.getResponseCode();
       if (statusCode == 200){
-        GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username);
+        GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username, gameId);
         gameplayUI.run();
       }
     }

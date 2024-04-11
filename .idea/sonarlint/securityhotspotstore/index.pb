@@ -25,3 +25,7 @@ G
 src/main/java/Main.java,e\4\e44a8606ce010ad9b89aafdfcee2ab49afbf6d10
 M
 src/main/java/ClientMain.java,7\8\7838a6281ec1b99fa2c1155cc59b2353ab6052f7
+q
+Asrc/main/java/webSocketMessages/serverMessages/ServerMessage.java,1\9\195fcec39a1c332282ed1e2aaa032c668896c2a1
+p
+@src/main/java/webSocketMessages/serverMessages/Notification.java,f\3\f31ec3df01524e95327705fe3da1b4604c64f810

@@ -6,7 +6,9 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import exception.ResponseException;
 import model.AuthData;
+import server.NotificationHandler;
 import server.ServerFacade;
+import server.WebSocketFacade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import static ui.EscapeSequences.*;
 // TODO: add more cmds like make move
 
 public class GameplayUI {
+  private NotificationHandler notificationHandler;
+  private WebSocketFacade webSocketFacade = new WebSocketFacade("http://localhost:8282");
   private AuthData auth;
   private String username;
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
@@ -39,7 +43,7 @@ public class GameplayUI {
 
   private boolean isrunning = true;
 
-  GameplayUI (String auth, String username){
+  GameplayUI (String auth, String username) throws ResponseException {
     AuthData authData = new AuthData(auth, username);
     this.auth =  authData;
     this.username = username;
@@ -60,8 +64,8 @@ public class GameplayUI {
      case "quit" -> quit();
      case "highlight" -> highLight(chessGame, params);
      case "help" -> help();
-     case "drawBoard" -> drawBoard(chessGame.getBoard());
-     case "makeMove" -> makeMove(params);
+     case "drawboard" -> drawBoard(chessGame.getBoard());
+     case "makemove" -> makeMove(params);
      case "leave" -> leave();
      case "resign" -> resign();
     }
@@ -71,6 +75,7 @@ public class GameplayUI {
   }
 
   private void leave() {
+    this.webSocketFacade = new
   }
 
   private void makeMove(String[] params) {
@@ -91,13 +96,13 @@ public class GameplayUI {
                 """);
   }
 
-  private void drawBoard(ChessBoard board) {
+  public static void drawBoard(ChessBoard board) {
     drawBoardOnce(board, ChessGame.TeamColor.WHITE);
     System.out.println();
     drawBoardOnce(board, ChessGame.TeamColor.BLACK);
   }
 
-  private void drawBoardOnce(ChessBoard board, ChessGame.TeamColor teamColor) {
+  public static void drawBoardOnce(ChessBoard board, ChessGame.TeamColor teamColor) {
     PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
     printIndex(out, teamColor);
     if(teamColor == ChessGame.TeamColor.WHITE){
@@ -170,7 +175,7 @@ public class GameplayUI {
 
   }
 
-  private void printpiece(PrintStream out, ChessPiece currentPiece, ChessGame.TeamColor teamColor) {
+  private static void printpiece(PrintStream out, ChessPiece currentPiece, ChessGame.TeamColor teamColor) {
     if(currentPiece != null){
     if (currentPiece.getTeamColor() == ChessGame.TeamColor.WHITE) {
       out.print(whitePieceColor);
@@ -191,7 +196,7 @@ public class GameplayUI {
     }
   }
 
-  private void printIndex(PrintStream out, ChessGame.TeamColor teamColor) {
+  private static void printIndex(PrintStream out, ChessGame.TeamColor teamColor) {
     out.print(BackgroundColor);
     out.print(textColor);
     String [] index;

@@ -28,7 +28,6 @@ public class Server {
     private AuthDAOInterface authSQL;
 
     public Server() {
-        // what should I do with the constructor
         try {
             DatabaseManager.configureDatabase();
         } catch (ResponseException e) {
@@ -56,6 +55,7 @@ public class Server {
         Spark.staticFiles.location("web");
 
         // Register your endpoints and handle exceptions here
+        Spark.webSocket("/connect", webSocketHandler);
         //clear application
         Spark.delete("/db", this::deleteDatabase);
         //Register

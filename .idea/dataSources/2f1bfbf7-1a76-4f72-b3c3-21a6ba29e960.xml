@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="chess@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.51">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1016,13 +1016,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="294" parent="1" name="chess">
       <Current>1</Current>
-      <IntrospectionTimestamp>2024-03-27.12:39:42</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-03-28.00:39:42</LocalIntrospectionTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-03-28.00:39:42</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="295" parent="1" name="chess2">
-      <IntrospectionTimestamp>2024-03-25.11:21:14</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2024-03-25.23:21:14</LocalIntrospectionTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-03-25.23:21:14</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="296" parent="1" name="mysql.infoschema">

@@ -16,7 +16,7 @@ public class ConnectionManager {
     if (connections.get(gameID) == null){
       // if key not initialized
       ArrayList<Connection> connectionArrayList = new ArrayList<>();
-      connectionArrayList.add(connection)
+      connectionArrayList.add(connection);
       connections.put(gameID, connectionArrayList);
     } else {
       ArrayList<Connection> connectionArrayList = connections.get(gameID);
@@ -25,7 +25,7 @@ public class ConnectionManager {
     }
   }
 
-  public void remove(int gameID, String authToken){
+  public void remove(int gameID){
     connections.remove(gameID);
   }
 
@@ -34,10 +34,11 @@ public class ConnectionManager {
       for (var c : connectionList){
         if(c.session.isOpen()){
           if (!c.authToken.equals(auth)) {
-            c.send(notification.getMessage());9-
+            c.send(notification.getMessage());
           }
         }
       }
     }
   }
+
 }

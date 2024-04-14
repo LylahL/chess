@@ -23,3 +23,9 @@ d
 4src/main/java/server/websocket/WebSocketHandler.java,a\1\a1e176380e02ea0e2874c86a0c686d03b73c8282
 ^
 .src/main/java/server/websocket/Connection.java,3\7\37defc871c22d622968a9058e47ef697c0948f12
+P
+ src/main/java/server/Server.java,4\c\4c405aa622276106ee9ef8c3a2fbee4e76dcafbb
+]
+-src/main/java/dataAccess/DatabaseManager.java,c\a\ca8e537e22592e882e6b882e3dc07228f03d6960
+q
+Asrc/main/java/webSocketMessages/userCommands/UserGameCommand.java,4\f\4f548dc39a7ea41fc4f6972cc3aff66055548887

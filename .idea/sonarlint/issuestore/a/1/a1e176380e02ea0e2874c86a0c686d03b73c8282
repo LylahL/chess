@@ -1,3 +1,25 @@
 
-X
-java:S2094"BRemove this empty class, write its code or make it an "interface".(Ê ¦›
+Ä
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Â²óí8öææïí1J$e79773ff-c6ec-4143-93ea-6abacb834fd7
+Ä
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ş¹šæ8÷ææïí1J$dd045478-cf6f-44db-ad3b-dcc72fdec92a
+É
+java:S1186!"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ó™€¸ùÿÿÿÿ8÷ææïí1J$3346b738-01cf-4c14-b866-0646a8227508
+É
+java:S1186$"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï°çÚÿÿÿÿÿ8÷ææïí1J$a1de2d26-295b-4985-93cc-22edb6ff5bff
+É
+java:S1186'"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(›àËÿÿÿÿÿ8÷ææïí1J$065da481-7dcc-443f-aeef-802558d9f9c6
+~
+java:S1172";Remove these unused method parameters "message", "session".(Â²óí8ıææïí1J$00d5d7fc-0ee5-48e4-8c6f-5017e8bed7f1
+~
+java:S1172";Remove these unused method parameters "message", "session".(Ş¹šæ8şææïí1J$fdf2eeac-a68a-46f9-87ef-ac4cc4e6617e
+ƒ
+java:S1172!";Remove these unused method parameters "message", "session".(ó™€¸ùÿÿÿÿ8şææïí1J$6e1cb42f-469e-4b4d-9e26-5e0997ab9062
+ƒ
+java:S1172$";Remove these unused method parameters "message", "session".(ï°çÚÿÿÿÿÿ8şææïí1J$04f503f7-6023-46f3-b02e-75cb4a45ac12
+ƒ
+java:S1172'";Remove these unused method parameters "message", "session".(›àËÿÿÿÿÿ8ÿææïí1J$10a59f35-fab3-4660-9dad-479a04569443
+w
+java:S1068"5Remove this unused "connectionManager" private field.(æÃı08çæïí1J$b7667d61-ae86-4c5f-af37-178f659ee17d
+w
+java:S1144*"/Remove this unused private "convertCmd" method.(¿ˆè¥ÿÿÿÿÿ8‚çæïí1J$f0dd2f8a-8d0c-4b88-a3a0-fd5379934ca2

@@ -7,6 +7,7 @@ import model.AuthData;
 import model.GameData;
 import model.JoinGameRequest;
 import model.UserData;
+import server.websocket.WebSocketHandler;
 import service.ClearApplication;
 import service.GameService;
 import service.UserService;
@@ -27,6 +28,8 @@ public class Server {
     private UserService userService;
     private AuthDAOInterface authSQL;
 
+    private WebSocketHandler webSocketHandler;
+
     public Server() {
         try {
             DatabaseManager.configureDatabase();
@@ -43,6 +46,7 @@ public class Server {
         userService = new UserService(authSQL, user);
         clearApplication = new ClearApplication(authSQL, game, user);
         gameService = new GameService(authSQL, game, user);
+        webSocketHandler = new WebSocketHandler();
     }
 
 

@@ -1,5 +1,6 @@
 package dataAccess;
 
+import chess.ChessGame;
 import exception.ResponseException;
 import model.GameData;
 
@@ -13,4 +14,6 @@ public interface GameDAOInterface {
   HashSet<GameData> listAllGame() throws DataAccessException;
 
   boolean checkExist(int gameId);
+
+  void makeMove(int gameID, ChessGame game) throws ResponseException, DataAccessException;
 }

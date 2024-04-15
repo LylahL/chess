@@ -30,13 +30,14 @@ public class ConnectionManager {
     connections.remove(gameID);
   }
 
-  public void sendMessage(String auth, Object object, int gameID) throws IOException {
+  public void sendMessage(String auth, Object object) throws IOException {
     // sendMessage to one specific player in one game
-    for(var c : connections.get(gameID)){
-      // find that game
-      if (c.session.isOpen() && c.authToken.equals(auth)){
-        String message = new Gson().toJson(object);
-        c.send(message);
+    for(var connectionList : connections.values()){
+      for(var c: connectionList){
+        if (c.session.isOpen() && c.authToken.equals(auth)){
+          String message = new Gson().toJson(object);
+          c.send(message);
+      }
       }
     }
   }

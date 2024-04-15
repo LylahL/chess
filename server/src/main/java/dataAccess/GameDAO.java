@@ -1,5 +1,6 @@
 package dataAccess;
 
+import chess.ChessGame;
 import model.GameData;
 
 import java.util.HashSet;
@@ -15,6 +16,11 @@ public class GameDAO implements GameDAOInterface{
     @Override
     public boolean checkExist(int gameId) {
         return this.getGameByGameId(gameId) != null;
+    }
+
+    @Override
+    public void makeMove(int gameID, ChessGame game) {
+        return;
     }
 
     public GameData getGameByGameId(int gameId) {

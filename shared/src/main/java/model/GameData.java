@@ -14,6 +14,10 @@ public class GameData {
   private String blackUsername;
   private String gameName;
 
+  public ChessGame getGame() {
+    return game;
+  }
+
   private ChessGame game;
   private static ArrayList<String> observers = new ArrayList<>();
   private static int n=0;

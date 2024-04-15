@@ -1,5 +1,6 @@
 package server.websocket;
 
+import chess.ChessGame;
 import com.google.gson.Gson;
 import dataAccess.AuthDAOInterface;
 import dataAccess.AuthSQL;
@@ -37,22 +38,60 @@ public class WebSocketHandler {
     }
   }
 
+  private boolean authTokenCheck(String authString) throws IOException {
+    if (auth.getAuthDataByAuthString(authString)==null){
+      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Invalid authToken"));
+      return false;
+    }
+    return true;
+  }
+
+  private boolean gameIDCheck(int gameID, String authString) throws IOException {
+    if (game.getGameByGameId(gameID)==null){
+      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Invalid gameID"));
+      return false;
+    }
+    return true;
+  }
+
+  private boolean gameStillGoingCheck(GameData gameData, String authString) throws IOException {
+    if (gameData.getGame().getTeamTurn()==null){
+      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Game is already over"));
+      return false;
+    }
+    return true;
+  }
+
   private void resign(String message, Session session) throws IOException {
     Resign resignCmd = convertCmd(message, Resign.class);
     connectionManager.add(resignCmd.getGameID(), resignCmd.getAuthString(), session);
     int gameID = resignCmd.getGameID();
     String authString =resignCmd.getAuthString();
+    if(!authTokenCheck(authString)){
+      return;
+    }
     AuthData authData = auth.getAuthDataByAuthString(authString);
     String username = authData.getUsername();
+    if(!gameIDCheck(gameID, authString)){
+      return;
+    }
     GameData gameData = game.getGameByGameId(gameID);
     String resignMsg = String.format("Player %s has resigned, sucks to be them \n", username);
-    String errorMsg = String.format("You are not in game %d \n", gameID);
-
+    String errorMsg2 = String.format("You are not in game, or you are in as an observer%d \n", gameID);
     if(!Objects.equals(username, gameData.getWhiteUsername()) &&
             (!Objects.equals(username, gameData.getBlackUsername()))){
       // if player not in that game
-      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, errorMsg), gameID);
+      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, errorMsg2));
+      return;
     }
+    if(!gameStillGoingCheck(gameData, authString)){
+      return;
+    }
+    ChessGame chessGame = gameData.getGame();
+    chessGame.setTeamTurn(null);
+    game.
+
+
 
 
   }

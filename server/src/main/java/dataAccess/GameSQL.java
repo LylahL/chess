@@ -80,7 +80,6 @@ public class GameSQL implements GameDAOInterface{
           while (rs.next()){
             GameData gameData = readGameData(rs);
             gameList.add(gameData);
-//         // gameList.add(new Gson().fromJson(rs.getString("game"), GameData.class));
           }
           return gameList;
         } catch (SQLException e) {
@@ -105,6 +104,13 @@ public class GameSQL implements GameDAOInterface{
     } catch (SQLException | DataAccessException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override
+  public void makeMove(int gameID, ChessGame game) throws ResponseException, DataAccessException {
+    var statement = "UPDATE gamedata SET game=? WHERE gameID=?";
+    DatabaseManager.executeUpdate(statement, new Gson().toJson(game), gameID);
+
   }
 
   private GameData readGameData(ResultSet rs) throws SQLException {

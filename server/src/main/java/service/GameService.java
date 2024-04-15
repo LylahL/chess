@@ -1,5 +1,8 @@
 package service;
 
+import chess.ChessGame;
+import chess.ChessMove;
+import chess.InvalidMoveException;
 import dataAccess.*;
 import exception.ResponseException;
 import model.AuthData;
@@ -60,5 +63,18 @@ public class GameService {
       // no game found
       throw new ResponseException(400, "Error: game is not found in system");
     }
+  }
+
+  public void makeMove(int gameId, ChessMove chessMove, AuthData authData) throws ResponseException, InvalidMoveException, DataAccessException {
+    GameData gameData = game.getGameByGameId(gameId);
+    ChessGame chessGame = gameData.getGame();
+    if (chessGame == null){
+      throw new ResponseException(400, "Error: Invalid gameID");
+    }
+    if (!auth.checkExist(authData)){
+      throw new ResponseException(401, "Error: User didn't log in");
+    }
+    chessGame.makeMove(chessMove);
+    game.makeMove(gameId, chessGame);
   }
 }

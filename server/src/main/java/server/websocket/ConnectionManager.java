@@ -1,5 +1,6 @@
 package server.websocket;
 
+import com.google.gson.Gson;
 import org.eclipse.jetty.websocket.api.Session;
 import webSocketMessages.serverMessages.Notification;
 
@@ -29,14 +30,33 @@ public class ConnectionManager {
     connections.remove(gameID);
   }
 
+  public void sendMessage(String auth, Object object, int gameID) throws IOException {
+    // sendMessage to one specific player in one game
+    for(var c : connections.get(gameID)){
+      // find that game
+      if (c.session.isOpen() && c.authToken.equals(auth)){
+        String message = new Gson().toJson(object);
+        c.send(message);
+      }
+    }
+  }
+
+  public void sendMessageToOthers(String auth, Object object, int gameID) throws IOException {
+    // sendMessage to everyone besides the root client
+    for(var c : connections.get(gameID)){
+      // find that game
+      if (!c.session.isOpen() && c.authToken.equals(auth)){
+        String message = new Gson().toJson(object);
+        c.send(message);
+      }
+    }
+  }
+
   public void broadcast(String auth, Notification notification, int gameID) throws IOException {
-    for(var connectionList : connections.values()){
-      for (var c : connectionList){
+    // send message to everyone within one game
+    for(var c : connections.get(gameID)){
         if(c.session.isOpen()){
-          if (!c.authToken.equals(auth)) {
             c.send(notification.getMessage());
-          }
-        }
       }
     }
   }

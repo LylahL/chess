@@ -1,24 +1,13 @@
 
-€
-java:S4973„"<Strings and Boxed types should be compared using "equals()".(ä…¨°8ÇŒ¢Çî1J$d2326ec5-5657-41ed-bd10-e2e2faefd5da
-…
-java:S4973†"<Strings and Boxed types should be compared using "equals()".(Ñ¤Ô“øÿÿÿÿ8ÈŒ¢Çî1J$437a3d3f-439b-4004-81e2-15eb65fc1f77
 »
-java:S1130D"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍşÿÿÿÿ8è¢Çî1J$0d601f47-d181-427f-9dea-b3570d38c453
+java:S1130D"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍşÿÿÿÿ8­´Èî1J$d0ad4997-bd24-46a1-9d57-d203f3fdc805
 v
-java:S1172D".Remove this unused method parameter "session".(¨™ÉÍşÿÿÿÿ8è¢Çî1J$01113b4e-63bf-42c8-bba1-447fbfeb72bd
-~	java:S125F"<This block of commented-out lines of code should be removed.(¤¦Æ¾8é¢Çî1J$61eaf038-0920-4d8f-8df1-eb7c5d1a3a9b
+java:S1172D".Remove this unused method parameter "session".(¨™ÉÍşÿÿÿÿ8®´Èî1J$e13ddb58-c3ad-4cd0-9f68-8a9474aee403
+~	java:S125F"<This block of commented-out lines of code should be removed.(¤¦Æ¾8¯´Èî1J$b2725550-00f7-4350-9a77-a75ec02d793c
 ”
-java:S3457_"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8ì¢Çî1J$57039f04-522e-40c7-a27e-d24e1ad25880
-ƒ
-java:S1854k"@Remove this useless assignment to local variable "notification".(ùÅäÆ8í¢Çî1J$b1a241eb-389b-413e-8709-0d12007b73c9
-Š
-java:S1854j"BRemove this useless assignment to local variable "successMessage".(öã™øûÿÿÿÿ8í¢Çî1J$a0a2b815-bea8-4cd0-afd1-4117734d21e6
+java:S3457_"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8±´Èî1J$8fdf87bf-7125-4463-b887-d5954ed873c1
 q
-java:S1172d".Remove this unused method parameter "session".(Ş¹šæ8í¢Çî1J$f6a0292c-8aff-4b41-a2fc-dd39a3d4c8db
-{
-java:S1481j"3Remove this unused "successMessage" local variable.(öã™øûÿÿÿÿ8î¢Çî1J$2ea82c76-429d-42d8-aa6c-aaa816883754
-t
-java:S1481k"1Remove this unused "notification" local variable.(ùÅäÆ8î¢Çî1J$4b50f17c-d471-41d0-9d49-363de4e0e3d1
+java:S1172d".Remove this unused method parameter "session".(é®ü×8²´Èî1J$14e087b0-3f31-4333-9d1f-5bc7a3653b98
 q
-java:S1172p".Remove this unused method parameter "session".(¹’™¬8ï¢Çî1J$f518b70a-dba5-4aab-b6de-8496d2d5afd2
+java:S1172s".Remove this unused method parameter "session".(¹’™¬8¶´Èî1J$dc2f2735-3f83-48c4-b4a6-889a35585409
+„	java:S125‡"<This block of commented-out lines of code should be removed.(Õš¯ãøÿÿÿÿ8¸´Èî1J$c1b3191a-9e97-4e4e-9815-3ff273838161

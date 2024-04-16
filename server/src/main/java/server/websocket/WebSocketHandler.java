@@ -97,14 +97,17 @@ public class WebSocketHandler {
     connectionManager.broadcast(authString, notification, gameID);
   }
 
-  private void leave(String message, Session session) {
+  private void leave(String message, Session session) throws IOException {
 // remove connection for leave
     Leave leaveCmd = convertCmd(message, Leave.class);
     int gameID = leaveCmd.getGameID();
     String authString = leaveCmd.getAuthString();
     String username = auth.getAuthDataByAuthString(authString).getUsername();
-    String successMessage = String.format("Player %s has left the game", username);
-    Notification notification = new Notification(message);
+    String successMessage = String.format("Player %s has left the game, now they are a observer", username);
+    ChessGame chessGame = game.getGameByGameId(gameID).getGame();
+    Notification notification = new Notification(successMessage);
+    connectionManager.sendMessage(authString, new LoadGame(chessGame));
+    connectionManager.sendMessageToOthers(authString, notification, gameID);
     connectionManager.removeSession(gameID, authString);
 
   }
@@ -129,10 +132,24 @@ public class WebSocketHandler {
       return;
     }
     // whoever moves first sets the first turn
-    if(username == gameData.getWhiteUsername()&&chessGame.getTeamTurn() == null){
-      gameService.setFirstTurn(gameID, ChessGame.TeamColor.WHITE);
-    }else if (username == gameData.getBlackUsername()&&chessGame.getTeamTurn() == null){
-      gameService.setFirstTurn(gameID, ChessGame.TeamColor.BLACK);
+//    if(Objects.equals(username, gameData.getWhiteUsername()) &&chessGame.getTeamTurn() == null){
+//      gameService.setFirstTurn(gameID, ChessGame.TeamColor.WHITE);
+//    }else if (Objects.equals(username, gameData.getBlackUsername()) &&chessGame.getTeamTurn() == null){
+//      gameService.setFirstTurn(gameID, ChessGame.TeamColor.BLACK);
+//    }
+    ChessGame updatedChessgame = game.getGameByGameId(gameID).getGame();
+    // check turn
+    if(Objects.equals(username, gameData.getWhiteUsername())){
+      // white is playing
+      if(updatedChessgame.getTeamTurn() != ChessGame.TeamColor.WHITE){
+        connectionManager.sendMessage(authString, new ErrorMsg("Not your turn"));
+        return;
+      }
+    }
+    else if (Objects.equals(username, gameData.getBlackUsername()) && (updatedChessgame.getTeamTurn() != ChessGame.TeamColor.BLACK)){
+        connectionManager.sendMessage(authString, new ErrorMsg("Not your turn"));
+        return;
+
     }
     ChessMove chessMove = makeMoveCmd.getMove();
     try {

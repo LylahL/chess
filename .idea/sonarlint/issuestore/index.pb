@@ -37,3 +37,9 @@ Q
 !src/main/java/model/GameData.java,6\7\67153312f42cfc25e918e7241d99ff3d32f0ce01
 U
 %src/main/java/dataAccess/GameSQL.java,b\0\b082cb311016c31432cd6007880456b7f918dd6f
+R
+"src/main/java/chess/ChessGame.java,7\3\73bf4fdc57c71c6f70f600b9fea515a646b27eef
+j
+:src/main/java/webSocketMessages/userCommands/MakeMove.java,5\4\546f3ec1417c7041ab8fe840af1c666bde270617
+^
+.src/main/java/dataAccess/GameDAOInterface.java,2\a\2afaba3e3882fc5294bf96ea847f04e8c64ca167

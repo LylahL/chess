@@ -111,28 +111,26 @@ public class WebSocketHandler {
   }
 
   private void makeMove(String message, Session session) throws ResponseException, DataAccessException, IOException, InvalidMoveException {
-    try{
-      MakeMove makeMoveCmd = convertCmd(message, MakeMove.class);
-      String authString = makeMoveCmd.getAuthString();
-      AuthData authData = auth.getAuthDataByAuthString(authString);
-      String username = authData.getUsername();
-      int gameID = makeMoveCmd.getGameID();
-      GameData gameData = game.getGameByGameId(gameID);
-      ChessGame chessGame = gameData.getGame();
-      ChessMove chessMove = makeMoveCmd.getChessMove();
+    MakeMove makeMoveCmd = convertCmd(message, MakeMove.class);
+    String authString = makeMoveCmd.getAuthString();
+    AuthData authData = auth.getAuthDataByAuthString(authString);
+    String username = authData.getUsername();
+    int gameID = makeMoveCmd.getGameID();
+    GameData gameData = game.getGameByGameId(gameID);
+    ChessMove chessMove = makeMoveCmd.getMove();
+    try {
       gameService.makeMove(gameID, chessMove, authData);
-      ChessGame gameAfterMove = game.getGameByGameId(gameID).getGame();
-      String successMsg = String.format("Player %s has made a move from %s to %s", username, chessMove.getStartPosition(), chessMove.getEndPosition());
-      Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, successMsg);
-      LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, gameAfterMove);
-      connectionManager.broadcast(authString, notification, gameID);
-      connectionManager.broadcast(authString, loadGame, gameID);
-    }catch (InvalidMoveException e){
-      System.out.println(e.getMessage());
-      // construct an error and send through ws
-    }catch (DataAccessException e) {
-
+    } catch (Exception e){
+      connectionManager.sendMessage(authString, new ErrorMsg(e.getMessage()));
+      return;
     }
+
+    ChessGame gameAfterMove = game.getGameByGameId(gameID).getGame();
+    String successMsg = String.format("Player %s has made a move from %s to %s", username, chessMove.getStartPosition(), chessMove.getEndPosition());
+    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, successMsg);
+    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, gameAfterMove);
+    connectionManager.sendMessageToOthers(authString, notification, gameID);
+    connectionManager.broadcast(authString, loadGame, gameID);
 
   }
 

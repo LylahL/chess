@@ -1,24 +1,24 @@
 
-E
-java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–
-E
-java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–
-]
-java:S11922"GDefine a constant instead of duplicating this literal "signin" 3 times.(—Ç¨È
-d
-java:S11923"IDefine a constant instead of duplicating this literal "register" 3 times.(œïü‰ýÿÿÿÿ
-Q	java:S125!"<This block of commented-out lines of code should be removed.(áËìÀ
-@	java:S106#"+Replace this use of System.out by a logger.(‚´Ýä
-<	java:S1311""Add a default case to this switch.(Ï—íàýÿÿÿÿ
-h	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£½‰úÿÿÿÿ
-@	java:S106="+Replace this use of System.out by a logger.(·Á½Ù
-?	java:S106B"+Replace this use of System.out by a logger.(Ì¤Ÿ:
-E	java:S106I"+Replace this use of System.out by a logger.(ÅŠ¤Ùøÿÿÿÿ
-R
-java:S1117S"<Rename "username" which hides the field declared at line 25.(¼Ñœ’
-@	java:S106\"+Replace this use of System.out by a logger.(ÕÇª¢
-E	java:S106]"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿ
-R
-java:S1117e"<Rename "username" which hides the field declared at line 25.(¼Ñœ’
-@	java:S106l"+Replace this use of System.out by a logger.(Ï¦Þó
-E	java:S106m"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿ
+k
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–J$98ff5978-7bdd-41de-a9bf-936ebc36595a
+k
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–J$2cae976a-d050-47bb-80e3-d13777329e60
+ƒ
+java:S11922"GDefine a constant instead of duplicating this literal "signin" 3 times.(—Ç¨ÈJ$eb4b4e60-b463-4635-9ecd-d43f5989406b
+Š
+java:S11923"IDefine a constant instead of duplicating this literal "register" 3 times.(œïü‰ýÿÿÿÿJ$e0e06cb0-b00e-4aaf-bf84-390e1cc27075
+w	java:S125!"<This block of commented-out lines of code should be removed.(áËìÀJ$e7fa3325-64f3-4ee4-a6af-370083e9be5c
+f	java:S106#"+Replace this use of System.out by a logger.(‚´ÝäJ$0d76288f-901c-481a-9b14-79f2eb221252
+b	java:S1311""Add a default case to this switch.(Ï—íàýÿÿÿÿJ$e9818128-f8b6-48ac-a04b-1a8f199ca600
+Ž	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£½‰úÿÿÿÿJ$6992594b-5065-4182-829a-ff803f50c50c
+f	java:S106="+Replace this use of System.out by a logger.(·Á½ÙJ$2992105b-8193-45a5-9af7-581818aaed87
+e	java:S106B"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$2f71e473-8a7a-4057-b606-78da9e134ff8
+k	java:S106I"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$67a69f2f-580a-4c7d-9d3b-b63c70dd836c
+x
+java:S1117S"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$a4a4b4c9-6124-442b-abe9-69a7756faa3b
+f	java:S106\"+Replace this use of System.out by a logger.(ÕÇª¢J$344ea590-a527-4d44-9532-10a75096e0f3
+k	java:S106]"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$d391be31-66b4-48db-8571-525a61d1b8ed
+x
+java:S1117e"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$0828e471-145c-4c3b-9e16-7b102ec92117
+f	java:S106l"+Replace this use of System.out by a logger.(Ï¦ÞóJ$0eb8f17f-a5d6-40b1-89c3-e1b2090948d1
+k	java:S106m"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$2668281d-0895-4a41-a954-78111018f367

@@ -1,0 +1,19 @@
+
+`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112:"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112<"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112?"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112V"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+P
+java:S11417"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+K
+java:S1141O"5Extract this nested try block into a separate method.(Öß¥
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(šäåó
+R
+java:S1854."<Remove this useless assignment to local variable "gameName".(‰Ñ¥•
+C
+java:S1481."-Remove this unused "gameName" local variable.(‰Ñ¥•
+_
+java:S2147;"DCombine this catch with the one at line 57, which has the same body.(Ï¤¦úÿÿÿÿ

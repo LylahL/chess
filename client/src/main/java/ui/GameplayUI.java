@@ -1,9 +1,6 @@
 package ui;
 
-import chess.ChessBoard;
-import chess.ChessGame;
-import chess.ChessPiece;
-import chess.ChessPosition;
+import chess.*;
 import exception.ResponseException;
 import model.AuthData;
 import server.ServerMessageHandler;
@@ -18,6 +15,7 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static java.lang.Integer.parseInt;
 import static ui.EscapeSequences.*;
 // TODO: add more cmds like make move
 
@@ -77,6 +75,7 @@ public class GameplayUI {
   }
 
   private void redraw() {
+    return;
   }
 
   private void VaidInputCheck(String cmd, String[] params) {
@@ -109,10 +108,27 @@ public class GameplayUI {
       }
       ChessPosition startPosition = convertPosition(start);
       ChessPosition endPosition = convertPosition(end);
+      ChessMove chessMove = new ChessMove(startPosition, endPosition, null);
+      webSocketFacade.makeMove(auth, gameID, chessMove);
     }
   }
 
   private ChessPosition convertPosition(String position) {
+    int column=0;
+    int row;
+    String[] coordinates=position.split("");
+    row=parseInt(coordinates[1]);
+    switch (coordinates[0].toLowerCase()) {
+      case "a" -> column=1;
+      case "b" -> column=2;
+      case "c" -> column=3;
+      case "d" -> column=4;
+      case "e" -> column=5;
+      case "f" -> column=6;
+      case "g" -> column=7;
+      case "h" -> column=8;
+    }
+    return new ChessPosition(column, row);
   }
 
   private boolean isValidMoveInput(String position) {
@@ -156,8 +172,8 @@ public class GameplayUI {
 
   public static void drawBoardOnce(ChessBoard board, ChessGame.TeamColor teamColor) {
     PrintStream out=new PrintStream(System.out, true, StandardCharsets.UTF_8);
-    printIndex(out, teamColor);
     System.out.println();
+    printIndex(out, teamColor);
     if (teamColor == ChessGame.TeamColor.WHITE) {
       for (int i=1; i <= 8; i++) {
         out.print(BackgroundColor);

@@ -6,6 +6,8 @@ import webSocketMessages.serverMessages.Notification;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ConnectionManager {
@@ -26,8 +28,19 @@ public class ConnectionManager {
     }
   }
 
-  public void remove(int gameID){
+  public void removeWholeGame(int gameID){
     connections.remove(gameID);
+  }
+
+  public void removeSession(int gameID, String authToken) {
+    ArrayList<Connection> tmp = connections.get(gameID);
+    Iterator<Connection> iterator = tmp.iterator();
+    while (iterator.hasNext()) {
+      Connection conn = iterator.next();
+      if (Objects.equals(conn.authToken, authToken)) {
+        iterator.remove();
+      }
+    }
   }
 
   public void sendMessage(String auth, Object object) throws IOException {
@@ -53,11 +66,11 @@ public class ConnectionManager {
     }
   }
 
-  public void broadcast(String auth, Notification notification, int gameID) throws IOException {
+  public void broadcast(String auth, Object object, int gameID) throws IOException {
     // send message to everyone within one game
     for(var c : connections.get(gameID)){
         if(c.session.isOpen()){
-          String message = new Gson().toJson(notification);
+          String message = new Gson().toJson(object);
           c.send(message);
       }
     }

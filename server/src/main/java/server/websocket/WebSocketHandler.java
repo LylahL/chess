@@ -1,6 +1,7 @@
 package server.websocket;
 
 import chess.ChessGame;
+import chess.ChessMove;
 import chess.InvalidMoveException;
 import com.google.gson.Gson;
 import dataAccess.*;
@@ -11,14 +12,11 @@ import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import service.GameService;
-import webSocketMessages.serverMessages.Error;
+import webSocketMessages.serverMessages.ErrorMsg;
 import webSocketMessages.serverMessages.LoadGame;
 import webSocketMessages.serverMessages.Notification;
 import webSocketMessages.serverMessages.ServerMessage;
-import webSocketMessages.userCommands.JoinObserver;
-import webSocketMessages.userCommands.JoinPlayer;
-import webSocketMessages.userCommands.Resign;
-import webSocketMessages.userCommands.UserGameCommand;
+import webSocketMessages.userCommands.*;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -46,7 +44,7 @@ public class WebSocketHandler {
 
   private boolean authTokenCheck(String authString) throws IOException {
     if (auth.getAuthDataByAuthString(authString)==null){
-      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Invalid authToken"));
+      connectionManager.sendMessage(authString, new ErrorMsg("Invalid authToken"));
       return false;
     }
     return true;
@@ -54,7 +52,7 @@ public class WebSocketHandler {
 
   private boolean gameIDCheck(int gameID, String authString) throws IOException {
     if (game.getGameByGameId(gameID)==null){
-      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Invalid gameID"));
+      connectionManager.sendMessage(authString, new ErrorMsg("Invalid gameID"));
       return false;
     }
     return true;
@@ -62,7 +60,7 @@ public class WebSocketHandler {
 
   private boolean gameStillGoingCheck(GameData gameData, String authString) throws IOException {
     if (gameData.getGame().getTeamTurn()==null){
-      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, "Game is already over"));
+      connectionManager.sendMessage(authString, new ErrorMsg("Game is already over"));
       return false;
     }
     return true;
@@ -82,11 +80,11 @@ public class WebSocketHandler {
       return;
     }
     GameData gameData = game.getGameByGameId(gameID);
-    String errorMsg2 = String.format("You are not in game, or you are in as an observer%d", gameID);
+    String errorMsg2 = String.format("Error: You are not in game%d, or you are in as an observer", gameID);
     if(!Objects.equals(username, gameData.getWhiteUsername()) &&
             (!Objects.equals(username, gameData.getBlackUsername()))){
       // if player not in that game
-      connectionManager.sendMessage(authString, new Error(ServerMessage.ServerMessageType.ERROR, errorMsg2));
+      connectionManager.sendMessage(authString, new ErrorMsg(errorMsg2));
       return;
     }
     if(!gameStillGoingCheck(gameData, authString)){
@@ -102,10 +100,40 @@ public class WebSocketHandler {
 
   private void leave(String message, Session session) {
 // remove connection for leave
+    Leave leaveCmd = convertCmd(message, Leave.class);
+    int gameID = leaveCmd.getGameID();
+    String authString = leaveCmd.getAuthString();
+    String username = auth.getAuthDataByAuthString(authString).getUsername();
+    String successMessage = String.format("Player %s has left the game", username);
+    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, message);
+    connectionManager.removeSession(gameID, authString);
 
   }
 
-  private void makeMove(String message, Session session) {
+  private void makeMove(String message, Session session) throws ResponseException, DataAccessException, IOException, InvalidMoveException {
+    try{
+      MakeMove makeMoveCmd = convertCmd(message, MakeMove.class);
+      String authString = makeMoveCmd.getAuthString();
+      AuthData authData = auth.getAuthDataByAuthString(authString);
+      String username = authData.getUsername();
+      int gameID = makeMoveCmd.getGameID();
+      GameData gameData = game.getGameByGameId(gameID);
+      ChessGame chessGame = gameData.getGame();
+      ChessMove chessMove = makeMoveCmd.getChessMove();
+      gameService.makeMove(gameID, chessMove, authData);
+      ChessGame gameAfterMove = game.getGameByGameId(gameID).getGame();
+      String successMsg = String.format("Player %s has made a move from %s to %s", username, chessMove.getStartPosition(), chessMove.getEndPosition());
+      Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, successMsg);
+      LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, gameAfterMove);
+      connectionManager.broadcast(authString, notification, gameID);
+      connectionManager.broadcast(authString, loadGame, gameID);
+    }catch (InvalidMoveException e){
+      System.out.println(e.getMessage());
+      // construct an error and send through ws
+    }catch (DataAccessException e) {
+
+    }
+
   }
 
   private void joinPlayer(String message, Session session) throws IOException {

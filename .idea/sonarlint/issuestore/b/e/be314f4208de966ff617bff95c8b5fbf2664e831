@@ -1,5 +1,7 @@
 
-½
-java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(ÊÁ±şÿÿÿÿJ$cafe7aed-516e-43cc-97af-4a88c3b605eb
-g
-java:S11728"+Remove this unused method parameter "auth".(€ë¬J$732b01d2-bfd0-439d-8117-3f93b0afacb1
+Ä
+java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(ÊÁ±şÿÿÿÿ8Ë²ÈÀî1J$671cc2e5-ef74-4895-8b78-01e85047d869
+n
+java:S1172E"+Remove this unused method parameter "auth".(Ùß€·8¡³ÈÀî1J$dc1e3747-3f0e-4018-83ec-11ac174d2151
+l
+java:S1128"JRemove this unused import 'webSocketMessages.serverMessages.Notification'.(›Û…úÿÿÿÿ8ÜçÈÀî1

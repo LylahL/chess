@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import ui.GameplayUI;
+import webSocketMessages.serverMessages.ErrorMsg;
 import webSocketMessages.serverMessages.LoadGame;
 import webSocketMessages.serverMessages.Notification;
 import webSocketMessages.serverMessages.ServerMessage;
@@ -17,7 +18,7 @@ public class ServerMessageHandler {
       LoadGame loadGame=new Gson().fromJson(message, LoadGame.class);
       GameplayUI.drawBoard(loadGame.getGame());
     } else if (serverMessage.getServerMessageType() == ServerMessage.ServerMessageType.ERROR) {
-      Error error=new Gson().fromJson(message, Error.class);
+      ErrorMsg error=new Gson().fromJson(message, ErrorMsg.class);
       System.out.println(error.getMessage());
     }
   }

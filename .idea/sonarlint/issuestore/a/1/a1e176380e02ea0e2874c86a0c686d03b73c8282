@@ -1,16 +1,26 @@
 
-Â
-java:S1186l"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ó™€¸ùÿÿÿÿJ$561955e4-f308-4473-bc79-5b08f40392b8
-´
-java:S1130G"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿJ$9e480473-381d-4a69-826b-964446ed5cd2
-o
-java:S1172G".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿJ$4e04c00d-aa59-4c80-81b2-c534646512e3
-w	java:S125I"<This block of commented-out lines of code should be removed.(¤¦Æ¾J$e464431e-25bd-45ce-824e-772c35efdeef
-
-java:S3457b"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡J$4e29fb41-3f47-4620-ace2-389d71d26c9b
-w
-java:S1172g";Remove these unused method parameters "message", "session".(Þ¹šæJ$8dedae9e-8d38-4d21-a6bf-8d2ec55466ef
-|
-java:S1172l";Remove these unused method parameters "message", "session".(ó™€¸ùÿÿÿÿJ$4dcb4d8b-5b0d-4a08-89bd-f4ddc2e1c8f1
-p
-java:S1068 "/Remove this unused "gameService" private field.(ÅÑÑºúÿÿÿÿJ$f06a159f-f767-4135-901b-4214f111c27d
+»
+java:S1130E"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿ8–ÎÆÂî1J$bf484f0a-5ae1-49fa-a1b3-4a0d2dbbea59
+v
+java:S1172E".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿ8³Ô£Áî1J$66d198af-0a51-4621-a22b-58015abdaa20
+~	java:S125G"<This block of commented-out lines of code should be removed.(¤¦Æ¾8µÔ£Áî1J$8bc9613a-f272-4c89-8425-a065c4d630f1
+”
+java:S3457`"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8¹Ô£Áî1J$905ea86a-b9ad-4b7e-88dc-a99d8900e32e
+ƒ
+java:S1854l"@Remove this useless assignment to local variable "notification".(¦º¨8ºÔ£Áî1J$f15bad2e-0973-4566-a669-a0bf6e8f6f7a
+Š
+java:S1854k"BRemove this useless assignment to local variable "successMessage".(öã™øûÿÿÿÿ8ºÔ£Áî1J$5eac0632-3106-4090-94c2-3af38f1e8f08
+q
+java:S1172e".Remove this unused method parameter "session".(Þ¹šæ8»Ô£Áî1J$46518c82-e0bc-4283-a76e-e066b1ed563d
+{
+java:S1481k"3Remove this unused "successMessage" local variable.(öã™øûÿÿÿÿ8½Ô£Áî1J$f4df9f67-53df-497d-9952-579ad30e3b84
+t
+java:S1481l"1Remove this unused "notification" local variable.(¦º¨8½Ô£Áî1J$a86eb8c2-5069-4ce9-86db-b44007bc0448
+€
+java:S1854y"=Remove this useless assignment to local variable "chessGame".(ØÚ†8¾Ô£Áî1J$f58874db-a4e6-4826-86c0-1689adb212d0
+q
+java:S1172q".Remove this unused method parameter "session".(¹’™¬8¿Ô£Áî1J$61f27f53-130f-495d-abc7-c641048b9617
+q
+java:S1481y".Remove this unused "chessGame" local variable.(ØÚ†8ÁÔ£Áî1J$336a1c1d-85ce-42e7-94bf-cbceb8816876
+s	java:S106ƒ"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ8€¥Áî1J$630b79cb-9b95-4eba-a5f6-bcd77afcd71e
+q	java:S108…")Either remove or fill this block of code.(Ï¤¦úÿÿÿÿ8ââãÁî1J$9d12ce69-5f57-404b-8103-ef26405013bb

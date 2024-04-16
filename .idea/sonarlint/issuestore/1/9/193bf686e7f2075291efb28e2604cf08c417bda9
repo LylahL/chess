@@ -1,5 +1,6 @@
 
 u
-java:S1118	":Add a private constructor to hide the implicit public one.(ÿ¹ J$c1261ba3-fcaf-4259-ab14-f25fd6a87689
-k	java:S106"+Replace this use of System.out by a logger.(‡¢Š¼ùÿÿÿÿJ$c4f825a4-2604-4c15-9e76-9843235f00a8
-f	java:S106"+Replace this use of System.out by a logger.(ÉÐëšJ$7e0a1e4b-319f-4f4f-8898-54f1b4211cdc
+java:S1118
+":Add a private constructor to hide the implicit public one.(ÿ¹ J$c27716b1-d126-4932-937d-fcf665bb3ad5
+k	java:S106"+Replace this use of System.out by a logger.(‡¢Š¼ùÿÿÿÿJ$07118fc0-f401-47b2-a20b-6ee0ce99601c
+f	java:S106"+Replace this use of System.out by a logger.(ÉÐëšJ$aac19259-0e49-4bb2-9140-a9f364bbe90f

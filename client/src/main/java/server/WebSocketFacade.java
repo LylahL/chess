@@ -6,6 +6,7 @@ import chess.ChessMove;
 import com.google.gson.Gson;
 import exception.ResponseException;
 import model.AuthData;
+import ui.GameplayUI;
 import webSocketMessages.serverMessages.ServerMessage;
 import webSocketMessages.userCommands.*;
 
@@ -35,8 +36,8 @@ public class WebSocketFacade extends Endpoint{
       this.session.addMessageHandler(new MessageHandler.Whole<String>() {
         @Override
         public void onMessage(String message) {
-          ServerMessage notification = new Gson().fromJson(message, ServerMessage.class);
-          notificationHandler.notify(message);
+//          notificationHandler.notify(message);
+          GameplayUI.notify(message);
         }
       });
     } catch (DeploymentException | IOException | URISyntaxException ex) {
@@ -84,7 +85,11 @@ public class WebSocketFacade extends Endpoint{
   public void resign(AuthData auth, int gameID){
     try {
       var cmd = new Resign(auth.getAuthToken(), gameID);
-      this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+      if(this.session.isOpen()){
+        this.session.getBasicRemote().sendText(new Gson().toJson(cmd));
+      }else{
+        System.out.println("You've already resigned, you can't resign twice");
+      }
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

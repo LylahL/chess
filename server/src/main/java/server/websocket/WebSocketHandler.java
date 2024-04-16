@@ -79,7 +79,7 @@ public class WebSocketHandler {
       return;
     }
     GameData gameData = game.getGameByGameId(gameID);
-    String errorMsg2 = String.format("You are not in game, or you are in as an observer%d \n", gameID);
+    String errorMsg2 = String.format("You are not in game, or you are in as an observer%d", gameID);
     if(!Objects.equals(username, gameData.getWhiteUsername()) &&
             (!Objects.equals(username, gameData.getBlackUsername()))){
       // if player not in that game
@@ -98,6 +98,7 @@ public class WebSocketHandler {
   }
 
   private void leave(String message, Session session) {
+
   }
 
   private void makeMove(String message, Session session) {

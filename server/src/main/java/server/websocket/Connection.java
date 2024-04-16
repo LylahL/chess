@@ -17,8 +17,6 @@ public class Connection {
 
   public void send(String message) throws IOException {
     session.getRemote().sendString(message);
-    // sends a string message (message) over a WebSocket connection to the remote endpoint.
-    // by remote, it means either the client or the server
-    // in this case from server to the client
+
   }
 }

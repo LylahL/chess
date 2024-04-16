@@ -15,7 +15,6 @@ import service.GameService;
 import webSocketMessages.serverMessages.ErrorMsg;
 import webSocketMessages.serverMessages.LoadGame;
 import webSocketMessages.serverMessages.Notification;
-import webSocketMessages.serverMessages.ServerMessage;
 import webSocketMessages.userCommands.*;
 
 import java.io.IOException;
@@ -91,10 +90,10 @@ public class WebSocketHandler {
       return;
     }
     ChessGame chessGame = gameData.getGame();
-    chessGame.setTeamTurn(null);
+    chessGame.setGameOver(1);
     game.makeMove(gameID, chessGame);
     String resignMsg = String.format("Player %s has resigned, sucks to be them \n", username);
-    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, resignMsg);
+    Notification notification = new Notification(resignMsg);
     connectionManager.broadcast(authString, notification, gameID);
   }
 
@@ -105,7 +104,7 @@ public class WebSocketHandler {
     String authString = leaveCmd.getAuthString();
     String username = auth.getAuthDataByAuthString(authString).getUsername();
     String successMessage = String.format("Player %s has left the game", username);
-    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, message);
+    Notification notification = new Notification(message);
     connectionManager.removeSession(gameID, authString);
 
   }
@@ -117,6 +116,24 @@ public class WebSocketHandler {
     String username = authData.getUsername();
     int gameID = makeMoveCmd.getGameID();
     GameData gameData = game.getGameByGameId(gameID);
+    ChessGame chessGame = gameData.getGame();
+    //if game is already over
+    if(chessGame.getGameOver() == 1){
+      connectionManager.sendMessage(authString, new ErrorMsg("You can't make move, game is over"));
+    }
+    //if it's an observer
+    if(!Objects.equals(username, gameData.getWhiteUsername()) &&
+            (!Objects.equals(username, gameData.getBlackUsername()))){
+      // if player not in that game
+      connectionManager.sendMessage(authString, new ErrorMsg("You are an Observer that shouldn't be making a move"));
+      return;
+    }
+    // whoever moves first sets the first turn
+    if(username == gameData.getWhiteUsername()&&chessGame.getTeamTurn() == null){
+      gameService.setFirstTurn(gameID, ChessGame.TeamColor.WHITE);
+    }else if (username == gameData.getBlackUsername()&&chessGame.getTeamTurn() == null){
+      gameService.setFirstTurn(gameID, ChessGame.TeamColor.BLACK);
+    }
     ChessMove chessMove = makeMoveCmd.getMove();
     try {
       gameService.makeMove(gameID, chessMove, authData);
@@ -124,13 +141,31 @@ public class WebSocketHandler {
       connectionManager.sendMessage(authString, new ErrorMsg(e.getMessage()));
       return;
     }
-
     ChessGame gameAfterMove = game.getGameByGameId(gameID).getGame();
     String successMsg = String.format("Player %s has made a move from %s to %s", username, chessMove.getStartPosition(), chessMove.getEndPosition());
-    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, successMsg);
-    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, gameAfterMove);
+    Notification notification = new Notification(successMsg);
+    LoadGame loadGame = new LoadGame(gameAfterMove);
     connectionManager.sendMessageToOthers(authString, notification, gameID);
     connectionManager.broadcast(authString, loadGame, gameID);
+    // checkmate stalemate checks
+    if (gameAfterMove.isInCheck(ChessGame.TeamColor.BLACK)){
+      connectionManager.broadcast(authString,new Notification("Team Black is in check"), gameID);
+    }
+    if (gameAfterMove.isInCheck(ChessGame.TeamColor.WHITE)){
+      connectionManager.broadcast(authString,new Notification("Team White is in check"), gameID);
+    }
+    if (gameAfterMove.isInCheckmate(ChessGame.TeamColor.BLACK)){
+      gameAfterMove.setTeamTurn(null);
+      gameAfterMove.setGameOver(1);
+      game.makeMove(gameID, gameAfterMove);
+      connectionManager.broadcast(authString, new Notification("Team White has won"), gameID);
+    }
+    if (gameAfterMove.isInCheckmate(ChessGame.TeamColor.WHITE)){
+      gameAfterMove.setTeamTurn(null);
+      gameAfterMove.setGameOver(1);
+      game.makeMove(gameID, gameAfterMove);
+      connectionManager.broadcast(authString, new Notification("Team Black has won"), gameID);
+    }
 
   }
 
@@ -147,8 +182,8 @@ public class WebSocketHandler {
     GameData gameData = game.getGameByGameId(gameID);
     ChessGame chessGame = gameData.getGame();
     String joinSuccessMsg =  String.format("Player %s has joined game as team %s", username, teamColor.toString());
-    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, joinSuccessMsg);
-    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, chessGame);
+    Notification notification = new Notification(joinSuccessMsg);
+    LoadGame loadGame = new LoadGame(chessGame);
     connectionManager.sendMessageToOthers(authString, notification, gameID);
     connectionManager.sendMessage(authString, loadGame);
 
@@ -164,8 +199,8 @@ public class WebSocketHandler {
     AuthData authData = auth.getAuthDataByAuthString(authString);
     String username = authData.getUsername();
     String joinSuccessMsg = String.format("Player %s has joined as an observer", username);
-    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, joinSuccessMsg);
-    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, chessGame);
+    Notification notification = new Notification(joinSuccessMsg);
+    LoadGame loadGame = new LoadGame(chessGame);
     connectionManager.sendMessageToOthers(authString, notification, gameID);
     connectionManager.sendMessage(authString, loadGame);
   }

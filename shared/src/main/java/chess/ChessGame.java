@@ -10,11 +10,22 @@ import java.util.*;
  */
 public class ChessGame {
     TeamColor teamTurn;
+
+    public int getGameOver() {
+        return GameOver;
+    }
+
+    public void setGameOver(int gameOver) {
+        GameOver=gameOver;
+    }
+
+    int GameOver = 0;
     ChessBoard board = new ChessBoard();
+
 
     public ChessGame() {
         board.resetBoard();
-        teamTurn = TeamColor.WHITE;
+        teamTurn = null;
     }
 
     /**
@@ -29,7 +40,7 @@ public class ChessGame {
      *
      * @param team the team whose turn it is
      */
-    public void setTeamTurn(TeamColor team) {
+    public void  setTeamTurn(TeamColor team) {
         teamTurn = team;
     }
 
@@ -127,6 +138,7 @@ public class ChessGame {
             }
 
     }
+
 
     /**
      * Determines if the given team is in check

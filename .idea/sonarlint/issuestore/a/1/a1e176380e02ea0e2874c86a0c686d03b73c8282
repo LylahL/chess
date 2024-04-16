@@ -1,24 +1,24 @@
 
-»
-java:S1130E"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿ8¼ÁéÃî1J$44537408-540a-4159-add2-3d127f0a2c0f
+€
+java:S4973„"<Strings and Boxed types should be compared using "equals()".(ä…¨°8¯­‡Æî1J$e6d0ec4f-30ff-4d3c-af68-47e8a934c276
+…
+java:S4973†"<Strings and Boxed types should be compared using "equals()".(Ñ¤Ô“øÿÿÿÿ8°­‡Æî1J$f500eaee-ea8e-4dd1-97f0-e4fd8d4764ed
+•
+java:S1130D"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿ8¬ˆ‹Æî1
 v
-java:S1172E".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿ8½ÁéÃî1J$230ca9cb-10da-4591-b010-8ef89b7c0178
-~	java:S125G"<This block of commented-out lines of code should be removed.(¤¦Æ¾8½ÁéÃî1J$094f1d9b-621d-4500-bde6-e986efbbefe0
+java:S1172D".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿ8Ã­‡Æî1J$0dc4097f-dd37-442f-b6ee-825eeecd01f8
+~	java:S125F"<This block of commented-out lines of code should be removed.(¤¦Æ¾8Ã­‡Æî1J$e5bed73a-7f6e-4816-b49e-e0027b64c7fe
 ”
-java:S3457`"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8¿ÁéÃî1J$1da25a0a-fc19-4ace-991b-51dfaf896de9
+java:S3457_"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8Æ­‡Æî1J$e25ca66b-b558-45bc-b1e1-1f39810c7f29
 ƒ
-java:S1854l"@Remove this useless assignment to local variable "notification".(¦º¨8ÀÁéÃî1J$789ed259-ac72-4abb-8adc-85e622746d8a
+java:S1854k"@Remove this useless assignment to local variable "notification".(ùÅäÆ8Ç­‡Æî1J$08b36a1c-8b92-4cfc-9632-4e0cc0366094
 Š
-java:S1854k"BRemove this useless assignment to local variable "successMessage".(öã™øûÿÿÿÿ8ÀÁéÃî1J$dafe486f-3173-4fa0-9dbf-33f35faba6ef
+java:S1854j"BRemove this useless assignment to local variable "successMessage".(öã™øûÿÿÿÿ8Ç­‡Æî1J$81e92179-faac-4edc-bcfc-2b6aadf82c5f
 q
-java:S1172e".Remove this unused method parameter "session".(Þ¹šæ8ÀÁéÃî1J$f649f273-7294-4a70-8935-943a87f57587
+java:S1172d".Remove this unused method parameter "session".(Þ¹šæ8Ç­‡Æî1J$8dcc5038-ac3b-4583-a872-dc914e74d99f
 {
-java:S1481k"3Remove this unused "successMessage" local variable.(öã™øûÿÿÿÿ8ÁÁéÃî1J$a145f124-6cd7-4229-b9c4-34821acbf1bc
+java:S1481j"3Remove this unused "successMessage" local variable.(öã™øûÿÿÿÿ8È­‡Æî1J$a0eaf8e5-a54c-4931-8c42-aaecfcd62043
 t
-java:S1481l"1Remove this unused "notification" local variable.(¦º¨8ÁÁéÃî1J$f8720c22-7d6b-41d8-834f-72f6b9d0d1f6
-„
-java:S1854w"<Remove this useless assignment to local variable "gameData".(ÏŽÀÅýÿÿÿÿ8¹¼ëÃî1J$403a30ef-4936-4e2b-a4ec-ab340439301c
+java:S1481k"1Remove this unused "notification" local variable.(ùÅäÆ8È­‡Æî1J$f1b621ca-4480-4735-9174-3d3cca8f2203
 q
-java:S1172q".Remove this unused method parameter "session".(¹’™¬8ÂÁéÃî1J$5f69a944-8028-47d8-927e-e10f7a6a8b97
-u
-java:S1481w"-Remove this unused "gameData" local variable.(ÏŽÀÅýÿÿÿÿ8º¼ëÃî1J$7a0a50e3-33d6-4545-87c1-c41d4c783335
+java:S1172p".Remove this unused method parameter "session".(¹’™¬8É­‡Æî1J$7c8cd4b1-be24-41d7-bc8c-44ec462e82e4

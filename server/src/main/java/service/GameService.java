@@ -64,7 +64,11 @@ public class GameService {
       throw new ResponseException(400, "Error: game is not found in system");
     }
   }
-
+  public void setFirstTurn(int gameId, ChessGame.TeamColor color){
+    GameData gameData = game.getGameByGameId(gameId);
+    ChessGame chessGame = gameData.getGame();
+    chessGame.setTeamTurn(color);
+  }
   public void makeMove(int gameId, ChessMove chessMove, AuthData authData) throws ResponseException, InvalidMoveException, DataAccessException {
     GameData gameData = game.getGameByGameId(gameId);
     ChessGame chessGame = gameData.getGame();

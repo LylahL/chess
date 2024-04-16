@@ -57,7 +57,8 @@ public class ConnectionManager {
     // send message to everyone within one game
     for(var c : connections.get(gameID)){
         if(c.session.isOpen()){
-            c.send(notification.getMessage());
+          String message = new Gson().toJson(notification);
+            c.send(message);
       }
     }
   }

@@ -1,17 +1,18 @@
 package server.websocket;
 
 import chess.ChessGame;
+import chess.InvalidMoveException;
 import com.google.gson.Gson;
-import dataAccess.AuthDAOInterface;
-import dataAccess.AuthSQL;
-import dataAccess.GameDAOInterface;
-import dataAccess.GameSQL;
+import dataAccess.*;
+import exception.ResponseException;
 import model.AuthData;
 import model.GameData;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import service.GameService;
 import webSocketMessages.serverMessages.Error;
+import webSocketMessages.serverMessages.Notification;
 import webSocketMessages.serverMessages.ServerMessage;
 import webSocketMessages.userCommands.Resign;
 import webSocketMessages.userCommands.UserGameCommand;
@@ -24,9 +25,11 @@ public class WebSocketHandler {
   private final ConnectionManager connectionManager = new ConnectionManager();
   private final AuthDAOInterface auth = new AuthSQL();
   private final GameDAOInterface game = new GameSQL();
+  private final UserDAOInterface user = new UserSQL();
+  private final GameService gameService = new GameService(auth, game, user);
 
   @OnWebSocketMessage
-  public void onMessage(Session session,String message) throws IOException {
+  public void onMessage(Session session,String message) throws IOException, ResponseException, DataAccessException, InvalidMoveException {
     UserGameCommand cmd = new Gson().fromJson(message, UserGameCommand.class);
 
     switch (cmd.getCommandType()){
@@ -62,7 +65,7 @@ public class WebSocketHandler {
     return true;
   }
 
-  private void resign(String message, Session session) throws IOException {
+  private void resign(String message, Session session) throws IOException, ResponseException, DataAccessException, InvalidMoveException {
     Resign resignCmd = convertCmd(message, Resign.class);
     connectionManager.add(resignCmd.getGameID(), resignCmd.getAuthString(), session);
     int gameID = resignCmd.getGameID();
@@ -76,7 +79,6 @@ public class WebSocketHandler {
       return;
     }
     GameData gameData = game.getGameByGameId(gameID);
-    String resignMsg = String.format("Player %s has resigned, sucks to be them \n", username);
     String errorMsg2 = String.format("You are not in game, or you are in as an observer%d \n", gameID);
     if(!Objects.equals(username, gameData.getWhiteUsername()) &&
             (!Objects.equals(username, gameData.getBlackUsername()))){
@@ -89,11 +91,10 @@ public class WebSocketHandler {
     }
     ChessGame chessGame = gameData.getGame();
     chessGame.setTeamTurn(null);
-    game.
-
-
-
-
+    game.makeMove(gameID, chessGame);
+    String resignMsg = String.format("Player %s has resigned, sucks to be them \n", username);
+    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, resignMsg);
+    connectionManager.broadcast(authString, notification, gameID);
   }
 
   private void leave(String message, Session session) {

@@ -10,19 +10,21 @@ import server.NotificationHandler;
 import server.ServerFacade;
 import server.WebSocketFacade;
 
+import javax.swing.text.Position;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static ui.EscapeSequences.*;
 // TODO: add more cmds like make move
 
 public class GameplayUI {
+
+  private State state;
   private NotificationHandler notificationHandler;
   private WebSocketFacade webSocketFacade = new WebSocketFacade("http://localhost:8282",notificationHandler);
   private AuthData auth;
@@ -40,19 +42,20 @@ public class GameplayUI {
   private static final String DefaultBackgroundColor = SET_BG_COLOR_BLACK;
   private static final String space = EMPTY;
 
-
-
   private boolean isrunning = true;
 
-  GameplayUI (String auth, String username, int gameID) throws ResponseException {
+  GameplayUI (String auth, String username, int gameID, State state) throws ResponseException {
     AuthData authData = new AuthData(auth, username);
     this.auth =  authData;
     this.username = username;
     this.gameID = gameID;
+    this.state=state;
   }
 
   public void run() throws ResponseException, IOException, URISyntaxException {
+    System.out.println("This is the GamePlay page, type help to check available commands");
     while(isrunning){
+      System.out.printf("[%s] >>>", state.toString());
       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
       ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
       parseCommads(cmds);
@@ -62,18 +65,33 @@ public class GameplayUI {
   private void parseCommads(ArrayList<String> cmds) throws ResponseException, IOException, URISyntaxException {
     String cmd = cmds.getFirst().toLowerCase();
     String[] params =cmds.subList(1, cmds.size()).toArray(new String[0]);
+    VaidInputCheck(cmd, params);
     switch (cmd) {
      case "quit" -> quit();
      case "highlight" -> highLight(chessGame, params);
      case "help" -> help();
-     case "drawboard" -> drawBoard(chessGame.getBoard());
+     case "drawboard" -> drawBoard(chessGame);
      case "makemove" -> makeMove(params);
      case "leave" -> leave();
      case "resign" -> resign();
     }
   }
 
+  private void VaidInputCheck(String cmd, String[] params) {
+    ArrayList<String> validInputList=new ArrayList<>(Arrays.asList("quit", "highlight", "help", "drawboard", "makemove", "leave", "resign"));
+    // not a valid input
+    if (!validInputList.contains(cmd)) {
+      System.out.println("Please input a valid command");
+      help();
+    } else if ((Objects.equals(cmd, "highlight") && params.length != 1)
+            || (Objects.equals(cmd, "makemove") && params.length != 2)) {
+      System.out.println("Please input correct amount of params");
+      help();
+    }
+  }
+
   private void resign() {
+    webSocketFacade.resign(auth, gameID);
   }
 
   private void leave() {
@@ -81,10 +99,33 @@ public class GameplayUI {
   }
 
   private void makeMove(String[] params) {
+    if(params.length == 2) {
+      String start = params[0];
+      String end = params[1];
+      if(!isValidMoveInput(start) || !isValidMoveInput(end)){
+        System.out.println("Enter a valid position input");
+        return;
+      }
+    }
+  }
 
+  private boolean isValidMoveInput(String position) {
+    if (position.length() != 2) {
+      System.out.println("Invalid input, please only input two coordinates to represent one position");
+      return false;
+    }
+
+    HashSet<Character> validInputSet = new HashSet<>();
+    validInputSet.addAll(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', '1', '2', '3', '4', '5', '6', '7', '8'));
+
+    char col = Character.toLowerCase(position.charAt(0)); // Convert to lowercase for case-insensitive comparison
+    char row = position.charAt(1);
+
+    return validInputSet.contains(col) && validInputSet.contains(row);
   }
 
   private void highLight(ChessGame chessGame, String[] params) {
+
   }
 
   private void help() {
@@ -94,11 +135,13 @@ public class GameplayUI {
                 - leave - removes the user from the game
                 - resign - the user forfeits the game and the game is over. Does not cause the user to leave the game
                 - makeMove <START POSITION> <END POSITION> - make a move
-                - highlight - hight lights legal moves
+                - highlight -<POSITION> highlights legal moves
                 """);
   }
-
-  public static void drawBoard(ChessBoard board) {
+// calldrawBoard()
+  public static void drawBoard(ChessGame game) {
+    // call websocketFacade
+    ChessBoard board = game.getBoard();
     drawBoardOnce(board, ChessGame.TeamColor.WHITE);
     System.out.println();
     drawBoardOnce(board, ChessGame.TeamColor.BLACK);

@@ -1,17 +1,17 @@
 
-`	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-`	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-`	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-a	java:S112¯"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-a	java:S112¶"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-a	java:S112¸"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-i
-java:S1192W"NDefine a constant instead of duplicating this literal "authorization" 4 times.(¦Œğíÿÿÿÿÿ
-a
-java:S1192F"FDefine a constant instead of duplicating this literal "/game" 3 times.(Şõ–°ÿÿÿÿÿ
-_
-java:S2147'"DCombine this catch with the one at line 36, which has the same body.(Ï¤¦úÿÿÿÿ
-Q	java:S125j"<This block of commented-out lines of code should be removed.(¸¨µ¬
-a
-java:S2147·"ECombine this catch with the one at line 181, which has the same body.(Ï¤¦úÿÿÿÿ
+†	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$805bf5fe-df66-45d6-8c7d-dd10fa71aae8
+†	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$2580d547-aed2-43b5-8939-e0ab88fc600c
+†	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$974ea440-64a6-46c7-bb68-be4a3abdbb3f
+‡	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$e7a3be8b-274d-4fee-8303-78a5bcea35ee
+‡	java:S112¯"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$92342b8d-7d14-4d9b-a2c7-19b2e0470dc5
+‡	java:S112¶"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$910666d5-efad-48bb-9756-122c425c6102
+‡	java:S112¸"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿJ$a1166dae-7165-4a33-bcf0-635b5124574e
+
+java:S1192W"NDefine a constant instead of duplicating this literal "authorization" 4 times.(¦ŒğíÿÿÿÿÿJ$b649e86c-5d8a-4749-a30f-2a3c639bd756
+‡
+java:S1192F"FDefine a constant instead of duplicating this literal "/game" 3 times.(Şõ–°ÿÿÿÿÿJ$668fb6f8-bf20-4143-8de2-5e0236a4a710
+…
+java:S2147'"DCombine this catch with the one at line 36, which has the same body.(Ï¤¦úÿÿÿÿJ$bbf64974-e920-4556-b95f-f003e8539dac
+w	java:S125j"<This block of commented-out lines of code should be removed.(¸¨µ¬J$f88ec12d-3042-4d52-9c77-f668ab91783d
+‡
+java:S2147·"ECombine this catch with the one at line 181, which has the same body.(Ï¤¦úÿÿÿÿJ$5cadd516-94dd-45d5-a15a-ce4f4af207b5

@@ -40,6 +40,11 @@ public class AuthDAO implements AuthDAOInterface{
         return null;
     }
 
+    @Override
+    public AuthData getAuthDataByUsername(String username) {
+        return null;
+    }
+
     public AuthData createAuthToken(String username) {
         AuthData newAuthData = new AuthData(username);
         authData.put(newAuthData, username);

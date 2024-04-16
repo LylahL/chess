@@ -47,3 +47,17 @@ l
 <src/main/java/webSocketMessages/serverMessages/LoadGame.java,9\1\912a7fb95fb824c90c5fab09a750fb08a3c381f2
 p
 @src/main/java/webSocketMessages/serverMessages/Notification.java,f\3\f31ec3df01524e95327705fe3da1b4604c64f810
+i
+9src/test/java/dataAccessTests/DataAccessServiceTests.java,2\6\26a6239c4143899f548b68db818f5afd430729cf
+^
+.src/main/java/dataAccess/AuthDAOInterface.java,c\f\cfdb61d4db2b3c355bd99f2a0eb6933c231a20b1
+^
+.src/main/java/dataAccess/UserDAOInterface.java,6\7\67f56a7a304bb9d518aefffdb2397ecabb581fb8
+U
+%src/main/java/dataAccess/AuthSQL.java,9\6\96fe2247ba50f8f00b7134b2391fa582a25ed943
+l
+<src/main/java/webSocketMessages/userCommands/JoinPlayer.java,3\b\3b89728c64ef8055ebf8c8cd70e8b9cdfe11fa33
+q
+Asrc/main/java/webSocketMessages/userCommands/UserGameCommand.java,4\f\4f548dc39a7ea41fc4f6972cc3aff66055548887
+U
+%src/main/java/dataAccess/AuthDAO.java,1\4\14de9464e27091c9de02f22671e80f0293efea9b

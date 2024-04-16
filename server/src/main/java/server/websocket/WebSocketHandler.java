@@ -58,7 +58,7 @@ public class WebSocketHandler {
   }
 
   private boolean gameStillGoingCheck(GameData gameData, String authString) throws IOException {
-    if (gameData.getGame().getTeamTurn()==null){
+    if (gameData.getGame().getGameOver() == 1){
       connectionManager.sendMessage(authString, new ErrorMsg("Game is already over"));
       return false;
     }
@@ -174,13 +174,33 @@ public class WebSocketHandler {
     JoinPlayer joinCmd = convertCmd(message, JoinPlayer.class);
     String authString = joinCmd.getAuthString();
     connectionManager.add(joinCmd.getGameID(), joinCmd.getAuthString(), session);
+    int gameID = joinCmd.getGameID();
+    if (auth.getAuthDataByAuthString(authString)==null) {
+      connectionManager.broadcast(authString, new ErrorMsg("Invalid authToken"), gameID);
+      return;
+    }
     AuthData authData = auth.getAuthDataByAuthString(authString);
     String username = authData.getUsername();
-    int gameID = joinCmd.getGameID();
+    if(!gameIDCheck(gameID, authString)){
+      return;
+    }
     // ignore all the error for now
     ChessGame.TeamColor teamColor = joinCmd.getPlayerColor();
     GameData gameData = game.getGameByGameId(gameID);
     ChessGame chessGame = gameData.getGame();
+    // this is the without http call one
+    if(gameData.getBlackUsername()==null||gameData.getWhiteUsername()==null){
+      connectionManager.sendMessage(authString, new ErrorMsg("Haven't made HTTP call yet"));
+      return;
+    }
+    if (teamColor == ChessGame.TeamColor.WHITE && !Objects.equals(gameData.getWhiteUsername(), username)){
+      connectionManager.sendMessage(authString, new ErrorMsg("This team White is already taken"));
+      return;
+    }
+    if (teamColor == ChessGame.TeamColor.BLACK && !Objects.equals(gameData.getBlackUsername(), username)){
+      connectionManager.sendMessage(authString, new ErrorMsg("This team Black is already taken"));
+      return;
+    }
     String joinSuccessMsg =  String.format("Player %s has joined game as team %s", username, teamColor.toString());
     Notification notification = new Notification(joinSuccessMsg);
     LoadGame loadGame = new LoadGame(chessGame);
@@ -194,6 +214,13 @@ public class WebSocketHandler {
     connectionManager.add(joinObserverCmd.getGameID(), joinObserverCmd.getAuthString(), session);
     String authString =joinObserverCmd.getAuthString();
     int gameID = joinObserverCmd.getGameID();
+    if(!authTokenCheck(authString)){
+      return;
+    }
+    if(!gameIDCheck(gameID, authString)){
+      return;
+    }
+
     GameData gameData = game.getGameByGameId(gameID);
     ChessGame chessGame = gameData.getGame();
     AuthData authData = auth.getAuthDataByAuthString(authString);

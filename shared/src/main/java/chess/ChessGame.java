@@ -19,7 +19,7 @@ public class ChessGame {
         GameOver=gameOver;
     }
 
-    int GameOver = 0;
+    int GameOver = 0; // 0 means still going 1 means gameover
     ChessBoard board = new ChessBoard();
 
 

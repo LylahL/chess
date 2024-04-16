@@ -6,8 +6,6 @@ import chess.ChessMove;
 import com.google.gson.Gson;
 import exception.ResponseException;
 import model.AuthData;
-import ui.GameplayUI;
-import webSocketMessages.serverMessages.ServerMessage;
 import webSocketMessages.userCommands.*;
 
 import javax.websocket.*;
@@ -18,26 +16,23 @@ import java.net.URISyntaxException;
 public class WebSocketFacade extends Endpoint{
 
   Session session;
-  NotificationHandler notificationHandler;
   @Override
   public void onOpen(Session session, EndpointConfig endpointConfig) {
 
   }
   // make connection to the /connect endpoint in my server
-  public WebSocketFacade(String url, NotificationHandler notificationHandler)throws ResponseException {
+  public WebSocketFacade(String url)throws ResponseException {
     try {
       url = url.replace("http", "ws");
       URI socketURI = new URI(url + "/connect");
-      this.notificationHandler = notificationHandler;
 
       WebSocketContainer container = ContainerProvider.getWebSocketContainer();
       this.session = container.connectToServer(this, socketURI);
       //set message handler
-      this.session.addMessageHandler(new MessageHandler.Whole<String>() {
+      this.session.addMessageHandler(new javax.websocket.MessageHandler.Whole<String>() {
         @Override
         public void onMessage(String message) {
-//          notificationHandler.notify(message);
-          GameplayUI.notify(message);
+          ServerMessageHandler.notify(message);
         }
       });
     } catch (DeploymentException | IOException | URISyntaxException ex) {

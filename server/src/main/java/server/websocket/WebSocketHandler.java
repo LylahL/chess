@@ -12,8 +12,11 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import service.GameService;
 import webSocketMessages.serverMessages.Error;
+import webSocketMessages.serverMessages.LoadGame;
 import webSocketMessages.serverMessages.Notification;
 import webSocketMessages.serverMessages.ServerMessage;
+import webSocketMessages.userCommands.JoinObserver;
+import webSocketMessages.userCommands.JoinPlayer;
 import webSocketMessages.userCommands.Resign;
 import webSocketMessages.userCommands.UserGameCommand;
 
@@ -67,7 +70,7 @@ public class WebSocketHandler {
 
   private void resign(String message, Session session) throws IOException, ResponseException, DataAccessException, InvalidMoveException {
     Resign resignCmd = convertCmd(message, Resign.class);
-    connectionManager.add(resignCmd.getGameID(), resignCmd.getAuthString(), session);
+//    connectionManager.add(resignCmd.getGameID(), resignCmd.getAuthString(), session);
     int gameID = resignCmd.getGameID();
     String authString =resignCmd.getAuthString();
     if(!authTokenCheck(authString)){
@@ -98,16 +101,47 @@ public class WebSocketHandler {
   }
 
   private void leave(String message, Session session) {
+// remove connection for leave
 
   }
 
   private void makeMove(String message, Session session) {
   }
 
-  private void joinPlayer(String message, Session session) {
+  private void joinPlayer(String message, Session session) throws IOException {
+
+    JoinPlayer joinCmd = convertCmd(message, JoinPlayer.class);
+    String authString = joinCmd.getAuthString();
+    connectionManager.add(joinCmd.getGameID(), joinCmd.getAuthString(), session);
+    AuthData authData = auth.getAuthDataByAuthString(authString);
+    String username = authData.getUsername();
+    int gameID = joinCmd.getGameID();
+    // ignore all the error for now
+    ChessGame.TeamColor teamColor = joinCmd.getPlayerColor();
+    GameData gameData = game.getGameByGameId(gameID);
+    ChessGame chessGame = gameData.getGame();
+    String joinSuccessMsg =  String.format("Player %s has joined game as team %s", username, teamColor.toString());
+    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, joinSuccessMsg);
+    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, chessGame);
+    connectionManager.sendMessageToOthers(authString, notification, gameID);
+    connectionManager.sendMessage(authString, loadGame);
+
   }
 
-  private void joinObserver(String message, Session session) {
+  private void joinObserver(String message, Session session) throws IOException {
+    JoinObserver joinObserverCmd = convertCmd(message, JoinObserver.class);
+    connectionManager.add(joinObserverCmd.getGameID(), joinObserverCmd.getAuthString(), session);
+    String authString =joinObserverCmd.getAuthString();
+    int gameID = joinObserverCmd.getGameID();
+    GameData gameData = game.getGameByGameId(gameID);
+    ChessGame chessGame = gameData.getGame();
+    AuthData authData = auth.getAuthDataByAuthString(authString);
+    String username = authData.getUsername();
+    String joinSuccessMsg = String.format("Player %s has joined as an observer", username);
+    Notification notification = new Notification(ServerMessage.ServerMessageType.NOTIFICATION, joinSuccessMsg);
+    LoadGame loadGame = new LoadGame(ServerMessage.ServerMessageType.LOAD_GAME, chessGame);
+    connectionManager.sendMessageToOthers(authString, notification, gameID);
+    connectionManager.sendMessage(authString, loadGame);
   }
 
   private <T> T convertCmd(String message, Class<T> convertType){

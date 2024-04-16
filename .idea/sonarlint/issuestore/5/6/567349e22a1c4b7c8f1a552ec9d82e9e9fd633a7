@@ -1,0 +1,24 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–
+E
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–
+]
+java:S11922"GDefine a constant instead of duplicating this literal "signin" 3 times.(—Ç¨È
+d
+java:S11923"IDefine a constant instead of duplicating this literal "register" 3 times.(œïü‰ýÿÿÿÿ
+Q	java:S125!"<This block of commented-out lines of code should be removed.(áËìÀ
+@	java:S106#"+Replace this use of System.out by a logger.(‚´Ýä
+<	java:S1311""Add a default case to this switch.(Ï—íàýÿÿÿÿ
+h	java:S1009"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£½‰úÿÿÿÿ
+@	java:S106="+Replace this use of System.out by a logger.(·Á½Ù
+?	java:S106B"+Replace this use of System.out by a logger.(Ì¤Ÿ:
+E	java:S106I"+Replace this use of System.out by a logger.(ÅŠ¤Ùøÿÿÿÿ
+R
+java:S1117S"<Rename "username" which hides the field declared at line 25.(¼Ñœ’
+@	java:S106\"+Replace this use of System.out by a logger.(ÕÇª¢
+E	java:S106]"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿ
+R
+java:S1117e"<Rename "username" which hides the field declared at line 25.(¼Ñœ’
+@	java:S106l"+Replace this use of System.out by a logger.(Ï¦Þó
+E	java:S106m"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿ

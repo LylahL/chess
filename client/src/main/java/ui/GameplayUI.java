@@ -4,17 +4,12 @@ import chess.ChessBoard;
 import chess.ChessGame;
 import chess.ChessPiece;
 import chess.ChessPosition;
-import com.google.gson.Gson;
 import exception.ResponseException;
 import model.AuthData;
-import server.NotificationHandler;
+import server.ServerMessageHandler;
 import server.ServerFacade;
 import server.WebSocketFacade;
-import webSocketMessages.serverMessages.LoadGame;
-import webSocketMessages.serverMessages.Notification;
-import webSocketMessages.serverMessages.ServerMessage;
 
-import javax.swing.text.Position;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,8 +24,8 @@ import static ui.EscapeSequences.*;
 public class GameplayUI {
 
   private State state;
-  private NotificationHandler notificationHandler;
-  private WebSocketFacade webSocketFacade=new WebSocketFacade("http://localhost:8282", notificationHandler);
+  private ServerMessageHandler serverMessageHandler;
+  private WebSocketFacade webSocketFacade=new WebSocketFacade("http://localhost:8282");
   private AuthData auth;
   private int gameID;
   private String username;
@@ -74,11 +69,14 @@ public class GameplayUI {
       case "quit" -> quit();
       case "highlight" -> highLight(chessGame, params);
       case "help" -> help();
-      case "drawboard" -> drawBoard(chessGame);
+      case "drawboard" -> redraw();
       case "makemove" -> makeMove(params);
       case "leave" -> leave();
       case "resign" -> resign();
     }
+  }
+
+  private void redraw() {
   }
 
   private void VaidInputCheck(String cmd, String[] params) {
@@ -109,7 +107,12 @@ public class GameplayUI {
         System.out.println("Enter a valid position input");
         return;
       }
+      ChessPosition startPosition = convertPosition(start);
+      ChessPosition endPosition = convertPosition(end);
     }
+  }
+
+  private ChessPosition convertPosition(String position) {
   }
 
   private boolean isValidMoveInput(String position) {
@@ -154,6 +157,7 @@ public class GameplayUI {
   public static void drawBoardOnce(ChessBoard board, ChessGame.TeamColor teamColor) {
     PrintStream out=new PrintStream(System.out, true, StandardCharsets.UTF_8);
     printIndex(out, teamColor);
+    System.out.println();
     if (teamColor == ChessGame.TeamColor.WHITE) {
       for (int i=1; i <= 8; i++) {
         out.print(BackgroundColor);
@@ -185,7 +189,7 @@ public class GameplayUI {
         out.println();
 //        out.print(BackgroundColor);
       }
-      out.print(BackgroundColor);
+//      out.print(BackgroundColor);
 //      out.print(space);
 
     } else {
@@ -274,17 +278,4 @@ public class GameplayUI {
 
 
 
-  public static void notify(String message) {
-    ServerMessage serverMessage=new Gson().fromJson(message, ServerMessage.class);
-    if (serverMessage.getServerMessageType() == ServerMessage.ServerMessageType.NOTIFICATION) {
-      Notification notification=new Gson().fromJson(message, Notification.class);
-      System.out.println(notification.getMessage());
-    } else if (serverMessage.getServerMessageType() == ServerMessage.ServerMessageType.LOAD_GAME) {
-      LoadGame loadGame=new Gson().fromJson(message, LoadGame.class);
-      GameplayUI.drawBoard(loadGame.getGame());
-    } else if (serverMessage.getServerMessageType() == ServerMessage.ServerMessageType.ERROR) {
-      Error error=new Gson().fromJson(message, Error.class);
-      System.out.println(error.getMessage());
-    }
-  }
 }

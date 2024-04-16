@@ -46,7 +46,7 @@ public class ConnectionManager {
     // sendMessage to everyone besides the root client
     for(var c : connections.get(gameID)){
       // find that game
-      if (!c.session.isOpen() && c.authToken.equals(auth)){
+      if (c.session.isOpen() && !c.authToken.equals(auth)){
         String message = new Gson().toJson(object);
         c.send(message);
       }

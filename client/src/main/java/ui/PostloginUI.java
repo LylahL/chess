@@ -1,8 +1,10 @@
 package ui;
 
+import chess.ChessGame;
 import exception.ResponseException;
 import model.*;
 import server.ServerFacade;
+import server.WebSocketFacade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,11 +21,13 @@ public class PostloginUI {
   private String username;
 
   private State state;
+  private WebSocketFacade webSocketFacade = new WebSocketFacade("http://localhost:8282");
   private final ServerFacade serverFacade = new ServerFacade("http://localhost:8282");
 
   private boolean isrunning = true;
 
-  PostloginUI (String auth, String username, State state){
+
+  PostloginUI (String auth, String username, State state) throws ResponseException {
     this.state=state;
     AuthData authData = new AuthData(auth, username);
     this.auth =  authData;
@@ -84,6 +88,7 @@ public class PostloginUI {
     if (params.length == 1){
       int gameId = Integer.parseInt(params[0]);
       serverFacade.joinGame(auth, new JoinGameRequest(null, gameId));
+      webSocketFacade.joinObserver(auth, gameId);
       System.out.println("Joined as Observer Successfully");
       GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username, gameId, state);
       gameplayUI.run();
@@ -96,6 +101,14 @@ public class PostloginUI {
       String teamColor = params[0];
       int gameId = Integer.parseInt(params[1]);
       HttpURLConnection http = ServerFacade.joinGame(auth, new JoinGameRequest(teamColor, gameId));
+      ChessGame.TeamColor color= null ;
+      if(Objects.equals(teamColor, "WHITE")){
+       color =ChessGame.TeamColor.WHITE;
+      }else if (Objects.equals(teamColor, "BLACK")){
+        color = ChessGame.TeamColor.BLACK;
+      }
+      webSocketFacade.joinPlayer(auth, gameId, color);
+
       var statusCode=http.getResponseCode();
       if (statusCode == 200){
         GameplayUI gameplayUI = new GameplayUI(auth.getAuthToken(), username, gameId, state);

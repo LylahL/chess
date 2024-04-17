@@ -61,9 +61,7 @@ public class GameplayUI {
   public void run() throws ResponseException, IOException, URISyntaxException {
     System.out.println("This is the GamePlay page, type help to check available commands");
     while (isrunning) {
-      System.out.printf("[%s] >>>", state.toString());
-      BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
-      ArrayList<String> cmds=new ArrayList<>(List.of(reader.readLine().split(" ")));
+      ArrayList<String> cmds = ClientRun.gatherData();
       parseCommads(cmds);
     }
   }

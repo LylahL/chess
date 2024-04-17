@@ -1,20 +1,29 @@
 
+r
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–8¤ËÇÒî1J$4dc37438-6786-4821-99dd-4b7c52369abc
+r
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–8¤ËÇÒî1J$2406890c-01e0-4922-afe1-eaeb1adc4067
 ‰
-java:S1192;"MDefine a constant instead of duplicating this literal "joinobserver" 3 times.(‡£¸J$4817596b-1016-4f48-8886-9a0af8f9924a
+java:S11929"MDefine a constant instead of duplicating this literal "joinobserver" 3 times.(‡£¸J$500a1d16-3293-47e5-b512-eff228f25d75
 …
-java:S1192:"IDefine a constant instead of duplicating this literal "joingame" 3 times.(ñ¤äğJ$733e732a-e9d5-466e-bc01-f803d45031dc
+java:S11928"IDefine a constant instead of duplicating this literal "joingame" 3 times.(ñ¤äğJ$218cb586-a7f8-4edb-8013-a13b4e9ed49e
 Œ
-java:S11928"KDefine a constant instead of duplicating this literal "creategame" 3 times.(¬›åÿÿÿÿÿJ$f7c49924-b07a-482a-9999-29d96fc47d72
-k	java:S106'"+Replace this use of System.out by a logger.(½±æøşÿÿÿÿJ$f9ffaa11-1ef9-46b0-b3d3-d0879e8d2b1d
-w	java:S125("<This block of commented-out lines of code should be removed.(áËìÀJ$63488697-81e0-421e-97f5-ed72b1c926fb
-f	java:S106*"+Replace this use of System.out by a logger.(‚´İäJ$35c7a003-6b83-47d4-9e5c-ea9ce35bc377
-b	java:S1316""Add a default case to this switch.(Ï—íàıÿÿÿÿJ$4cd0041c-3011-4320-95a7-365e784f73eb
-f	java:S106D"+Replace this use of System.out by a logger.(·Á½ÙJ$7f5fbd74-047a-43f4-8672-57db97bac175
-e	java:S106I"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$03f84e0b-7264-4f68-abef-72a9ee15cef7
-k	java:S106N"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$cf7ccca3-9498-493a-bf5c-297aa635cc36
-f	java:S106\"+Replace this use of System.out by a logger.(ÿ¨’‹J$9d1bbd2f-c318-48db-890e-7c59c2545c2f
-l	java:S106ƒ"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿJ$2690c2ca-cc3d-485f-81c7-c81d13f22d83
-g	java:S106‹"+Replace this use of System.out by a logger.(ÙÌš¨J$5261c844-4d90-459b-ace7-0b3b0075a3a2
-l	java:S106Œ"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$280c6657-5f09-4f1f-bbc3-232eb7c946b5
-l	java:S106“"+Replace this use of System.out by a logger.(Ù¯Ğ¹ûÿÿÿÿJ$3cefc7ea-3baf-47f1-bc0e-9559cbdb2ab4
-}	java:S125—"<This block of commented-out lines of code should be removed.(Ã¹¬€ùÿÿÿÿJ$6f35aa89-d9c4-49e3-9df8-815b52dfcd3d
+java:S11926"KDefine a constant instead of duplicating this literal "creategame" 3 times.(¬›åÿÿÿÿÿJ$0722c650-aaa5-4cce-bd6c-2a4c09c713ae
+¼
+java:S1130"yRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from constructor's body.(ÆÇ¬8çËÇÒî1J$faaefee1-3780-4c83-8d7e-0545d72c62d0
+k	java:S106'"+Replace this use of System.out by a logger.(½±æøşÿÿÿÿJ$e6a84523-7f20-4036-9acd-145a1f8bd3dd
+w	java:S125("<This block of commented-out lines of code should be removed.(áËìÀJ$d1ff2602-c144-4615-a324-a5097dfea722
+b	java:S1314""Add a default case to this switch.(Ï—íàıÿÿÿÿJ$9503fb9c-f717-4951-8fd1-5c73dc8d09b8
+f	java:S106B"+Replace this use of System.out by a logger.(·Á½ÙJ$0dd36e10-2dab-4018-9b8b-be0cd76054a3
+e	java:S106G"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$dd4f72ea-c709-43fb-bcdc-0c08b816f412
+k	java:S106L"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$dbc679a4-8ad6-4577-970d-92b5718bd59a
+}
+java:S2209X"5Change this instance-reference to a static reference.(æß°ëıÿÿÿÿ8ùËÇÒî1J$8f24145a-2d42-4ad3-9a8c-292157c6b9c5
+f	java:S106Z"+Replace this use of System.out by a logger.(ÿ¨’‹J$2236e219-82c2-4599-9e82-588e78a276b2
+l	java:S106"+Replace this use of System.out by a logger.(®ıáëûÿÿÿÿJ$689f85fc-338f-49c1-af13-4cac26dab97e
+g	java:S106‰"+Replace this use of System.out by a logger.(ÙÌš¨J$224d6234-ae1e-47f5-ac30-4d9bf772f236
+l	java:S106Š"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$c7b2a943-1118-40fa-82af-fc8638727612
+½
+java:S1130"tRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from method's body.(£é¼‚øÿÿÿÿ8…ÌÇÒî1J$95541bb9-c44b-410d-86f0-b2665cccd431
+l	java:S106‘"+Replace this use of System.out by a logger.(Ù¯Ğ¹ûÿÿÿÿJ$c17e1032-e30f-40c7-acb5-be51f38760e5
+}	java:S125•"<This block of commented-out lines of code should be removed.(Ã¹¬€ùÿÿÿÿJ$424a97ed-79f3-4654-9053-1ee4c2519189

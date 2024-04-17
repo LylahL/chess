@@ -39,9 +39,7 @@ public class PostloginUI {
       System.out.println("This is the Postlogin page, type help to check available commands");
 //      System.out.printf("[%s] >>>", state.toString());
       while(isrunning){
-        System.out.printf("[%s] >>>", state.toString());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<String> cmds = new ArrayList<>(List.of(reader.readLine().split(" ")));
+        ArrayList<String> cmds = ClientRun.gatherData();
         parseCommads(cmds);
     }
     }

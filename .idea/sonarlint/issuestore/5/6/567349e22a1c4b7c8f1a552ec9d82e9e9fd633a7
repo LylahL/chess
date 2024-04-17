@@ -1,19 +1,22 @@
 
+r
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–8¹õ®Òî1J$75f3d6a2-ac3a-475e-9196-12610fd8b3a7
+r
+java:S3740"/Provide the parametrized type for this generic.(ÐÁ¹–8Èõ®Òî1J$b3f9b6cd-f74a-4505-aa30-622a49532600
 ƒ
-java:S11922"GDefine a constant instead of duplicating this literal "signin" 3 times.(—Ç¨ÈJ$4bdabe5a-82d2-4e9d-836f-6363f61676ca
+java:S1192/"GDefine a constant instead of duplicating this literal "signin" 3 times.(—Ç¨ÈJ$257feee9-a38c-4b98-ad29-9a87d19705bc
 Š
-java:S11923"IDefine a constant instead of duplicating this literal "register" 3 times.(œïü‰ýÿÿÿÿJ$56ca168e-d39e-4215-9f43-a93d68937783
-w	java:S125!"<This block of commented-out lines of code should be removed.(áËìÀJ$81c2a68d-7947-472e-acd2-c88896ec5edb
-f	java:S106#"+Replace this use of System.out by a logger.(‚´ÝäJ$6959a8ac-c997-4eac-a954-5a73442e54a9
-b	java:S1311""Add a default case to this switch.(Ï—íàýÿÿÿÿJ$e91acb04-f726-412b-8d9d-e166bbba6474
-f	java:S106="+Replace this use of System.out by a logger.(·Á½ÙJ$e1030777-092c-47d1-a905-081c18cc68c1
-e	java:S106B"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$fc6ae51f-a8dd-443c-a726-fe5b983f274a
-k	java:S106I"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$d73fcb2a-0ead-48ef-bcbd-8a52dfcdabc1
+java:S11920"IDefine a constant instead of duplicating this literal "register" 3 times.(œïü‰ýÿÿÿÿJ$04582776-c3fb-410c-b612-966d088f5071
+w	java:S125!"<This block of commented-out lines of code should be removed.(áËìÀJ$b09b8254-650c-4411-b482-ef8a43a6f408
+b	java:S131.""Add a default case to this switch.(Ï—íàýÿÿÿÿJ$e8e8d52d-4a9e-4530-950b-b3354db7e5ce
+f	java:S106:"+Replace this use of System.out by a logger.(·Á½ÙJ$3db71c23-3ed8-45ca-82be-583a0bc3afa4
+e	java:S106?"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$0baac5e2-40ba-4fa7-9bd8-fd0a32f5e611
+k	java:S106F"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$78afae4b-0f9c-4a26-a294-50b278b3e3fb
 x
-java:S1117S"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$eb3c5099-33c5-4511-93a8-14615ec2a7c2
-f	java:S106\"+Replace this use of System.out by a logger.(ÕÇª¢J$378f99c9-2ef4-45cf-a72d-ac1eb722de23
-k	java:S106]"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$bcf4443e-d126-4f2a-82a4-dc64ee149ce0
+java:S1117P"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$1984043b-6a1c-4276-b2e8-db656727f3d9
+f	java:S106Y"+Replace this use of System.out by a logger.(ÕÇª¢J$201aa652-82ec-4503-833d-7a3b294639e9
+k	java:S106Z"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$c7910af7-1009-4e41-9e4e-44cf2d3661f8
 x
-java:S1117e"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$3737d944-f878-48ed-ab87-d164065fc662
-f	java:S106l"+Replace this use of System.out by a logger.(Ï¦ÞóJ$7c4f8422-466b-4724-b727-829c2c4f940f
-k	java:S106m"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$0dc904ca-d41c-48df-9f90-ddea898eb558
+java:S1117b"<Rename "username" which hides the field declared at line 25.(¼Ñœ’J$d065792a-f90e-4d18-9635-0645dbfb58a7
+f	java:S106i"+Replace this use of System.out by a logger.(Ï¦ÞóJ$e07c3173-d9d1-4c0b-8a62-aefaf15bce68
+k	java:S106j"+Replace this use of System.out by a logger.(ªÓ¼áþÿÿÿÿJ$5d88211b-052b-4fad-9789-19a513724cbc

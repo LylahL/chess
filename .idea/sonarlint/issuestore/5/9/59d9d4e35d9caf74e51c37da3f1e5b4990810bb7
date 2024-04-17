@@ -1,0 +1,18 @@
+
+r
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–8ÂòÒÒî1J$957a1b2b-7f3b-4291-9c8d-ba84db5e248d
+r
+java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–8ÂòÒÒî1J$dd48e091-24ee-4907-869d-6f906246c56a
+¸
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(°×ğ»úÿÿÿÿ8ÃòÒÒî1J$151076f5-c354-4faf-acfc-6290aaae0375
+Ÿ
+java:S1488"\Immediately return this expression instead of assigning it to the temporary variable "cmds".(š‚8ÄòÒÒî1J$ed9894a9-feb6-47b6-affa-3c5450c4a983
+m	java:S106"+Replace this use of System.out by a logger.(‚´İä8ÒòÒÒî1J$db0e869f-99c3-43da-bf05-3cf62f0d543b
+s
+java:S1068"0Remove this unused "serverFacade" private field.(ĞÁ¹–8ÕòÒÒî1J$81e44d59-3886-479a-95d0-d4026817138e
+o
+java:S1068"-Remove this unused "isrunning" private field.(¶ÍêC8ÕòÒÒî1J$d3969285-9978-4849-8860-c7a94bb8366e
+p
+java:S1068"(Remove this unused "auth" private field.(¡øíÿÿÿÿÿ8ÕòÒÒî1J$fcda83c4-7601-41af-8749-63865ae59bf5
+o
+java:S1068",Remove this unused "username" private field.(‘ó¹²8ÕòÒÒî1J$6a67741a-1b5f-483d-8263-9ee5fb9b01de

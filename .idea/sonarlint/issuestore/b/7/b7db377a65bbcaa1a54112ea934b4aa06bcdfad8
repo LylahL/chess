@@ -1,67 +1,60 @@
 
-k
-java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–J$a32a94bb-372a-4eb5-9924-f4ecaf0cd9dd
-k
-java:S3740"/Provide the parametrized type for this generic.(ĞÁ¹–J$f8c144f9-b7ca-4c5a-a43a-a5c1e61c0348
 Š
-java:S1192G"IDefine a constant instead of duplicating this literal "makemove" 3 times.(úşƒ¢ÿÿÿÿÿJ$935049cd-e99f-4c64-b8a6-4cdfe7bdf78c
+java:S1192F"IDefine a constant instead of duplicating this literal "makemove" 3 times.(úşƒ¢ÿÿÿÿÿJ$4aaca7f2-68bf-4589-861b-6d047f9296b5
 ‹
-java:S1192D"JDefine a constant instead of duplicating this literal "highlight" 3 times.(Ş¶àÙıÿÿÿÿJ$3af85249-ecd7-4b67-92dc-da1abd816356
+java:S1192C"JDefine a constant instead of duplicating this literal "highlight" 3 times.(Ş¶àÙıÿÿÿÿJ$28ab522a-5ded-40b6-ae6c-0bcb14433209
 ‘
-java:S1104"UMake chessGame a static final constant or non-public and provide accessors if needed.(èà¨åJ$d075830f-5361-44fc-bbe3-e7b21be683a8
+java:S1104"UMake chessGame a static final constant or non-public and provide accessors if needed.(èà¨åJ$9eb62111-a603-4764-b8fa-7917e78ca526
 k
-java:S1444"/Make this "public static chessGame" field final(èà¨åJ$9859ec09-131c-486f-9ee8-12a312978cd1
-”	java:S115 "ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ªßnJ$3a6df3ef-9c92-4a0d-beb1-dc3c6a687797
-•	java:S115!"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ıÉ€­J$c9bb7bcf-b982-420d-a023-19eb13ac4de4
-•	java:S115""ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¢Êú‰J$26a477bb-c4d8-4545-95f1-dddfe1879ce9
-š	java:S115#"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(÷³€ØúÿÿÿÿJ$cc932cbc-f93c-4e6c-9a14-33c4cdec3a76
-”	java:S115$"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Öå`J$780c2288-5b61-40fc-a843-3e8b3369f511
-•	java:S115%"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(€ÖŠ®J$7987a54a-5de9-415d-ad43-75e535d35600
-”	java:S115&"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÉÜùoJ$8cd90610-889f-4e8c-950b-fa1bffe93670
-š	java:S115'"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(İé¨æûÿÿÿÿJ$1903d46e-951a-4e0b-9b4f-58cfd7bd89a8
-š	java:S115("ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¬‘Ò™ûÿÿÿÿJ$44e0da2e-68e1-4310-9760-9575b16644ba
+java:S1444"/Make this "public static chessGame" field final(èà¨åJ$297c7a07-58c4-40d0-818e-a7c99ac59da2
+”	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ªßnJ$be194c29-9f33-47b5-9fc5-76755795a448
+•	java:S115 "ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ıÉ€­J$614e3b0c-fbed-4346-893f-008220227736
+•	java:S115!"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¢Êú‰J$d272fcff-a21a-4f1d-a184-aeef91bb0ad3
+š	java:S115""ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(÷³€ØúÿÿÿÿJ$b6fb7150-ecc8-460e-8cc5-5e797e6bf4b9
+”	java:S115#"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Öå`J$b7d5bf45-a66d-4eed-bfbe-10fe66ee4425
+•	java:S115$"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(€ÖŠ®J$ce6c94eb-2669-47e1-9fe9-562914158a80
+”	java:S115%"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÉÜùoJ$3251bb30-f650-489c-9ee3-4fe54a5af609
+š	java:S115&"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(İé¨æûÿÿÿÿJ$1421778d-4e13-4b6c-b16d-eb65fc5531fc
+š	java:S115'"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¬‘Ò™ûÿÿÿÿJ$15271d10-0fb9-4eb1-9318-5a3a9311561d
 ½
-java:S1186•"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛĞÄJ$cb8da79c-b124-4289-9626-3c529490734a
-s
-java:S1135"2Complete the task associated to this TODO comment.(ƒõøĞÿÿÿÿÿJ$24fe41f9-4fd8-4eae-a7e8-e894f3c7c112
-µ
-java:S1130,"yRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from constructor's body.(×öÜ¤J$8dd1307a-f7ad-46b8-bbc7-2539529eaf4d
-k	java:S1065"+Replace this use of System.out by a logger.(É¡±ıÿÿÿÿJ$281af9af-c4f7-4224-a4d7-b6e8f3abab80
-f	java:S1067"+Replace this use of System.out by a logger.(‚´İäJ$3d706c81-b0c1-4d24-9e9d-005a7738e753
+java:S1186”"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛĞÄJ$578b4657-64d2-4b7e-8070-fc749cbef184
+–
+java:S1130+"yRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from constructor's body.(×öÜ¤8ÿáõÑî1
+k	java:S1064"+Replace this use of System.out by a logger.(É¡±ıÿÿÿÿJ$74bc1d8e-2d8f-4aca-a40d-b55178023915
+f	java:S1066"+Replace this use of System.out by a logger.(‚´İäJ$118adea1-994e-4320-9a1d-908434dd3e83
 °
-java:S1130>"tRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from method's body.(è«ññJ$bafcdc5a-4967-44c6-8883-e52fd9fbd2c1
+java:S1130="tRemove the declaration of thrown exception 'exception.ResponseException', as it cannot be thrown from method's body.(è«ññJ$2642e432-1807-4f46-8dfe-68a86cc8fe8c
 ¨
-java:S1130>"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(è«ññJ$b694ebbb-4399-493a-85cd-ce7618034188
-°
-java:S1130>"tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(è«ññJ$5e5626ca-afc1-4c46-96f9-e2af240afc69
-b	java:S131B""Add a default case to this switch.(Ï—íàıÿÿÿÿJ$eab8c454-fb1b-4a15-ab21-33c87da7ec39
-8
-java:S3626N"Remove this redundant jump.(ûÁİ…8˜à÷Àî1
-	java:S100Q"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£½‰úÿÿÿÿJ$1e56264a-bf81-4566-b162-e567dff98e0e
-f	java:S106U"+Replace this use of System.out by a logger.(·Á½ÙJ$61bd32ff-19b2-4fca-bcf0-b5cbd497b967
-e	java:S106X"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$38fd070a-e3aa-4d92-92e8-e61272a654dd
-k	java:S106j"+Replace this use of System.out by a logger.(§Õ¶«ûÿÿÿÿJ$cdb9f761-ebfa-4159-9573-908b6b77f13b
-]	java:S131y""Add a default case to this switch.(ÄÍ¯J$1f8e67e8-fc3e-4ffd-b265-b257314976cb
-g	java:S106ˆ"+Replace this use of System.out by a logger.(úı™J$af00260b-0158-4d7e-af17-6be28a5abfed
+java:S1130="lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(è«ññJ$27b0458f-13fd-4479-a23c-891d57cfb518
+‘
+java:S1130="tRemove the declaration of thrown exception 'java.net.URISyntaxException', as it cannot be thrown from method's body.(è«ññ8‡âõÑî1
+b	java:S131A""Add a default case to this switch.(Ï—íàıÿÿÿÿJ$85c576b2-38b3-4954-8f6d-e4568cc9f6fe
+^
+java:S3626M"Remove this redundant jump.(ûÁİ…8˜à÷Àî1J$7223c492-f52a-4376-aa85-1ec7350cebae
+f	java:S106T"+Replace this use of System.out by a logger.(·Á½ÙJ$52581afc-363b-4062-b48e-f70183df828a
+e	java:S106W"+Replace this use of System.out by a logger.(Ì¤Ÿ:J$59d67294-cd56-405d-8a25-2918f398d5bc
+k	java:S106i"+Replace this use of System.out by a logger.(§Õ¶«ûÿÿÿÿJ$fa0357e2-5d37-473a-8e81-0932d8ec8b71
+]	java:S131x""Add a default case to this switch.(ÄÍ¯J$d6b9ecbc-dbda-4d20-8256-3f08257933fe
+g	java:S106‡"+Replace this use of System.out by a logger.(úı™J$1efcea9d-e7f2-4b2b-92b4-97573943f4b7
 x
-java:S1172•"<Remove these unused method parameters "chessGame", "params".(ÛĞÄJ$b0d4a4c5-4d9f-4015-85c5-72ba61fed30d
-l	java:S106š"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$27f21156-ebd5-4f0d-a157-6f11d4565433
-l	java:S106©"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$ff8ce662-9e90-42d4-94af-1b4119b2d252
+java:S1172”"<Remove these unused method parameters "chessGame", "params".(ÛĞÄJ$555f76ad-7662-492e-acd2-c8c1fc36b1ce
+l	java:S106™"+Replace this use of System.out by a logger.(ÅŠ¤ÙøÿÿÿÿJ$50796a4f-24ae-4093-a660-a7f518a35301
+l	java:S106¨"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$1d6287a2-e702-4ba1-886b-15a2748f66e3
 
-java:S3776­"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(ÏÇî¹J$b7cca9a4-ab88-43fc-8cf3-f6a5758560c9
-g	java:S106®"+Replace this use of System.out by a logger.(Ü†ÎßJ$474b3ed6-89d3-4ad7-8dca-2eabb53847a6
-l	java:S106¯"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$891b5e3c-2b7a-45a3-81e1-0eea232b5209
-}	java:S125Î"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$18adde78-2485-4a15-a9dc-7720f1ee9d55
-}	java:S125Ğ"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$afbfe378-f75c-41da-baa0-d5ab54037032
-}	java:S125ï"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$eae1c051-a81e-496a-b4e1-858e1f7c3e83
-}	java:S125ñ"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$a07f0863-2a75-41a4-b27a-9173660796e3
+java:S3776¬"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(ÏÇî¹J$34eb310e-7ea4-4f7b-967a-8b84a402b7c0
+g	java:S106­"+Replace this use of System.out by a logger.(Ü†ÎßJ$de84d26c-b5de-4ffa-ac45-ea781eded224
+l	java:S106®"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$f31396c3-0563-45f4-973d-45e03933309b
+}	java:S125Í"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$8acefc69-d2e6-41c2-b165-1df21ce8ad18
+}	java:S125Ï"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$8914c12d-e5d1-4d52-b99d-1447ccd68a89
+}	java:S125î"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$dc7086c5-abe8-49d1-be68-e0b0daaa0d12
+}	java:S125ğ"<This block of commented-out lines of code should be removed.(Éğ€àşÿÿÿÿJ$762a5f0e-2626-45f2-9baa-913ef1fe985d
 r
-java:S1172÷"0Remove this unused method parameter "teamColor".(œÌÀõüÿÿÿÿJ$c1e18885-c44d-454e-b83f-bafc1089bc96
+java:S1172ö"0Remove this unused method parameter "teamColor".(œÌÀõüÿÿÿÿJ$c9733887-993d-4064-a7f5-604ac31f8ac6
 y
-java:S1068"8Remove this unused "serverMessageHandler" private field.(»û‰ûÿÿÿÿJ$7def73bf-e907-4cd0-bf73-3f16bb53d540
+java:S1068"8Remove this unused "serverMessageHandler" private field.(»û‰ûÿÿÿÿJ$4bb8b331-6505-460a-9f55-ce208d0da2d4
 h
-java:S1068",Remove this unused "username" private field.(‘ó¹²J$f756e8f6-c2a3-4209-ab9c-244e90998ebf
+java:S1068",Remove this unused "username" private field.(‘ó¹²J$863717bf-4171-485f-95e7-64d718c79dbd
 l
-java:S1068"0Remove this unused "serverFacade" private field.(ĞÁ¹–J$286709f2-1733-486b-87b7-d8c30611824d
+java:S1068"0Remove this unused "serverFacade" private field.(ĞÁ¹–J$abed3b8e-2637-4fc7-9edb-e4e9124a9efa
 {
-java:S1068'":Remove this unused "DefaultBackgroundColor" private field.(İé¨æûÿÿÿÿJ$47ad7515-ad01-4f0e-a857-ea7b6a120f17
+java:S1068&":Remove this unused "DefaultBackgroundColor" private field.(İé¨æûÿÿÿÿJ$11ff765c-8144-44cc-993f-dcca4a821cd8

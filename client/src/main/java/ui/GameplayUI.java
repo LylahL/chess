@@ -17,7 +17,6 @@ import java.util.*;
 
 import static java.lang.Integer.parseInt;
 import static ui.EscapeSequences.*;
-// TODO: add more cmds like make move
 
 public class GameplayUI {
 
@@ -62,7 +61,7 @@ public class GameplayUI {
   private void parseCommads(ArrayList<String> cmds) throws ResponseException, IOException, URISyntaxException {
     String cmd=cmds.getFirst().toLowerCase();
     String[] params=cmds.subList(1, cmds.size()).toArray(new String[0]);
-    VaidInputCheck(cmd, params);
+    validInputCheck(cmd, params);
     switch (cmd) {
       case "quit" -> quit();
       case "highlight" -> highLight(chessGame, params);
@@ -78,7 +77,7 @@ public class GameplayUI {
     return;
   }
 
-  private void VaidInputCheck(String cmd, String[] params) {
+  private void validInputCheck(String cmd, String[] params) {
     ArrayList<String> validInputList=new ArrayList<>(Arrays.asList("quit", "highlight", "help", "drawboard", "makemove", "leave", "resign"));
     // not a valid input
     if (!validInputList.contains(cmd)) {

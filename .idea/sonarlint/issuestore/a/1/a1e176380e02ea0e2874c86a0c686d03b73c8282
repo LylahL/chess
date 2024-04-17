@@ -1,13 +1,12 @@
 
 »
-java:S1130D"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿ8­´žÈî1J$d0ad4997-bd24-46a1-9d57-d203f3fdc805
+java:S1130D"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(¨™ÉÍþÿÿÿÿ8­´žÈî1J$86bc7112-20e9-41da-b161-1aeeb32571c2
 v
-java:S1172D".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿ8®´žÈî1J$e13ddb58-c3ad-4cd0-9f68-8a9474aee403
-~	java:S125F"<This block of commented-out lines of code should be removed.(¤¦Æ¾8¯´žÈî1J$b2725550-00f7-4350-9a77-a75ec02d793c
+java:S1172D".Remove this unused method parameter "session".(¨™ÉÍþÿÿÿÿ8®´žÈî1J$f483bdab-9a38-4cd7-907a-912349025039
+~	java:S125F"<This block of commented-out lines of code should be removed.(¤¦Æ¾8¯´žÈî1J$4eeb0c1c-60b4-4a31-8c14-1b87732e9428
 ”
-java:S3457_"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8±´žÈî1J$8fdf87bf-7125-4463-b887-d5954ed873c1
+java:S3457_"Q%n should be used in place of \n to produce the platform-specific line separator.(î¯û‡8±´žÈî1J$e38aa7c7-0da7-48e9-bbbb-65191092cc39
 q
-java:S1172d".Remove this unused method parameter "session".(é®ü×8²´žÈî1J$14e087b0-3f31-4333-9d1f-5bc7a3653b98
+java:S1172d".Remove this unused method parameter "session".(é®ü×8²´žÈî1J$af2538dc-adc8-4558-acf2-0166a0c19cd2
 q
-java:S1172s".Remove this unused method parameter "session".(¹’™¬8¶´žÈî1J$dc2f2735-3f83-48c4-b4a6-889a35585409
-„	java:S125‡"<This block of commented-out lines of code should be removed.(Õš¯ãøÿÿÿÿ8¸´žÈî1J$c1b3191a-9e97-4e4e-9815-3ff273838161
+java:S1172s".Remove this unused method parameter "session".(¹’™¬8¶´žÈî1J$bc0af51c-cef1-4715-8e9c-76cdd59148b9

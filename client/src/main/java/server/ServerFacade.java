@@ -23,7 +23,7 @@ public class ServerFacade<T> {
   public SignInResponse signIn(SignInRequest signInRequest) throws IOException, URISyntaxException {
     URL path=(new URI(serverURL + "/session")).toURL();
     // write Request Body
-    String requestBody=WriteRequestBody(signInRequest);
+    String requestBody=writeRequestBody(signInRequest);
     // send Request
     HttpURLConnection http=sendRequest(path, "POST", requestBody, null, null);
     // read Response
@@ -33,7 +33,7 @@ public class ServerFacade<T> {
   public SignInResponse register(UserData user) throws IOException, URISyntaxException {
     URL path=(new URI(serverURL + "/user")).toURL();
     // write Request Body
-    String requestBody=WriteRequestBody(user);
+    String requestBody=writeRequestBody(user);
     // send Request
     HttpURLConnection http=sendRequest(path, "POST", requestBody, null, null);
     // read Response
@@ -52,7 +52,7 @@ public class ServerFacade<T> {
   public CreateGameResponse createGame(AuthData auth, CreateGameRequest createGameRequest) throws URISyntaxException, IOException {
     URL path=(new URI(serverURL + "/game")).toURL();
     // write Request Body
-    String requestBody=WriteRequestBody(createGameRequest);
+    String requestBody=writeRequestBody(createGameRequest);
     // send Request
     HttpURLConnection http=sendRequest(path, "POST", requestBody, "authorization", auth.getAuthToken());
     // read Response
@@ -82,7 +82,7 @@ public class ServerFacade<T> {
   public static HttpURLConnection joinGame(AuthData auth, JoinGameRequest joinGameRequest) throws URISyntaxException, IOException {
     URL path=(new URI(serverURL + "/game")).toURL();
     // write Request Body
-    String requestBody=WriteRequestBody(joinGameRequest);
+    String requestBody=writeRequestBody(joinGameRequest);
     // send Request
     HttpURLConnection http=sendRequest(path, "PUT", requestBody, "authorization", auth.getAuthToken());
     readResponse(http, null);
@@ -92,7 +92,7 @@ public class ServerFacade<T> {
     // catch all execption geterrormessageprint
   }
 
-  private static String WriteRequestBody(Object requestObject) {
+  private static String writeRequestBody(Object requestObject) {
     if (requestObject != null) {
       String requestBody=new Gson().toJson(requestObject);
       return requestBody;
@@ -121,7 +121,7 @@ public class ServerFacade<T> {
     var statusCode=http.getResponseCode();
     var statusMessage=http.getResponseMessage();
     if (statusCode != 200) {
-      ErrorHandling(http);
+      errorHandling(http);
       return null;
     }
     T responseBody=null;
@@ -138,7 +138,7 @@ public class ServerFacade<T> {
 
   }
 
-  private static Object ErrorHandling(HttpURLConnection http) throws IOException {
+  private static Object errorHandling(HttpURLConnection http) throws IOException {
     try (InputStream respBody=http.getErrorStream()) {
         InputStreamReader inputStreamReader=new InputStreamReader(respBody);
         Map response =new Gson().fromJson(inputStreamReader, Map.class);

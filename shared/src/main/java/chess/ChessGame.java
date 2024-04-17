@@ -12,14 +12,14 @@ public class ChessGame {
     TeamColor teamTurn;
 
     public int getGameOver() {
-        return GameOver;
+        return gameOver;
     }
 
     public void setGameOver(int gameOver) {
-        GameOver=gameOver;
+        this.gameOver=gameOver;
     }
 
-    int GameOver = 0; // 0 means still going 1 means gameover
+    int gameOver= 0; // 0 means still going 1 means gameover
     ChessBoard board = new ChessBoard();
 
 

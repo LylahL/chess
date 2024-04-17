@@ -131,12 +131,6 @@ public class WebSocketHandler {
       connectionManager.sendMessage(authString, new ErrorMsg("You are an Observer that shouldn't be making a move"));
       return;
     }
-    // whoever moves first sets the first turn
-//    if(Objects.equals(username, gameData.getWhiteUsername()) &&chessGame.getTeamTurn() == null){
-//      gameService.setFirstTurn(gameID, ChessGame.TeamColor.WHITE);
-//    }else if (Objects.equals(username, gameData.getBlackUsername()) &&chessGame.getTeamTurn() == null){
-//      gameService.setFirstTurn(gameID, ChessGame.TeamColor.BLACK);
-//    }
     ChessGame updatedChessgame = game.getGameByGameId(gameID).getGame();
     // check turn
     if(Objects.equals(username, gameData.getWhiteUsername())){

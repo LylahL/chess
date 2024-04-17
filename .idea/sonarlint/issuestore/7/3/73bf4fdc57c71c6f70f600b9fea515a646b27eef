@@ -1,0 +1,33 @@
+
+•	java:S135¨"YReduce the total number of break and continue statements in this loop to use at most one.(èíÕßJ$e7541acf-dbd0-4e15-a864-eaeb8bd8bdd4
+•	java:S135æ"YReduce the total number of break and continue statements in this loop to use at most one.(èíÕßJ$1a861007-b931-4696-bb31-084aa184fa04
+‰
+java:S1226©"LIntroduce a new variable instead of reusing the parameter "currentPosition".(´¬Ø™J$3da507c7-2dc9-437b-b078-1c40aa62cd3c
+‹
+java:S1226ª"IIntroduce a new variable instead of reusing the parameter "currentPiece".(îØé‚şÿÿÿÿJ$12b9b1f6-e2e9-45b9-807d-1eb90f78f297
+‰
+java:S1226ç"LIntroduce a new variable instead of reusing the parameter "currentPosition".(´¬Ø™J$2d96351b-5fc7-4e41-8096-6dd49cc23f0c
+‹
+java:S1226è"IIntroduce a new variable instead of reusing the parameter "currentPiece".(îØé‚şÿÿÿÿJ$58920610-770b-4588-9e2a-88f794556c33
+†
+java:S1226í"IIntroduce a new variable instead of reusing the parameter "kingPosition".(‰Ä›ŠJ$db6fe910-9b5e-465a-bd30-64498a3f324f
+ƒ
+java:S1226î"FIntroduce a new variable instead of reusing the parameter "kingPiece".(—Î§J$f2544399-714b-4abd-97f4-0c0309236ed5
+‰
+java:S1226"LIntroduce a new variable instead of reusing the parameter "currentPosition".(´¬Ø™J$80746823-5c71-4986-b281-55a05b1e6541
+‹
+java:S1226‘"IIntroduce a new variable instead of reusing the parameter "currentPiece".(îØé‚şÿÿÿÿJ$0e551cc0-ce6c-4a04-83e4-e21bf895ec36
+W
+java:S3626["Remove this redundant jump.(ÉŠ©ƒJ$26802bbc-253f-46c3-bed2-295bd5495f29
+}
+java:S1854o"ARemove this useless assignment to local variable "possibleMoves".(èşªÄJ$4885911c-983b-47ae-9438-c294ae0f2c3d
+X
+java:S3626¬"Remove this redundant jump.(ÉŠ©ƒJ$4fe6733e-6aae-48d7-b0e4-7f3721047307
+X
+java:S3626¹"Remove this redundant jump.(ÉŠ©ƒJ$7c66e273-e40c-48b1-b14e-816510ffc611
+X
+java:S3626ê"Remove this redundant jump.(ÉŠ©ƒJ$065200c0-c092-414a-97f0-1d4e6d07c552
+X
+java:S3626ñ"Remove this redundant jump.(ÉŠ©ƒJ$4f6a4816-a936-4651-bc1c-f080d62d8261
+X
+java:S3626“"Remove this redundant jump.(ÉŠ©ƒJ$8b117afc-58f1-4de2-a04d-a2af9376c9d2

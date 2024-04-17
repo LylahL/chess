@@ -1,0 +1,22 @@
+
+l
+java:S3740"/Provide the parametrized type for this generic.(Á¦ê´J$301799f5-0c5c-4fdc-b842-165ee7f82206
+Š
+java:S11920"NDefine a constant instead of duplicating this literal "authorization" 4 times.(áŞ©úJ$4fe0147e-f153-4319-8388-98de6dba0686
+‡
+java:S11925"FDefine a constant instead of duplicating this literal "/game" 3 times.(ÛûœıÿÿÿÿJ$52da847f-604b-47f6-ab6c-0daeb2c843a0
+¤
+java:S1488a"cImmediately return this expression instead of assigning it to the temporary variable "requestBody".(¥«éûÿÿÿÿJ$b998f991-5f80-4730-aa5c-3173b7dbc2ef
+W
+java:S2326"T is not used in the class.(²¦‡™J$7d45bd9e-4e67-4b91-8dd5-d9475dd89762
+g
+java:S3010"&Remove this assignment of "serverURL".(ÿÈËŸøÿÿÿÿJ$76888a96-56d1-403f-b45f-3373c8d4488d
+v
+java:S2209"5Change this instance-reference to a static reference.(ÿÈËŸøÿÿÿÿJ$2504503c-6660-4543-844c-1124ea064d1b
+w	java:S125."<This block of commented-out lines of code should be removed.(…€ĞğJ$75ec0f4e-a9a6-4ca7-a8c5-51c0ec64877b
+w	java:S125A"<This block of commented-out lines of code should be removed.(…€ĞğJ$f680f7bc-988e-4ffc-b228-74dc90bd3bc5
+w	java:S125K"<This block of commented-out lines of code should be removed.(…€ĞğJ$5e7203f3-ba33-4526-a84a-37e65a9fb385
+s
+java:S1481z"2Remove this unused "statusMessage" local variable.(†şÌÉÿÿÿÿÿJ$f7654241-80cf-4375-a15c-73d8f665b9a3
+l	java:S106‘"+Replace this use of System.out by a logger.(ÁùûŞúÿÿÿÿJ$ae6b8a82-b22e-48cb-aaeb-f90794fd5ed5
+l	java:S106’"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿJ$e6e796e6-da7e-4670-a257-2c582c2845b9

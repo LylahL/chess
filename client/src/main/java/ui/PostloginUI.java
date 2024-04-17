@@ -50,7 +50,7 @@ public class PostloginUI {
   private void parseCommads(ArrayList<String> cmds) throws ResponseException, IOException, URISyntaxException {
     String cmd = cmds.getFirst().toLowerCase();
     String[] params =cmds.subList(1, cmds.size()).toArray(new String[0]);
-    VaidInputCheck(cmd, params);
+    validInputCheck(cmd, params);
     switch (cmd) {
       case "logout" -> logOut(params);
       case "creategame" -> createGame(params);
@@ -61,7 +61,7 @@ public class PostloginUI {
     }
   }
 
-  private void VaidInputCheck(String cmd, String[] params) {
+  private void validInputCheck(String cmd, String[] params) {
     ArrayList<String> validInputList=new ArrayList<>(Arrays.asList("logout", "creategame", "listgames", "joingame", "joinobserver", "help"));
     // not a valid input
     if (!validInputList.contains(cmd)) {

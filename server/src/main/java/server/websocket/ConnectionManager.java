@@ -28,10 +28,6 @@ public class ConnectionManager {
     }
   }
 
-  public void removeWholeGame(int gameID){
-    connections.remove(gameID);
-  }
-
   public void removeSession(int gameID, String authToken) {
     ArrayList<Connection> tmp = connections.get(gameID);
     Iterator<Connection> iterator = tmp.iterator();

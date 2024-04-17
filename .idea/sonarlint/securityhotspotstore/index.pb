@@ -51,3 +51,5 @@ U
 .src/main/java/dataAccess/AuthDAOInterface.java,c\f\cfdb61d4db2b3c355bd99f2a0eb6933c231a20b1
 O
 src/main/java/ui/ClientRun.java,5\9\59d9d4e35d9caf74e51c37da3f1e5b4990810bb7
+S
+#src/main/java/chess/ChessPiece.java,8\5\85a88ea4958ed1b3e2cc2a545a3ad992329e985a

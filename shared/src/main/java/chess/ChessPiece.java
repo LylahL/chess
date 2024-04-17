@@ -238,13 +238,8 @@ public class ChessPiece {
                 if (myPosition.equals(endPosition)) {
                     //myPosition.getRow()+i == endPosition.getRow() && myPosition.getColumn()+j == endPosition.getColumn()
                     if(type == PAWN){
-                        // modifies endPosition it may return an array of end Positinos
-                        Collection<ChessPosition> possibleCaptures = checkCapture(board, myPosition, myPosition, endPosition);
-                        for(ChessPosition capturePosition : possibleCaptures){
-                            if (capturePosition != null) {
-                                addToCollection(moves, myPosition, capturePosition);
-                            }
-                        }
+                        pawnHelper(moves, board, myPosition, myPosition, endPosition);
+
                         break;
                     }
                     break;
@@ -255,12 +250,7 @@ public class ChessPiece {
             // hit opposite team
             else if (pieceUnder != null && pieceUnder.getTeamColor() != board.getPiece(myPosition).getTeamColor()) {
                 if(type == PAWN){
-                    Collection<ChessPosition> possibleCaptures = checkCapture(board, myPosition, myPosition, endPosition);
-                    for(ChessPosition capturePosition : possibleCaptures){
-                        if (capturePosition != null) {
-                            addToCollection(moves, myPosition, capturePosition);
-                        }
-                    }
+                    pawnHelper(moves, board, myPosition, myPosition, endPosition);
                     break;
                 }
                 if ((type == KING ||type == KNIGHT)&& !myPosition.equals(endPosition)){
@@ -293,6 +283,15 @@ public class ChessPiece {
             // just check capture
 
             nextStepPosition=new ChessPosition(nextStepPosition.getRow() + i, nextStepPosition.getColumn() + j);
+        }
+    }
+
+    private void pawnHelper(Collection<ChessMove> moves, ChessBoard board, ChessPosition myPosition, ChessPosition myPosition1, ChessPosition endPosition) {
+        Collection<ChessPosition> possibleCaptures = checkCapture(board, myPosition, myPosition, endPosition);
+        for(ChessPosition capturePosition : possibleCaptures){
+            if (capturePosition != null) {
+                addToCollection(moves, myPosition, capturePosition);
+            }
         }
     }
 

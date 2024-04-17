@@ -21,15 +21,6 @@ public class AuthDAO implements AuthDAOInterface{
         authData.clear();
     }
 
-    public String getUserByAuthToken(AuthData authToken) {
-        for (AuthData key : authData.keySet()) {
-            if (key.equals(authToken)) {
-                return authData.get(key);
-            }
-        }
-        return null;
-    }
-
     @Override
     public AuthData getAuthDataByAuthString(String authToken) {
         for (AuthData auth : authData.keySet()) {
